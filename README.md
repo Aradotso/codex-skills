@@ -32,6 +32,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [codex-console-automation](skills/codex-console-automation/) | [install](https://skills.sh/aradotso/codex-skills/codex-console-automation) | [dou-jiang/codex-console](https://github.com/dou-jiang/codex-console) | 2026-05-16 |
 | [codexmonitor-orchestration](skills/codexmonitor-orchestration/) | [install](https://skills.sh/aradotso/codex-skills/codexmonitor-orchestration) | [Dimillian/CodexMonitor](https://github.com/Dimillian/CodexMonitor) | 2026-05-16 |
 | [codex-plusplus-ios-simulator-tweak](skills/codex-plusplus-ios-simulator-tweak/) | [install](https://skills.sh/aradotso/codex-skills/codex-plusplus-ios-simulator-tweak) | [b-nnett/codex-plusplus-ios-simulator](https://github.com/b-nnett/codex-plusplus-ios-simulator) | 2026-05-16 |
+| [codex-autoresearch-skill](skills/codex-autoresearch-skill/) | [install](https://skills.sh/aradotso/codex-skills/codex-autoresearch-skill) | [leo-lilinxiao/codex-autoresearch](https://github.com/leo-lilinxiao/codex-autoresearch) | 2026-05-16 |
 <!-- SKILL_INDEX -->
 
 ---
