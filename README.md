@@ -35,6 +35,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [codex-autoresearch-skill](skills/codex-autoresearch-skill/) | [install](https://skills.sh/aradotso/codex-skills/codex-autoresearch-skill) | [leo-lilinxiao/codex-autoresearch](https://github.com/leo-lilinxiao/codex-autoresearch) | 2026-05-16 |
 | [open-computer-use-automation](skills/open-computer-use-automation/) | [install](https://skills.sh/aradotso/codex-skills/open-computer-use-automation) | [iFurySt/open-codex-computer-use](https://github.com/iFurySt/open-codex-computer-use) | 2026-05-16 |
 | [codex-session-patcher](skills/codex-session-patcher/) | [install](https://skills.sh/aradotso/codex-skills/codex-session-patcher) | [ryfineZ/codex-session-patcher](https://github.com/ryfineZ/codex-session-patcher) | 2026-05-16 |
+| [codex-complexity-optimizer](skills/codex-complexity-optimizer/) | [install](https://skills.sh/aradotso/codex-skills/codex-complexity-optimizer) | [Kappaemme-git/codex-complexity-optimizer](https://github.com/Kappaemme-git/codex-complexity-optimizer) | 2026-05-16 |
 <!-- SKILL_INDEX -->
 
 ---
