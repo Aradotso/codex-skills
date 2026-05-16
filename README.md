@@ -34,6 +34,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [codex-plusplus-ios-simulator-tweak](skills/codex-plusplus-ios-simulator-tweak/) | [install](https://skills.sh/aradotso/codex-skills/codex-plusplus-ios-simulator-tweak) | [b-nnett/codex-plusplus-ios-simulator](https://github.com/b-nnett/codex-plusplus-ios-simulator) | 2026-05-16 |
 | [codex-autoresearch-skill](skills/codex-autoresearch-skill/) | [install](https://skills.sh/aradotso/codex-skills/codex-autoresearch-skill) | [leo-lilinxiao/codex-autoresearch](https://github.com/leo-lilinxiao/codex-autoresearch) | 2026-05-16 |
 | [open-computer-use-automation](skills/open-computer-use-automation/) | [install](https://skills.sh/aradotso/codex-skills/open-computer-use-automation) | [iFurySt/open-codex-computer-use](https://github.com/iFurySt/open-codex-computer-use) | 2026-05-16 |
+| [codex-session-patcher](skills/codex-session-patcher/) | [install](https://skills.sh/aradotso/codex-skills/codex-session-patcher) | [ryfineZ/codex-session-patcher](https://github.com/ryfineZ/codex-session-patcher) | 2026-05-16 |
 <!-- SKILL_INDEX -->
 
 ---
