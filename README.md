@@ -31,6 +31,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [codexsaver-cost-router](skills/codexsaver-cost-router/) | [install](https://skills.sh/aradotso/codex-skills/codexsaver-cost-router) | [fendouai/CodexSaver](https://github.com/fendouai/CodexSaver) | 2026-05-16 |
 | [codex-console-automation](skills/codex-console-automation/) | [install](https://skills.sh/aradotso/codex-skills/codex-console-automation) | [dou-jiang/codex-console](https://github.com/dou-jiang/codex-console) | 2026-05-16 |
 | [codexmonitor-orchestration](skills/codexmonitor-orchestration/) | [install](https://skills.sh/aradotso/codex-skills/codexmonitor-orchestration) | [Dimillian/CodexMonitor](https://github.com/Dimillian/CodexMonitor) | 2026-05-16 |
+| [codex-plusplus-ios-simulator-tweak](skills/codex-plusplus-ios-simulator-tweak/) | [install](https://skills.sh/aradotso/codex-skills/codex-plusplus-ios-simulator-tweak) | [b-nnett/codex-plusplus-ios-simulator](https://github.com/b-nnett/codex-plusplus-ios-simulator) | 2026-05-16 |
 <!-- SKILL_INDEX -->
 
 ---
