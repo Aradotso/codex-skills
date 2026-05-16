@@ -21,6 +21,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | Skill | skills.sh | Source | Date |
 |-------|-----------|--------|------|
 | [codex-plugin-claude-code](skills/codex-plugin-claude-code/) | [install](https://skills.sh/aradotso/codex-skills/codex-plugin-claude-code) | [openai/codex-plugin-cc](https://github.com/openai/codex-plugin-cc) | 2026-05-16 |
+| [oh-my-codex-workflow](skills/oh-my-codex-workflow/) | [install](https://skills.sh/aradotso/codex-skills/oh-my-codex-workflow) | [Yeachan-Heo/oh-my-codex](https://github.com/Yeachan-Heo/oh-my-codex) | 2026-05-16 |
 <!-- SKILL_INDEX -->
 
 ---
