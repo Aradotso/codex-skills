@@ -29,6 +29,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [keep-codex-fast-maintenance](skills/keep-codex-fast-maintenance/) | [install](https://skills.sh/aradotso/codex-skills/keep-codex-fast-maintenance) | [vibeforge1111/keep-codex-fast](https://github.com/vibeforge1111/keep-codex-fast) | 2026-05-16 |
 | [codexbar-menubar-ai-usage-tracker](skills/codexbar-menubar-ai-usage-tracker/) | [install](https://skills.sh/aradotso/codex-skills/codexbar-menubar-ai-usage-tracker) | [steipete/CodexBar](https://github.com/steipete/CodexBar) | 2026-05-16 |
 | [codexsaver-cost-router](skills/codexsaver-cost-router/) | [install](https://skills.sh/aradotso/codex-skills/codexsaver-cost-router) | [fendouai/CodexSaver](https://github.com/fendouai/CodexSaver) | 2026-05-16 |
+| [codex-console-automation](skills/codex-console-automation/) | [install](https://skills.sh/aradotso/codex-skills/codex-console-automation) | [dou-jiang/codex-console](https://github.com/dou-jiang/codex-console) | 2026-05-16 |
 <!-- SKILL_INDEX -->
 
 ---
