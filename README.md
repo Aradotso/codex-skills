@@ -37,6 +37,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [codex-session-patcher](skills/codex-session-patcher/) | [install](https://skills.sh/aradotso/codex-skills/codex-session-patcher) | [ryfineZ/codex-session-patcher](https://github.com/ryfineZ/codex-session-patcher) | 2026-05-16 |
 | [codex-complexity-optimizer](skills/codex-complexity-optimizer/) | [install](https://skills.sh/aradotso/codex-skills/codex-complexity-optimizer) | [Kappaemme-git/codex-complexity-optimizer](https://github.com/Kappaemme-git/codex-complexity-optimizer) | 2026-05-16 |
 | [mimo2codex-proxy](skills/mimo2codex-proxy/) | [install](https://skills.sh/aradotso/codex-skills/mimo2codex-proxy) | [7as0nch/mimo2codex](https://github.com/7as0nch/mimo2codex) | 2026-05-16 |
+| [codex2api-reverse-proxy](skills/codex2api-reverse-proxy/) | [install](https://skills.sh/aradotso/codex-skills/codex2api-reverse-proxy) | [james-6-23/codex2api](https://github.com/james-6-23/codex2api) | 2026-05-16 |
 <!-- SKILL_INDEX -->
 
 ---
