@@ -25,6 +25,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [codexplusplus-launcher](skills/codexplusplus-launcher/) | [install](https://skills.sh/aradotso/codex-skills/codexplusplus-launcher) | [BigPizzaV3/CodexPlusPlus](https://github.com/BigPizzaV3/CodexPlusPlus) | 2026-05-16 |
 | [codex-plusplus-tweak-system](skills/codex-plusplus-tweak-system/) | [install](https://skills.sh/aradotso/codex-skills/codex-plusplus-tweak-system) | [b-nnett/codex-plusplus](https://github.com/b-nnett/codex-plusplus) | 2026-05-16 |
 | [awesome-codex-skills-curator](skills/awesome-codex-skills-curator/) | [install](https://skills.sh/aradotso/codex-skills/awesome-codex-skills-curator) | [ComposioHQ/awesome-codex-skills](https://github.com/ComposioHQ/awesome-codex-skills) | 2026-05-16 |
+| [awesome-codex-subagents](skills/awesome-codex-subagents/) | [install](https://skills.sh/aradotso/codex-skills/awesome-codex-subagents) | [VoltAgent/awesome-codex-subagents](https://github.com/VoltAgent/awesome-codex-subagents) | 2026-05-16 |
 <!-- SKILL_INDEX -->
 
 ---
