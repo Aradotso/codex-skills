@@ -27,6 +27,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [awesome-codex-skills-curator](skills/awesome-codex-skills-curator/) | [install](https://skills.sh/aradotso/codex-skills/awesome-codex-skills-curator) | [ComposioHQ/awesome-codex-skills](https://github.com/ComposioHQ/awesome-codex-skills) | 2026-05-16 |
 | [awesome-codex-subagents](skills/awesome-codex-subagents/) | [install](https://skills.sh/aradotso/codex-skills/awesome-codex-subagents) | [VoltAgent/awesome-codex-subagents](https://github.com/VoltAgent/awesome-codex-subagents) | 2026-05-16 |
 | [keep-codex-fast-maintenance](skills/keep-codex-fast-maintenance/) | [install](https://skills.sh/aradotso/codex-skills/keep-codex-fast-maintenance) | [vibeforge1111/keep-codex-fast](https://github.com/vibeforge1111/keep-codex-fast) | 2026-05-16 |
+| [codexbar-menubar-ai-usage-tracker](skills/codexbar-menubar-ai-usage-tracker/) | [install](https://skills.sh/aradotso/codex-skills/codexbar-menubar-ai-usage-tracker) | [steipete/CodexBar](https://github.com/steipete/CodexBar) | 2026-05-16 |
 <!-- SKILL_INDEX -->
 
 ---
