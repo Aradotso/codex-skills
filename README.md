@@ -30,6 +30,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [codexbar-menubar-ai-usage-tracker](skills/codexbar-menubar-ai-usage-tracker/) | [install](https://skills.sh/aradotso/codex-skills/codexbar-menubar-ai-usage-tracker) | [steipete/CodexBar](https://github.com/steipete/CodexBar) | 2026-05-16 |
 | [codexsaver-cost-router](skills/codexsaver-cost-router/) | [install](https://skills.sh/aradotso/codex-skills/codexsaver-cost-router) | [fendouai/CodexSaver](https://github.com/fendouai/CodexSaver) | 2026-05-16 |
 | [codex-console-automation](skills/codex-console-automation/) | [install](https://skills.sh/aradotso/codex-skills/codex-console-automation) | [dou-jiang/codex-console](https://github.com/dou-jiang/codex-console) | 2026-05-16 |
+| [codexmonitor-orchestration](skills/codexmonitor-orchestration/) | [install](https://skills.sh/aradotso/codex-skills/codexmonitor-orchestration) | [Dimillian/CodexMonitor](https://github.com/Dimillian/CodexMonitor) | 2026-05-16 |
 <!-- SKILL_INDEX -->
 
 ---
