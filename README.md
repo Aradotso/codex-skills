@@ -40,6 +40,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [codex2api-reverse-proxy](skills/codex2api-reverse-proxy/) | [install](https://skills.sh/aradotso/codex-skills/codex2api-reverse-proxy) | [james-6-23/codex2api](https://github.com/james-6-23/codex2api) | 2026-05-16 |
 | [codex-manager-rust](skills/codex-manager-rust/) | [install](https://skills.sh/aradotso/codex-skills/codex-manager-rust) | [qxcnm/Codex-Manager](https://github.com/qxcnm/Codex-Manager) | 2026-05-16 |
 | [codex-provider-sync-skill](skills/codex-provider-sync-skill/) | [install](https://skills.sh/aradotso/codex-skills/codex-provider-sync-skill) | [Dailin521/codex-provider-sync](https://github.com/Dailin521/codex-provider-sync) | 2026-05-16 |
+| [codex-auth-account-manager](skills/codex-auth-account-manager/) | [install](https://skills.sh/aradotso/codex-skills/codex-auth-account-manager) | [Loongphy/codex-auth](https://github.com/Loongphy/codex-auth) | 2026-05-17 |
 <!-- SKILL_INDEX -->
 
 ---
