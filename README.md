@@ -44,6 +44,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [codexdesktop-rebuild-electron](skills/codexdesktop-rebuild-electron/) | [install](https://skills.sh/aradotso/codex-skills/codexdesktop-rebuild-electron) | [Haleclipse/CodexDesktop-Rebuild](https://github.com/Haleclipse/CodexDesktop-Rebuild) | 2026-05-17 |
 | [cpa-codex-manager-openai-pool](skills/cpa-codex-manager-openai-pool/) | [install](https://skills.sh/aradotso/codex-skills/cpa-codex-manager-openai-pool) | [Maoleio/CPA-Codex-Manager](https://github.com/Maoleio/CPA-Codex-Manager) | 2026-05-17 |
 | [seemseam-ccb-multi-agent-cli](skills/seemseam-ccb-multi-agent-cli/) | [install](https://skills.sh/aradotso/codex-skills/seemseam-ccb-multi-agent-cli) | [SeemSeam/claude_codex_bridge](https://github.com/SeemSeam/claude_codex_bridge) | 2026-05-17 |
+| [codex-auto-register](skills/codex-auto-register/) | [install](https://skills.sh/aradotso/codex-skills/codex-auto-register) | [Ttungx/codex_auto_register](https://github.com/Ttungx/codex_auto_register) | 2026-05-17 |
 <!-- SKILL_INDEX -->
 
 ---
