@@ -1,41 +1,51 @@
 ---
 name: claude-code-codex-delegation
-description: Delegate prompts from Claude Code to OpenAI Codex CLI for automated code analysis, refactoring, and editing workflows
+description: Delegate code analysis, refactoring, and editing tasks from Claude Code to the Codex CLI for autonomous AI workflows
 triggers:
-  - "use codex to analyze this code"
-  - "delegate this task to codex"
-  - "run codex exec on this repository"
-  - "analyze with codex"
-  - "refactor using codex"
-  - "let codex review this code"
-  - "invoke codex for this task"
-  - "use codex to improve this"
+  - use codex to analyze this code
+  - delegate this to codex
+  - run codex on this repository
+  - let codex refactor this
+  - invoke codex session for this task
+  - execute codex with full auto mode
+  - resume my codex session
+  - have codex review this codebase
 ---
 
-# Claude Code Codex Delegation
+# Claude Code Codex Delegation Skill
 
 > Skill by [ara.so](https://ara.so) — Codex Skills collection.
 
 ## Overview
 
-This skill enables Claude Code to invoke the OpenAI Codex CLI for automated code analysis, refactoring, and editing workflows. It provides a structured way to delegate complex coding tasks to Codex's specialized models while maintaining Claude Code's orchestration capabilities.
-
-## Prerequisites
-
-- Codex CLI installed and available on `PATH`
-- Valid Codex credentials configured
-- Verify installation: `codex --version`
+This skill enables Claude Code to invoke the **Codex CLI** for automated code analysis, refactoring, and editing workflows. Codex is an autonomous AI coding agent that can perform complex multi-file operations, repository analysis, and sustained editing sessions. By delegating tasks to Codex, you leverage its specialized capabilities for code transformation while maintaining Claude Code's conversational interface.
 
 ## Installation
 
-### Via Claude Code Plugin (Recommended)
+### Prerequisites
+
+Ensure the `codex` CLI is installed and configured:
+
+```bash
+# Verify installation
+codex --version
+
+# If not installed, follow Codex documentation to install
+# Ensure valid credentials are configured
+```
+
+The `codex` binary must be available on your `PATH`.
+
+### Installing This Skill
+
+**Option 1: Plugin Installation (Recommended)**
 
 ```bash
 /plugin marketplace add skills-directory/skill-codex
 /plugin install skill-codex@skill-codex
 ```
 
-### Standalone Installation
+**Option 2: Manual Skill Installation**
 
 ```bash
 git clone --depth 1 https://github.com/skills-directory/skill-codex.git /tmp/skills-temp
@@ -44,306 +54,406 @@ cp -r /tmp/skills-temp/plugins/skill-codex/skills/codex ~/.claude/skills/codex
 rm -rf /tmp/skills-temp
 ```
 
-## Core Commands
+## Key Commands
 
-### Basic Execution
-
-```bash
-codex exec [options] "prompt"
-```
-
-**Key Options:**
-- `-m, --model` - Model selection (`gpt-5.5`, `gpt-5.4`, `gpt-5.4-mini`, `gpt-5.3-codex-spark`, `gpt-5.3-codex`)
-- `--config` - Runtime configuration (e.g., `model_reasoning_effort="high"`)
-- `--sandbox` - Safety mode (`read-only`, `write`, `full`)
-- `--full-auto` - Auto-approve all actions
-- `--skip-git-repo-check` - Skip git repository validation
-
-### Session Management
+### Basic Codex Execution
 
 ```bash
+# Single-shot analysis (read-only sandbox)
+codex exec -m gpt-5.3-codex-spark \
+  --sandbox read-only \
+  --full-auto \
+  --skip-git-repo-check \
+  "Analyze this repository for security vulnerabilities" 2>/dev/null
+
+# Code editing with write access
+codex exec -m gpt-5.4 \
+  --config model_reasoning_effort="high" \
+  --sandbox writable \
+  --full-auto \
+  "Refactor all API handlers to use async/await patterns"
+
 # Resume previous session
-codex resume
-
-# Resume specific session
 codex resume <session-id>
-
-# List sessions
-codex sessions list
 ```
-
-## Configuration
 
 ### Model Selection
 
-**Available Models:**
-- `gpt-5.5` - Latest flagship model
-- `gpt-5.4` - Previous generation flagship
-- `gpt-5.4-mini` - Faster, cost-effective variant
-- `gpt-5.3-codex-spark` - Optimized for code tasks
-- `gpt-5.3-codex` - Specialized coding model
+Choose based on task complexity:
+
+- **gpt-5.5**: Most capable, highest cost, best for complex multi-step tasks
+- **gpt-5.4**: Balanced performance for general refactoring
+- **gpt-5.4-mini**: Fast, cost-effective for simple tasks
+- **gpt-5.3-codex-spark**: Optimized for code-specific reasoning
+- **gpt-5.3-codex**: Baseline code model
 
 ### Reasoning Effort Levels
 
 ```bash
---config model_reasoning_effort="low"     # Fast, simple tasks
---config model_reasoning_effort="medium"  # Balanced (default)
---config model_reasoning_effort="high"    # Complex analysis
+# Low effort (faster, cheaper)
+--config model_reasoning_effort="low"
+
+# Medium effort (balanced)
+--config model_reasoning_effort="medium"
+
+# High effort (thorough, slower)
+--config model_reasoning_effort="high"
 ```
 
 ### Sandbox Modes
 
-- `read-only` - Analysis only, no file modifications
-- `write` - Allow file edits
-- `full` - Unrestricted access (use with caution)
+- `--sandbox read-only`: Analysis tasks, no file modifications
+- `--sandbox writable`: Allow Codex to edit files
+- `--sandbox full`: Unrestricted access (use with caution)
 
 ## Usage Patterns
 
-### Pattern 1: Code Analysis
+### Pattern 1: Repository Analysis
 
 ```bash
+# User asks: "Analyze this codebase for architectural issues"
+
 codex exec -m gpt-5.3-codex-spark \
   --config model_reasoning_effort="high" \
   --sandbox read-only \
   --full-auto \
   --skip-git-repo-check \
-  "Analyze this repository for security vulnerabilities and performance bottlenecks" 2>/dev/null
+  "Perform comprehensive architectural analysis. Identify:
+   1. Code organization issues
+   2. Dependency coupling problems
+   3. Testing gaps
+   4. Performance bottlenecks
+   5. Security concerns
+   Provide specific file locations and recommendations." 2>/dev/null
 ```
 
-### Pattern 2: Refactoring
+### Pattern 2: Automated Refactoring
 
 ```bash
+# User asks: "Refactor this to use TypeScript strict mode"
+
 codex exec -m gpt-5.4 \
   --config model_reasoning_effort="medium" \
-  --sandbox write \
+  --sandbox writable \
   --full-auto \
-  "Refactor the authentication module to use dependency injection" 2>/dev/null
+  "Enable TypeScript strict mode and fix all resulting type errors:
+   1. Update tsconfig.json
+   2. Add explicit types to all functions
+   3. Fix null/undefined handling
+   4. Ensure all tests still pass" 2>/dev/null
 ```
 
-### Pattern 3: Test Generation
+### Pattern 3: Session Resume
 
 ```bash
-codex exec -m gpt-5.3-codex-spark \
-  --config model_reasoning_effort="medium" \
-  --sandbox write \
-  --full-auto \
-  "Generate comprehensive unit tests for all exported functions in src/utils.js" 2>/dev/null
+# User asks: "Continue my previous codex session"
+
+# List recent sessions
+codex sessions list --limit 10
+
+# Resume specific session
+codex resume abc123def456
 ```
 
-### Pattern 4: Documentation
+### Pattern 4: Multi-File Migration
 
 ```bash
-codex exec -m gpt-5.4-mini \
-  --config model_reasoning_effort="low" \
-  --sandbox write \
-  --full-auto \
-  "Add JSDoc comments to all public API functions" 2>/dev/null
-```
+# User asks: "Migrate all class components to functional components with hooks"
 
-### Pattern 5: Migration
-
-```bash
-codex exec -m gpt-5.5 \
+codex exec -m gpt-5.4 \
   --config model_reasoning_effort="high" \
-  --sandbox write \
-  "Migrate this Express.js application to Fastify, preserving all functionality" 2>/dev/null
+  --sandbox writable \
+  --full-auto \
+  "Migrate React class components to functional components:
+   1. Convert lifecycle methods to useEffect
+   2. Replace this.state with useState
+   3. Update event handlers
+   4. Preserve all functionality
+   5. Update tests accordingly
+   
+   Process files in src/components directory." 2>/dev/null
 ```
 
-## Delegation Workflow
+## Configuration
 
-When a user requests Codex delegation, follow this workflow:
+### Environment Variables
 
-1. **Clarify Requirements** (if not specified):
-   - Model preference
-   - Reasoning effort level
-   - Sandbox mode (default: `read-only` for analysis, `write` for modifications)
+```bash
+# Codex API credentials (if required)
+export CODEX_API_KEY="your-api-key-from-env"
 
-2. **Construct Command**:
-   ```bash
-   codex exec -m <model> \
-     --config model_reasoning_effort="<level>" \
-     --sandbox <mode> \
-     --full-auto \
-     --skip-git-repo-check \
-     "<detailed prompt>" 2>/dev/null
-   ```
+# Default model preference
+export CODEX_DEFAULT_MODEL="gpt-5.3-codex-spark"
 
-3. **Execute and Parse Output**:
-   - Run the command
-   - Capture stdout (stderr suppressed by default with `2>/dev/null`)
-   - Summarize key findings
+# Default reasoning effort
+export CODEX_DEFAULT_EFFORT="medium"
+```
 
-4. **Present Results**:
-   - Highlight main insights
-   - Suggest follow-up actions
-   - Offer to resume session for iterative work
+### Codex Config File
+
+Codex may use `~/.codex/config.yaml` or project-level `.codex.yaml`:
+
+```yaml
+default_model: gpt-5.3-codex-spark
+reasoning_effort: medium
+sandbox_mode: read-only
+full_auto: true
+skip_git_repo_check: true
+```
 
 ## Thinking Tokens
 
-By default, thinking tokens (stderr output) are suppressed with `2>/dev/null` to avoid context window bloat. To view thinking tokens:
+**Important**: By default, this skill suppresses Codex's thinking tokens (stderr output) using `2>/dev/null` to prevent context window bloat in Claude Code.
 
-**User request:** "Show me the thinking tokens from Codex"
+To **enable thinking tokens** for debugging or insight:
 
-**Command adjustment:**
 ```bash
+# Remove stderr redirect
 codex exec -m gpt-5.3-codex-spark \
-  --config model_reasoning_effort="high" \
-  --sandbox read-only \
   --full-auto \
-  "Analyze error handling patterns"
-# Remove 2>/dev/null to display thinking tokens
+  "Analyze this code"
+# Now you'll see Codex's reasoning process
 ```
 
-## Environment Variables
+Or explicitly ask Claude: *"Show me the thinking tokens from Codex"*
 
-Configure Codex credentials via environment variables:
+## Real-World Examples
 
-```bash
-export CODEX_API_KEY=your_api_key_here
-export CODEX_ORG_ID=your_org_id_here
-```
+### Example 1: Security Audit
 
-Add to `~/.bashrc`, `~/.zshrc`, or equivalent shell configuration.
+**User Prompt**: "Use Codex to audit this Express.js API for security issues"
 
-## Common Workflows
-
-### Security Audit
-
-```bash
-codex exec -m gpt-5.5 \
-  --config model_reasoning_effort="high" \
-  --sandbox read-only \
-  --full-auto \
-  "Perform a comprehensive security audit focusing on: 1) SQL injection risks, 2) XSS vulnerabilities, 3) authentication weaknesses, 4) dependency vulnerabilities" 2>/dev/null
-```
-
-### Performance Optimization
-
+**Executed Command**:
 ```bash
 codex exec -m gpt-5.4 \
   --config model_reasoning_effort="high" \
   --sandbox read-only \
   --full-auto \
-  "Profile this codebase and identify: 1) algorithmic inefficiencies, 2) memory leaks, 3) unnecessary re-renders, 4) database query optimization opportunities" 2>/dev/null
+  --skip-git-repo-check \
+  "Security audit for Express.js API:
+   - SQL injection vulnerabilities
+   - XSS attack vectors
+   - Authentication/authorization flaws
+   - Sensitive data exposure
+   - Rate limiting gaps
+   - CORS misconfigurations
+   
+   Provide CVE references and fix recommendations." 2>/dev/null
 ```
 
-### Code Quality Review
+### Example 2: Test Generation
 
+**User Prompt**: "Generate comprehensive tests for all untested modules"
+
+**Executed Command**:
 ```bash
 codex exec -m gpt-5.3-codex-spark \
   --config model_reasoning_effort="medium" \
-  --sandbox read-only \
+  --sandbox writable \
   --full-auto \
-  "Review code quality across: 1) adherence to project style guide, 2) SOLID principles, 3) DRY violations, 4) test coverage gaps" 2>/dev/null
+  "Analyze test coverage and generate missing tests:
+   1. Identify modules without tests
+   2. Create unit tests for pure functions
+   3. Create integration tests for API endpoints
+   4. Use existing test framework patterns
+   5. Aim for 80%+ coverage
+   
+   Write tests to __tests__/ directory." 2>/dev/null
 ```
 
-### Automated Refactoring
+### Example 3: Dependency Upgrade
 
+**User Prompt**: "Upgrade all dependencies and fix breaking changes"
+
+**Executed Command**:
 ```bash
-codex exec -m gpt-5.4 \
+codex exec -m gpt-5.5 \
   --config model_reasoning_effort="high" \
-  --sandbox write \
-  "Refactor this monolith into microservices: 1) identify service boundaries, 2) extract services, 3) implement service communication, 4) update tests" 2>/dev/null
+  --sandbox writable \
+  --full-auto \
+  "Dependency upgrade workflow:
+   1. Update package.json to latest compatible versions
+   2. Run npm install
+   3. Identify breaking changes in CHANGELOG
+   4. Update code to match new APIs
+   5. Fix all TypeScript errors
+   6. Ensure all tests pass
+   
+   Create git commits for each major dependency." 2>/dev/null
+```
+
+### Example 4: Documentation Generation
+
+**User Prompt**: "Generate API documentation from code"
+
+**Executed Command**:
+```bash
+codex exec -m gpt-5.3-codex-spark \
+  --config model_reasoning_effort="low" \
+  --sandbox writable \
+  --full-auto \
+  "Generate API documentation:
+   1. Extract all public API endpoints
+   2. Document request/response schemas
+   3. Include authentication requirements
+   4. Add usage examples
+   5. Generate OpenAPI 3.0 spec
+   
+   Output to docs/api.md and openapi.yaml" 2>/dev/null
 ```
 
 ## Troubleshooting
 
-### Issue: "codex: command not found"
+### Codex Command Not Found
 
-**Solution:**
 ```bash
 # Verify installation
 which codex
 
-# If not found, reinstall Codex CLI
-# Follow installation instructions at https://docs.openai.com/codex/cli
+# Check PATH
+echo $PATH
+
+# If missing, reinstall Codex CLI per official docs
 ```
 
-### Issue: Authentication Errors
+### Authentication Errors
 
-**Solution:**
 ```bash
 # Verify credentials
 codex auth status
 
-# Reconfigure if needed
+# Re-authenticate if needed
 codex auth login
+
+# Check environment variables
+env | grep CODEX
 ```
 
-### Issue: Excessive Context Window Usage
+### Sandbox Permission Errors
 
-**Solution:**
-- Always append `2>/dev/null` to suppress thinking tokens unless debugging
-- Use more focused prompts
-- Consider `gpt-5.4-mini` for simpler tasks
+If Codex reports permission issues:
 
-### Issue: Unexpected File Modifications
+```bash
+# Ensure correct sandbox mode
+--sandbox writable  # for file edits
 
-**Solution:**
-- Use `--sandbox read-only` for analysis-only tasks
-- Review prompts for clarity
-- Remove `--full-auto` flag for manual approval
+# Check file permissions
+ls -la <affected-files>
 
-### Issue: Session Not Resuming
+# For git repositories, ensure .git directory is accessible
+```
 
-**Solution:**
+### Context Window Overflow
+
+If Claude Code runs out of context:
+
+1. **Suppress thinking tokens**: Ensure `2>/dev/null` is present
+2. **Use targeted prompts**: Be specific about which files/modules to analyze
+3. **Chain operations**: Break complex tasks into smaller Codex invocations
+4. **Use session resume**: For multi-turn workflows, use `codex resume`
+
+### Model Timeout or Rate Limits
+
+```bash
+# Switch to faster model
+-m gpt-5.4-mini
+
+# Reduce reasoning effort
+--config model_reasoning_effort="low"
+
+# Check Codex status
+codex status
+```
+
+### Session Not Found
+
 ```bash
 # List available sessions
 codex sessions list
 
-# Resume with explicit session ID
-codex resume <session-id>
-
-# Check session logs
-codex sessions logs <session-id>
+# Sessions may expire after 24 hours
+# Start new session instead of resuming
 ```
 
 ## Best Practices
 
-1. **Model Selection**: Use `gpt-5.3-codex-spark` for most coding tasks; reserve `gpt-5.5` for complex architectural decisions
-2. **Reasoning Effort**: Start with `medium`; escalate to `high` only for complex analysis
-3. **Sandbox Safety**: Default to `read-only` unless modifications are explicitly required
-4. **Prompt Clarity**: Provide detailed, structured prompts with numbered objectives
-5. **Session Management**: Use `codex resume` for iterative refinement rather than new executions
-6. **Context Preservation**: Suppress thinking tokens by default; enable only when debugging
+1. **Start with read-only**: Use `--sandbox read-only` for analysis tasks to prevent unintended modifications
+2. **Match model to task**: Use `gpt-5.4-mini` for simple tasks, `gpt-5.5` for complex refactoring
+3. **Be specific**: Detailed prompts yield better results from Codex
+4. **Review outputs**: Always review Codex-generated code before committing
+5. **Use version control**: Ensure clean git state before allowing write operations
+6. **Chain thoughtfully**: For multi-step workflows, guide Codex through each phase explicitly
+7. **Monitor costs**: Higher-tier models and reasoning efforts consume more tokens
 
-## Integration Examples
+## Integration with Claude Code Workflows
 
-### From Claude Code
+### Workflow 1: Analysis → Discussion → Action
 
-```markdown
-User: "Use Codex to analyze error handling in this Express app"
+```
+1. User: "Analyze this codebase with Codex"
+2. Claude: [Runs Codex in read-only mode]
+3. Claude: [Summarizes findings in conversation]
+4. User: "Fix the issues Codex found"
+5. Claude: [Runs Codex in writable mode with specific fixes]
+```
 
-Agent Response:
-I'll delegate this to Codex with the codex-spark model optimized for code analysis.
+### Workflow 2: Iterative Refactoring
 
-[Execute command]:
-codex exec -m gpt-5.3-codex-spark \
+```
+1. User: "Refactor authentication module"
+2. Claude: [Codex session 1 - analyze structure]
+3. User: "Good, now apply those changes"
+4. Claude: [Codex resume - implement changes]
+5. User: "Add tests for the new structure"
+6. Claude: [Codex resume - generate tests]
+```
+
+### Workflow 3: Validation Pipeline
+
+```
+1. Claude: [Makes code changes directly]
+2. User: "Have Codex validate these changes"
+3. Claude: [Runs Codex analysis on recent changes]
+4. Claude: [Reports validation results]
+```
+
+## Advanced Features
+
+### Custom Reasoning Configuration
+
+```bash
+codex exec -m gpt-5.4 \
   --config model_reasoning_effort="high" \
+  --config temperature=0.3 \
+  --config max_tokens=8000 \
+  "Your task here"
+```
+
+### Targeting Specific Files
+
+```bash
+codex exec -m gpt-5.3-codex-spark \
+  --files "src/auth/*.ts" \
   --sandbox read-only \
   --full-auto \
-  --skip-git-repo-check \
-  "Analyze error handling patterns in this Express.js application. Identify: 1) unhandled promise rejections, 2) missing try-catch blocks, 3) inconsistent error response formats, 4) opportunities for centralized error middleware" 2>/dev/null
-
-[Present summarized findings]
+  "Analyze authentication implementation in these files"
 ```
 
-### Session Continuation
+### Combining with Git Operations
 
-```markdown
-User: "Continue the previous Codex session and implement the suggestions"
+```bash
+# Before refactoring
+git checkout -b codex-refactor
 
-Agent Response:
-I'll resume the previous Codex session and apply the recommended changes.
+# Run Codex
+codex exec -m gpt-5.4 --sandbox writable --full-auto "Refactor task"
 
-[Execute command]:
-codex resume --sandbox write
-
-[Monitor and summarize applied changes]
+# After Codex completes
+git add .
+git commit -m "Codex: automated refactoring"
+git diff main
 ```
 
-## Additional Resources
+---
 
-- Official Codex CLI documentation: https://docs.openai.com/codex/cli
-- Model comparison guide: https://docs.openai.com/models
-- Sandbox security guide: https://docs.openai.com/codex/sandbox
+**Note**: This skill is part of the Codex Skills collection at [ara.so](https://ara.so). For the most autonomous setup combining Claude Code and Codex, see [klaudworks/ralph-meets-rex](https://github.com/klaudworks/ralph-meets-rex).
