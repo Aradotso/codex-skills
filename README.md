@@ -51,6 +51,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [opencode-openai-codex-auth](skills/opencode-openai-codex-auth/) | [install](https://skills.sh/aradotso/codex-skills/opencode-openai-codex-auth) | [numman-ali/opencode-openai-codex-auth](https://github.com/numman-ali/opencode-openai-codex-auth) | 2026-05-17 |
 | [codex-cli-best-practice](skills/codex-cli-best-practice/) | [install](https://skills.sh/aradotso/codex-skills/codex-cli-best-practice) | [shanraisshan/codex-cli-best-practice](https://github.com/shanraisshan/codex-cli-best-practice) | 2026-05-17 |
 | [codex-tools-account-manager](skills/codex-tools-account-manager/) | [install](https://skills.sh/aradotso/codex-skills/codex-tools-account-manager) | [170-carry/codex-tools](https://github.com/170-carry/codex-tools) | 2026-05-17 |
+| [codexskillmanager-macos-app](skills/codexskillmanager-macos-app/) | [install](https://skills.sh/aradotso/codex-skills/codexskillmanager-macos-app) | [Dimillian/CodexSkillManager](https://github.com/Dimillian/CodexSkillManager) | 2026-05-17 |
 <!-- SKILL_INDEX -->
 
 ---
