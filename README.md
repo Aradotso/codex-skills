@@ -54,6 +54,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [codexskillmanager-macos-app](skills/codexskillmanager-macos-app/) | [install](https://skills.sh/aradotso/codex-skills/codexskillmanager-macos-app) | [Dimillian/CodexSkillManager](https://github.com/Dimillian/CodexSkillManager) | 2026-05-17 |
 | [codex-desktop-linux-installer](skills/codex-desktop-linux-installer/) | [install](https://skills.sh/aradotso/codex-skills/codex-desktop-linux-installer) | [ilysenko/codex-desktop-linux](https://github.com/ilysenko/codex-desktop-linux) | 2026-05-17 |
 | [codex-cli-delegation](skills/codex-cli-delegation/) | [install](https://skills.sh/aradotso/codex-skills/codex-cli-delegation) | [skills-directory/skill-codex](https://github.com/skills-directory/skill-codex) | 2026-05-17 |
+| [claude-code-codex-delegation](skills/claude-code-codex-delegation/) | [install](https://skills.sh/aradotso/codex-skills/claude-code-codex-delegation) | [skills-directory/skill-codex](https://github.com/skills-directory/skill-codex) | 2026-05-17 |
 <!-- SKILL_INDEX -->
 
 ---
