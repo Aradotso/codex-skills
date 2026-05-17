@@ -49,6 +49,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [codexmcp-claude-codex-collaboration](skills/codexmcp-claude-codex-collaboration/) | [install](https://skills.sh/aradotso/codex-skills/codexmcp-claude-codex-collaboration) | [GuDaStudio/codexmcp](https://github.com/GuDaStudio/codexmcp) | 2026-05-17 |
 | [academic-research-skills-codex](skills/academic-research-skills-codex/) | [install](https://skills.sh/aradotso/codex-skills/academic-research-skills-codex) | [Imbad0202/academic-research-skills-codex](https://github.com/Imbad0202/academic-research-skills-codex) | 2026-05-17 |
 | [opencode-openai-codex-auth](skills/opencode-openai-codex-auth/) | [install](https://skills.sh/aradotso/codex-skills/opencode-openai-codex-auth) | [numman-ali/opencode-openai-codex-auth](https://github.com/numman-ali/opencode-openai-codex-auth) | 2026-05-17 |
+| [codex-cli-best-practice](skills/codex-cli-best-practice/) | [install](https://skills.sh/aradotso/codex-skills/codex-cli-best-practice) | [shanraisshan/codex-cli-best-practice](https://github.com/shanraisshan/codex-cli-best-practice) | 2026-05-17 |
 <!-- SKILL_INDEX -->
 
 ---
