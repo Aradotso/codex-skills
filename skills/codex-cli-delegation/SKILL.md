@@ -1,15 +1,15 @@
 ---
 name: codex-cli-delegation
-description: Delegate coding tasks to OpenAI Codex CLI for automated analysis, refactoring, and multi-file editing workflows
+description: Delegate complex code analysis, refactoring, and editing tasks to OpenAI Codex CLI from within Claude Code
 triggers:
   - "use codex to analyze this code"
-  - "delegate this task to codex"
+  - "delegate this to codex"
   - "run codex on this repository"
-  - "let codex refactor this"
-  - "invoke codex for code analysis"
+  - "ask codex to refactor this"
   - "start a codex session"
-  - "ask codex to improve this"
-  - "run codex exec on this project"
+  - "execute this with codex"
+  - "use codex for code review"
+  - "invoke codex cli"
 ---
 
 # Codex CLI Delegation
@@ -18,369 +18,423 @@ triggers:
 
 ## Overview
 
-The Codex CLI is OpenAI's command-line tool for automated code analysis, refactoring, and editing. It provides both one-shot execution (`codex exec`) and interactive session modes for complex multi-file workflows. This skill enables AI agents to delegate sophisticated coding tasks to Codex, leveraging its specialized models for code understanding and transformation.
+The Codex CLI (`codex`) is a command-line tool that enables automated code analysis, refactoring, editing, and agentic workflows using OpenAI's GPT models with specialized code-understanding capabilities. This skill enables AI coding agents to delegate tasks to Codex for multi-file operations, complex refactoring, and autonomous code editing.
 
 **Key capabilities:**
-- Automated codebase analysis and suggestions
-- Multi-file refactoring with git integration
-- Context-aware code editing
-- Repository-wide pattern detection
-- Session-based iterative workflows
+- Execute one-off prompts with `codex exec`
+- Resume interactive sessions with context persistence
+- Multi-file code analysis and editing
+- Automated git integration and safety checks
+- Configurable sandbox modes (read-only, edit, full)
+- Model selection and reasoning effort tuning
+
+## Prerequisites
+
+Verify Codex is installed and configured:
+
+```bash
+codex --version
+```
+
+If not installed, follow [Codex installation instructions](https://github.com/openai/codex-cli) and configure credentials:
+
+```bash
+# Set OpenAI API key
+export OPENAI_API_KEY="${OPENAI_API_KEY}"
+
+# Verify configuration
+codex config show
+```
 
 ## Installation
 
-### Prerequisites
-
-The Codex CLI must be installed and configured before using this skill:
+This skill is typically installed via Claude Code's plugin system:
 
 ```bash
-# Verify installation
-codex --version
-
-# If not installed, follow OpenAI's installation guide
-# Typically: pip install openai-codex-cli
-# or: npm install -g @openai/codex-cli
-
-# Configure credentials
-codex auth login
-# or set environment variable
-export OPENAI_API_KEY=your_key_here
+/plugin marketplace add skills-directory/skill-codex
+/plugin install skill-codex@skill-codex
 ```
 
-Confirm the installation works:
+Or as a standalone skill:
 
 ```bash
-codex exec "Hello from Codex"
+git clone --depth 1 git@github.com:skills-directory/skill-codex.git /tmp/skills-temp && \
+mkdir -p ~/.claude/skills && \
+cp -r /tmp/skills-temp/plugins/skill-codex/skills/codex ~/.claude/skills/codex && \
+rm -rf /tmp/skills-temp
 ```
 
 ## Core Commands
 
-### One-Shot Execution
+### `codex exec`
+
+Execute a one-off prompt with full configuration control:
 
 ```bash
-codex exec [options] "prompt"
+# Basic execution
+codex exec "Analyze error handling patterns in this codebase"
+
+# With model selection
+codex exec -m gpt-5.3-codex-spark "Refactor authentication module"
+
+# With reasoning effort
+codex exec --config model_reasoning_effort="high" "Find performance bottlenecks"
+
+# With sandbox mode
+codex exec --sandbox read-only "Review code quality"
+codex exec --sandbox edit "Add type hints to Python files"
+codex exec --sandbox full "Refactor and run tests"
+
+# Full automation mode
+codex exec --full-auto --skip-git-repo-check "Analyze this repository"
+
+# Suppress thinking tokens (recommended for Claude Code context)
+codex exec "Your prompt" 2>/dev/null
 ```
 
-**Essential options:**
-- `-m, --model`: Model selection (`gpt-5.5`, `gpt-5.4`, `gpt-5.4-mini`, `gpt-5.3-codex-spark`, `gpt-5.3-codex`)
-- `--config model_reasoning_effort=LEVEL`: Reasoning depth (`low`, `medium`, `high`)
-- `--sandbox MODE`: Safety mode (`read-only`, `full`, `none`)
-- `--full-auto`: Automatic execution without confirmation
-- `--skip-git-repo-check`: Bypass git repository validation
-- `--stream`: Stream output in real-time
-- `--session ID`: Resume or create named session
+### Session Resume
 
-### Session Management
+Continue previous Codex sessions with context:
 
 ```bash
-# Start interactive session
-codex session start
+# List available sessions
+codex sessions list
 
-# Resume existing session
-codex session resume <session-id>
+# Resume a specific session
+codex resume <session-id>
 
-# List sessions
-codex session list
-
-# Export session history
-codex session export <session-id>
+# Resume with additional prompt
+codex resume <session-id> "Continue with the refactoring we discussed"
 ```
 
-## Model Selection Guide
+## Model Selection
 
-| Model | Use Case | Speed | Cost |
-|-------|----------|-------|------|
-| `gpt-5.5` | Complex refactoring, architecture | Slowest | Highest |
-| `gpt-5.4` | Standard analysis, multi-file edits | Medium | Medium |
-| `gpt-5.4-mini` | Quick fixes, simple tasks | Fast | Low |
-| `gpt-5.3-codex-spark` | Rapid prototyping | Fastest | Lowest |
-| `gpt-5.3-codex` | Legacy compatibility | Medium | Medium |
+Choose the appropriate model for your task:
 
-**Default recommendation:** `gpt-5.3-codex-spark` for most tasks, `gpt-5.4` for complex workflows.
+| Model | Best For | Reasoning |
+|-------|----------|-----------|
+| `gpt-5.5` | Most complex tasks, architectural decisions | Highest |
+| `gpt-5.4` | Advanced refactoring, multi-file analysis | High |
+| `gpt-5.4-mini` | Faster analysis, simpler edits | Medium |
+| `gpt-5.3-codex-spark` | Quick code review, rapid prototyping | Low-Medium |
+| `gpt-5.3-codex` | Standard code operations | Low |
+
+Example:
+
+```bash
+# For complex architectural analysis
+codex exec -m gpt-5.5 --config model_reasoning_effort="high" \
+  "Design a plugin system for this application"
+
+# For quick code review
+codex exec -m gpt-5.3-codex-spark --config model_reasoning_effort="low" \
+  "Check for security issues in authentication"
+```
 
 ## Reasoning Effort Levels
 
-- **`low`**: Fast, surface-level analysis (15-30s)
-- **`medium`**: Balanced depth and speed (30-90s) — **recommended default**
-- **`high`**: Deep reasoning, comprehensive analysis (90s-5min)
+Control computational depth:
+
+- **`low`**: Fast, surface-level analysis
+- **`medium`**: Balanced speed and depth
+- **`high`**: Deep reasoning, comprehensive analysis
+
+```bash
+codex exec --config model_reasoning_effort="high" \
+  "Analyze concurrency patterns and race conditions"
+```
 
 ## Sandbox Modes
 
-- **`read-only`**: Analysis only, no file modifications — **safe default**
-- **`full`**: Can read and write files (use with caution)
-- **`none`**: No filesystem access (prompt-only mode)
+Control Codex's file system access:
 
-## Common Patterns
-
-### Repository Analysis
+- **`read-only`**: Analysis only, no modifications
+- **`edit`**: Can modify files but limited execution
+- **`full`**: Full file system and execution access
 
 ```bash
-# Comprehensive codebase review
-codex exec -m gpt-5.4 \
-  --config model_reasoning_effort="medium" \
-  --sandbox read-only \
-  --full-auto \
-  --skip-git-repo-check \
-  "Analyze this repository for code quality issues, architecture patterns, and suggest improvements" \
-  2>/dev/null
+# Safe analysis
+codex exec --sandbox read-only "Audit this codebase"
+
+# Controlled editing
+codex exec --sandbox edit "Add error handling to all API calls"
+
+# Full automation (use with caution)
+codex exec --sandbox full --full-auto "Implement feature X with tests"
 ```
 
-### Refactoring Workflow
+## Common Workflows
+
+### Code Analysis
 
 ```bash
-# Extract common patterns into reusable functions
+# Comprehensive repository analysis
 codex exec -m gpt-5.4 \
   --config model_reasoning_effort="high" \
-  --sandbox full \
-  --session refactor-session-1 \
-  "Identify duplicated code in src/ and refactor into shared utilities. Preserve all functionality and add tests."
-```
+  --sandbox read-only \
+  --full-auto \
+  "Analyze this repository comprehensively: architecture, patterns, code quality, potential improvements" \
+  2>/dev/null
 
-### Bug Investigation
-
-```bash
-# Debug specific issue with context
+# Security audit
 codex exec -m gpt-5.5 \
   --config model_reasoning_effort="high" \
   --sandbox read-only \
-  --stream \
-  "Investigate the null pointer exception in user_service.py line 47. Trace the call chain and suggest fixes."
+  "Perform security audit focusing on authentication, authorization, and data validation" \
+  2>/dev/null
 ```
 
-### Documentation Generation
+### Refactoring
+
+```bash
+# Extract reusable components
+codex exec -m gpt-5.4 \
+  --sandbox edit \
+  "Identify duplicated code and extract into reusable functions" \
+  2>/dev/null
+
+# Type safety improvements
+codex exec -m gpt-5.3-codex-spark \
+  --sandbox edit \
+  "Add TypeScript type annotations to all exported functions" \
+  2>/dev/null
+```
+
+### Feature Implementation
+
+```bash
+# Implement with tests
+codex exec -m gpt-5.5 \
+  --config model_reasoning_effort="high" \
+  --sandbox full \
+  --full-auto \
+  "Implement user authentication with JWT tokens, including unit tests and integration tests" \
+  2>/dev/null
+```
+
+### Documentation
 
 ```bash
 # Generate comprehensive docs
-codex exec -m gpt-5.4-mini \
-  --config model_reasoning_effort="low" \
-  --sandbox full \
-  --full-auto \
-  "Generate API documentation for all public functions in lib/. Use JSDoc format and include examples."
-```
-
-### Session-Based Iterative Work
-
-```bash
-# Start session for multi-step migration
-codex session start --id migration-to-typescript
-
-# Step 1
-codex exec --session migration-to-typescript \
-  "Convert src/utils/helpers.js to TypeScript with proper type definitions"
-
-# Step 2 (continues context)
-codex exec --session migration-to-typescript \
-  "Update all imports of helpers.js to use the new TypeScript module"
-
-# Review session history
-codex session export migration-to-typescript
+codex exec -m gpt-5.4 \
+  --sandbox edit \
+  "Add JSDoc comments to all public APIs and update README with usage examples" \
+  2>/dev/null
 ```
 
 ## Configuration
 
-### Global Config File
-
-Location: `~/.codex/config.yaml`
-
-```yaml
-# Default model
-default_model: gpt-5.3-codex-spark
-
-# Default reasoning effort
-default_reasoning_effort: medium
-
-# Default sandbox mode
-default_sandbox: read-only
-
-# Suppress thinking tokens (stderr) by default
-suppress_thinking: true
-
-# Auto-approve low-risk operations
-auto_approve:
-  - read-only
-  - documentation
-
-# Git integration
-git:
-  auto_commit: false
-  commit_message_template: "Codex: {summary}"
-```
-
 ### Environment Variables
 
 ```bash
-# API credentials
-export OPENAI_API_KEY=sk-...
+# OpenAI API key (required)
+export OPENAI_API_KEY="${OPENAI_API_KEY}"
 
-# Override default model
-export CODEX_DEFAULT_MODEL=gpt-5.4
-
-# Set reasoning effort
-export CODEX_REASONING_EFFORT=high
-
-# Session storage directory
-export CODEX_SESSION_DIR=~/.codex/sessions
+# Codex configuration directory (optional)
+export CODEX_CONFIG_DIR="${HOME}/.config/codex"
 ```
 
-## Working with Thinking Tokens
+### Global Config File
 
-By default, this skill suppresses thinking tokens (Codex's internal reasoning on stderr) using `2>/dev/null` to avoid context pollution. 
+Located at `~/.config/codex/config.yaml`:
 
-**To view thinking tokens:**
+```yaml
+default_model: gpt-5.4
+default_reasoning_effort: medium
+default_sandbox: edit
+auto_git_check: true
+thinking_tokens: false
+```
+
+### Per-Execution Config
 
 ```bash
-# Remove stderr redirection
-codex exec -m gpt-5.4 \
+# Override config for single execution
+codex exec \
   --config model_reasoning_effort="high" \
-  --sandbox read-only \
-  "Analyze this function"
-# (stderr will show reasoning process)
+  --config auto_git_check="false" \
+  "Your prompt here"
+```
+
+## Thinking Tokens
+
+By default, this skill suppresses Codex's reasoning output (stderr) to avoid bloating context:
+
+```bash
+# Suppressed (default for Claude Code)
+codex exec "Analyze code" 2>/dev/null
+
+# Show thinking tokens for debugging
+codex exec "Analyze code"
 ```
 
 **When to show thinking tokens:**
-- Debugging unexpected Codex behavior
+- Debugging Codex behavior
 - Understanding complex analysis decisions
-- Learning Codex's reasoning patterns
-- Troubleshooting edge cases
+- Learning from Codex's reasoning process
 
-## Real-World Examples
+## Safety and Git Integration
 
-### Example 1: Migrate API Endpoints
+Codex includes built-in safety checks:
 
 ```bash
-codex exec -m gpt-5.4 \
-  --config model_reasoning_effort="high" \
-  --sandbox full \
-  --session api-migration \
-  --skip-git-repo-check \
-  "Migrate all REST endpoints in src/routes/ from Express to Fastify. Preserve middleware, error handling, and add Fastify schema validation." \
-  2>/dev/null
+# Requires clean git state (recommended)
+codex exec --sandbox edit "Refactor module"
+
+# Skip git check (use with caution)
+codex exec --sandbox edit --skip-git-repo-check "Quick fix"
+
+# Full automation without prompts
+codex exec --full-auto --skip-git-repo-check "Automated task"
 ```
 
-### Example 2: Security Audit
+**Best practices:**
+1. Always work in a git repository with committed changes
+2. Use `read-only` sandbox for analysis
+3. Review changes before committing
+4. Use `--full-auto` only for well-defined, low-risk tasks
+
+## Error Handling
+
+### Common Issues
+
+**API Key Not Set:**
+```bash
+Error: OPENAI_API_KEY not found
+```
+Solution:
+```bash
+export OPENAI_API_KEY="${OPENAI_API_KEY}"
+```
+
+**Codex Not Found:**
+```bash
+codex: command not found
+```
+Solution: Install Codex CLI and ensure it's in PATH
+
+**Git Repository Required:**
+```bash
+Error: Not a git repository
+```
+Solution: Initialize git or use `--skip-git-repo-check`
+
+**Rate Limiting:**
+```bash
+Error: Rate limit exceeded
+```
+Solution: Reduce reasoning effort or switch to a faster model
+
+## Integration with Claude Code
+
+When delegating to Codex from Claude Code:
+
+1. **Ask for clarification** on model and reasoning effort if not specified
+2. **Default to `read-only` sandbox** for analysis tasks
+3. **Suppress thinking tokens** unless explicitly requested: `2>/dev/null`
+4. **Summarize Codex output** rather than showing raw responses
+5. **Offer follow-up actions** based on Codex results
+
+Example integration pattern:
+
+```python
+# In Claude Code skill activation
+def invoke_codex(prompt, model=None, reasoning=None, sandbox="read-only"):
+    # Confirm model selection
+    if model is None:
+        # Ask user: "Which model? gpt-5.5, gpt-5.4, gpt-5.4-mini, gpt-5.3-codex-spark, gpt-5.3-codex"
+        model = get_user_choice()
+    
+    # Confirm reasoning effort
+    if reasoning is None:
+        # Ask user: "Reasoning effort? low, medium, high"
+        reasoning = get_user_choice()
+    
+    # Build command
+    cmd = f'codex exec -m {model} --config model_reasoning_effort="{reasoning}" --sandbox {sandbox} --full-auto --skip-git-repo-check "{prompt}" 2>/dev/null'
+    
+    # Execute and return results
+    return execute_command(cmd)
+```
+
+## Advanced Patterns
+
+### Iterative Refinement
 
 ```bash
+# Initial analysis
+codex exec -m gpt-5.4 "Analyze authentication module" > analysis.txt
+
+# Resume with refinements
+SESSION_ID=$(codex sessions list | head -1 | awk '{print $1}')
+codex resume $SESSION_ID "Focus on OAuth2 implementation details"
+```
+
+### Multi-Stage Workflows
+
+```bash
+# Stage 1: Analysis (read-only)
+codex exec --sandbox read-only \
+  "Identify components that need refactoring" > refactor-plan.txt
+
+# Stage 2: Refactoring (edit)
+codex exec --sandbox edit \
+  "Refactor components listed in refactor-plan.txt"
+
+# Stage 3: Testing (full)
+codex exec --sandbox full \
+  "Run test suite and fix any failures"
+```
+
+### Combining with Shell Scripts
+
+```bash
+#!/bin/bash
+# automated-review.sh
+
+echo "Starting Codex code review..."
+
+# Security audit
 codex exec -m gpt-5.5 \
   --config model_reasoning_effort="high" \
   --sandbox read-only \
-  --stream \
-  "Perform a security audit of authentication logic. Check for: SQL injection, XSS, CSRF, insecure session handling, and hardcoded secrets." \
-  2>/dev/null
-```
+  "Security audit focusing on OWASP Top 10" \
+  2>/dev/null > security-report.md
 
-### Example 3: Test Coverage Analysis
-
-```bash
+# Code quality
 codex exec -m gpt-5.4 \
-  --config model_reasoning_effort="medium" \
   --sandbox read-only \
-  --full-auto \
-  "Analyze test coverage in tests/. Identify untested edge cases and suggest new test cases for critical paths." \
-  2>/dev/null
-```
+  "Code quality analysis: complexity, maintainability, test coverage" \
+  2>/dev/null > quality-report.md
 
-### Example 4: Performance Optimization
-
-```bash
-codex exec -m gpt-5.4 \
-  --config model_reasoning_effort="high" \
-  --sandbox full \
-  --session perf-opt \
-  "Profile the data processing pipeline in src/pipeline/. Identify bottlenecks and optimize for 10x throughput improvement. Add benchmarks." \
-  2>/dev/null
+echo "Reports generated: security-report.md, quality-report.md"
 ```
 
 ## Troubleshooting
 
-### Command Not Found
+### Performance Issues
 
-```bash
-# Check PATH
-which codex
+If Codex is slow:
+- Use lower reasoning effort: `--config model_reasoning_effort="low"`
+- Switch to faster model: `-m gpt-5.3-codex-spark`
+- Narrow the scope of your prompt
 
-# Reinstall if missing
-pip install --upgrade openai-codex-cli
-# or
-npm install -g @openai/codex-cli
-```
+### Context Window Limits
 
-### Authentication Errors
+If hitting context limits:
+- Break large tasks into smaller prompts
+- Use `--sandbox read-only` to limit file scanning
+- Exclude large dependencies or build artifacts
 
-```bash
-# Re-authenticate
-codex auth logout
-codex auth login
+### Inconsistent Results
 
-# Or set API key directly
-export OPENAI_API_KEY=sk-...
-```
+If results vary significantly:
+- Increase reasoning effort for more consistent analysis
+- Use `gpt-5.5` or `gpt-5.4` for complex tasks
+- Provide more specific, detailed prompts
 
-### Git Repository Errors
+## Resources
 
-If Codex complains about missing git repository:
-
-```bash
-# Initialize git if needed
-git init
-
-# Or skip the check
-codex exec --skip-git-repo-check "your prompt"
-```
-
-### Rate Limiting
-
-```bash
-# Check quota
-codex quota
-
-# Use cheaper model
-codex exec -m gpt-5.4-mini --config model_reasoning_effort="low" "prompt"
-```
-
-### Session Corruption
-
-```bash
-# List sessions
-codex session list
-
-# Delete corrupted session
-codex session delete <session-id>
-
-# Clear all sessions
-rm -rf ~/.codex/sessions/*
-```
-
-### Excessive Thinking Tokens
-
-If context window fills with thinking tokens:
-
-```bash
-# Always suppress stderr for normal operation
-codex exec "prompt" 2>/dev/null
-
-# Use lower reasoning effort
-codex exec --config model_reasoning_effort="low" "prompt"
-```
-
-## Best Practices
-
-1. **Start with read-only**: Always use `--sandbox read-only` for analysis unless modifications are explicitly needed
-2. **Choose appropriate models**: Use `gpt-5.4-mini` for simple tasks, `gpt-5.4` or `gpt-5.5` for complex work
-3. **Use sessions for multi-step work**: Maintain context across related operations
-4. **Suppress thinking tokens by default**: Add `2>/dev/null` unless debugging
-5. **Be specific in prompts**: Include file paths, expected outcomes, and constraints
-6. **Review before auto-approval**: Avoid `--full-auto` with `--sandbox full` for critical code
-7. **Version control integration**: Commit before running Codex edits for easy rollback
-8. **Monitor costs**: Check `codex quota` regularly when using premium models
-
-## Integration Tips for AI Agents
-
-When delegating to Codex:
-
-1. **Ask for model preference**: If user doesn't specify, ask which model to use
-2. **Ask for reasoning effort**: If user doesn't specify, ask for low/medium/high
-3. **Default to safe modes**: Use `read-only` sandbox unless user requests edits
-4. **Summarize outputs**: Codex can be verbose — extract key insights for the user
-5. **Handle sessions intelligently**: Suggest session IDs for related multi-step tasks
-6. **Expose thinking tokens on request**: If user asks "why did Codex decide X?", rerun without `2>/dev/null`
-7. **Validate prerequisites**: Check `codex --version` before first use
+- [Codex CLI Documentation](https://github.com/openai/codex-cli)
+- [Model Comparison Guide](https://platform.openai.com/docs/models)
+- [Agentic Workflows with ralph-meets-rex](https://github.com/klaudworks/ralph-meets-rex)
