@@ -56,6 +56,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [codex-cli-delegation](skills/codex-cli-delegation/) | [install](https://skills.sh/aradotso/codex-skills/codex-cli-delegation) | [skills-directory/skill-codex](https://github.com/skills-directory/skill-codex) | 2026-05-17 |
 | [claude-code-codex-delegation](skills/claude-code-codex-delegation/) | [install](https://skills.sh/aradotso/codex-skills/claude-code-codex-delegation) | [skills-directory/skill-codex](https://github.com/skills-directory/skill-codex) | 2026-05-17 |
 | [skill-codex-delegation](skills/skill-codex-delegation/) | [install](https://skills.sh/aradotso/codex-skills/skill-codex-delegation) | [skills-directory/skill-codex](https://github.com/skills-directory/skill-codex) | 2026-05-17 |
+| [codex-orange-book-guide](skills/codex-orange-book-guide/) | [install](https://skills.sh/aradotso/codex-skills/codex-orange-book-guide) | [alchaincyf/codex-orange-book](https://github.com/alchaincyf/codex-orange-book) | 2026-05-19 |
 <!-- SKILL_INDEX -->
 
 ---
