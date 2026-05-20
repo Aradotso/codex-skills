@@ -59,6 +59,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [codex-orange-book-guide](skills/codex-orange-book-guide/) | [install](https://skills.sh/aradotso/codex-skills/codex-orange-book-guide) | [alchaincyf/codex-orange-book](https://github.com/alchaincyf/codex-orange-book) | 2026-05-19 |
 | [codex-ppt-skill](skills/codex-ppt-skill/) | [install](https://skills.sh/aradotso/codex-skills/codex-ppt-skill) | [ningzimu/codex-ppt-skill](https://github.com/ningzimu/codex-ppt-skill) | 2026-05-19 |
 | [codex-redteam-mode](skills/codex-redteam-mode/) | [install](https://skills.sh/aradotso/codex-skills/codex-redteam-mode) | [chAng-L19/codex-redteam-mode](https://github.com/chAng-L19/codex-redteam-mode) | 2026-05-20 |
+| [codexisland-macos-notch](skills/codexisland-macos-notch/) | [install](https://skills.sh/aradotso/codex-skills/codexisland-macos-notch) | [ericjypark/codex-island](https://github.com/ericjypark/codex-island) | 2026-05-20 |
 <!-- SKILL_INDEX -->
 
 ---
