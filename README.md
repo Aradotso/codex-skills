@@ -61,6 +61,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [codex-redteam-mode](skills/codex-redteam-mode/) | [install](https://skills.sh/aradotso/codex-skills/codex-redteam-mode) | [chAng-L19/codex-redteam-mode](https://github.com/chAng-L19/codex-redteam-mode) | 2026-05-20 |
 | [codexisland-macos-notch](skills/codexisland-macos-notch/) | [install](https://skills.sh/aradotso/codex-skills/codexisland-macos-notch) | [ericjypark/codex-island](https://github.com/ericjypark/codex-island) | 2026-05-20 |
 | [codex-shim-byok-models](skills/codex-shim-byok-models/) | [install](https://skills.sh/aradotso/codex-skills/codex-shim-byok-models) | [0xSero/codex-shim](https://github.com/0xSero/codex-shim) | 2026-05-22 |
+| [codexguide-reference](skills/codexguide-reference/) | [install](https://skills.sh/aradotso/codex-skills/codexguide-reference) | [freestylefly/CodexGuide](https://github.com/freestylefly/CodexGuide) | 2026-05-27 |
 <!-- SKILL_INDEX -->
 
 ---
