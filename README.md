@@ -63,6 +63,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [codex-shim-byok-models](skills/codex-shim-byok-models/) | [install](https://skills.sh/aradotso/codex-skills/codex-shim-byok-models) | [0xSero/codex-shim](https://github.com/0xSero/codex-shim) | 2026-05-22 |
 | [codexguide-reference](skills/codexguide-reference/) | [install](https://skills.sh/aradotso/codex-skills/codexguide-reference) | [freestylefly/CodexGuide](https://github.com/freestylefly/CodexGuide) | 2026-05-27 |
 | [codex-app-transfer-proxy](skills/codex-app-transfer-proxy/) | [install](https://skills.sh/aradotso/codex-skills/codex-app-transfer-proxy) | [Cmochance/codex-app-transfer](https://github.com/Cmochance/codex-app-transfer) | 2026-05-28 |
+| [codex-claude-academic-skills](skills/codex-claude-academic-skills/) | [install](https://skills.sh/aradotso/codex-skills/codex-claude-academic-skills) | [zLanqing/codex-claude-academic-skills](https://github.com/zLanqing/codex-claude-academic-skills) | 2026-05-30 |
 <!-- SKILL_INDEX -->
 
 ---
