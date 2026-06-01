@@ -65,6 +65,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [codex-app-transfer-proxy](skills/codex-app-transfer-proxy/) | [install](https://skills.sh/aradotso/codex-skills/codex-app-transfer-proxy) | [Cmochance/codex-app-transfer](https://github.com/Cmochance/codex-app-transfer) | 2026-05-28 |
 | [codex-claude-academic-skills](skills/codex-claude-academic-skills/) | [install](https://skills.sh/aradotso/codex-skills/codex-claude-academic-skills) | [zLanqing/codex-claude-academic-skills](https://github.com/zLanqing/codex-claude-academic-skills) | 2026-05-30 |
 | [codex-app-mirror-installer](skills/codex-app-mirror-installer/) | [install](https://skills.sh/aradotso/codex-skills/codex-app-mirror-installer) | [Wangnov/codex-app-mirror](https://github.com/Wangnov/codex-app-mirror) | 2026-05-31 |
+| [lazycodex-agent-harness](skills/lazycodex-agent-harness/) | [install](https://skills.sh/aradotso/codex-skills/lazycodex-agent-harness) | [code-yeongyu/lazycodex](https://github.com/code-yeongyu/lazycodex) | 2026-06-01 |
 <!-- SKILL_INDEX -->
 
 ---
