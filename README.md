@@ -68,6 +68,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [lazycodex-agent-harness](skills/lazycodex-agent-harness/) | [install](https://skills.sh/aradotso/codex-skills/lazycodex-agent-harness) | [code-yeongyu/lazycodex](https://github.com/code-yeongyu/lazycodex) | 2026-06-01 |
 | [opencodex-gateway](skills/opencodex-gateway/) | [install](https://skills.sh/aradotso/codex-skills/opencodex-gateway) | [AITabby/opencodex](https://github.com/AITabby/opencodex) | 2026-06-05 |
 | [codex-windows-fast-patch-skill](skills/codex-windows-fast-patch-skill/) | [install](https://skills.sh/aradotso/codex-skills/codex-windows-fast-patch-skill) | [chen0416ccc-cpu/codex-windows-fast-patch-skill](https://github.com/chen0416ccc-cpu/codex-windows-fast-patch-skill) | 2026-06-05 |
+| [feishu-codex-bridge](skills/feishu-codex-bridge/) | [install](https://skills.sh/aradotso/codex-skills/feishu-codex-bridge) | [QQQingyu/feishu-codex-bridge](https://github.com/QQQingyu/feishu-codex-bridge) | 2026-06-11 |
 <!-- SKILL_INDEX -->
 
 ---
