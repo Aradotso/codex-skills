@@ -71,6 +71,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [feishu-codex-bridge](skills/feishu-codex-bridge/) | [install](https://skills.sh/aradotso/codex-skills/feishu-codex-bridge) | [QQQingyu/feishu-codex-bridge](https://github.com/QQQingyu/feishu-codex-bridge) | 2026-06-11 |
 | [codex-chatgpt-control-bridge](skills/codex-chatgpt-control-bridge/) | [install](https://skills.sh/aradotso/codex-skills/codex-chatgpt-control-bridge) | [adamallcock/codex-chatgpt-control](https://github.com/adamallcock/codex-chatgpt-control) | 2026-06-13 |
 | [fablecodex-workflow](skills/fablecodex-workflow/) | [install](https://skills.sh/aradotso/codex-skills/fablecodex-workflow) | [baskduf/FableCodex](https://github.com/baskduf/FableCodex) | 2026-06-17 |
+| [codexpro-chatgpt-local-agent](skills/codexpro-chatgpt-local-agent/) | [install](https://skills.sh/aradotso/codex-skills/codexpro-chatgpt-local-agent) | [rebel0789/codexpro](https://github.com/rebel0789/codexpro) | 2026-06-17 |
 <!-- SKILL_INDEX -->
 
 ---
