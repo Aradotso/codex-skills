@@ -73,6 +73,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [fablecodex-workflow](skills/fablecodex-workflow/) | [install](https://skills.sh/aradotso/codex-skills/fablecodex-workflow) | [baskduf/FableCodex](https://github.com/baskduf/FableCodex) | 2026-06-17 |
 | [codexpro-chatgpt-local-agent](skills/codexpro-chatgpt-local-agent/) | [install](https://skills.sh/aradotso/codex-skills/codexpro-chatgpt-local-agent) | [rebel0789/codexpro](https://github.com/rebel0789/codexpro) | 2026-06-17 |
 | [codex-cursor-limits-resetter](skills/codex-cursor-limits-resetter/) | [install](https://skills.sh/aradotso/codex-skills/codex-cursor-limits-resetter) | [Gulfsistable/codex-cursor-unlimited](https://github.com/Gulfsistable/codex-cursor-unlimited) | 2026-06-18 |
+| [codex-cursor-claude-usage-resetter](skills/codex-cursor-claude-usage-resetter/) | [install](https://skills.sh/aradotso/codex-skills/codex-cursor-claude-usage-resetter) | [Gulfsistable/codex-cursor-unlimited](https://github.com/Gulfsistable/codex-cursor-unlimited) | 2026-06-18 |
 <!-- SKILL_INDEX -->
 
 ---
