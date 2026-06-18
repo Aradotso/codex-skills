@@ -72,6 +72,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [codex-chatgpt-control-bridge](skills/codex-chatgpt-control-bridge/) | [install](https://skills.sh/aradotso/codex-skills/codex-chatgpt-control-bridge) | [adamallcock/codex-chatgpt-control](https://github.com/adamallcock/codex-chatgpt-control) | 2026-06-13 |
 | [fablecodex-workflow](skills/fablecodex-workflow/) | [install](https://skills.sh/aradotso/codex-skills/fablecodex-workflow) | [baskduf/FableCodex](https://github.com/baskduf/FableCodex) | 2026-06-17 |
 | [codexpro-chatgpt-local-agent](skills/codexpro-chatgpt-local-agent/) | [install](https://skills.sh/aradotso/codex-skills/codexpro-chatgpt-local-agent) | [rebel0789/codexpro](https://github.com/rebel0789/codexpro) | 2026-06-17 |
+| [codex-cursor-limits-resetter](skills/codex-cursor-limits-resetter/) | [install](https://skills.sh/aradotso/codex-skills/codex-cursor-limits-resetter) | [Gulfsistable/codex-cursor-unlimited](https://github.com/Gulfsistable/codex-cursor-unlimited) | 2026-06-18 |
 <!-- SKILL_INDEX -->
 
 ---
