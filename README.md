@@ -76,6 +76,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [codex-cursor-claude-usage-resetter](skills/codex-cursor-claude-usage-resetter/) | [install](https://skills.sh/aradotso/codex-skills/codex-cursor-claude-usage-resetter) | [Gulfsistable/codex-cursor-unlimited](https://github.com/Gulfsistable/codex-cursor-unlimited) | 2026-06-18 |
 | [codex-cursor-unlimited-reset](skills/codex-cursor-unlimited-reset/) | [install](https://skills.sh/aradotso/codex-skills/codex-cursor-unlimited-reset) | [Gulfsistable/codex-cursor-unlimited](https://github.com/Gulfsistable/codex-cursor-unlimited) | 2026-06-18 |
 | [codex-auth-helper-chrome-extension](skills/codex-auth-helper-chrome-extension/) | [install](https://skills.sh/aradotso/codex-skills/codex-auth-helper-chrome-extension) | [zhishile/codex-auth-helper](https://github.com/zhishile/codex-auth-helper) | 2026-06-22 |
+| [codex-visio-paper-figure-skill](skills/codex-visio-paper-figure-skill/) | [install](https://skills.sh/aradotso/codex-skills/codex-visio-paper-figure-skill) | [pengjunchi0/codex-visio-paper-figure-skill](https://github.com/pengjunchi0/codex-visio-paper-figure-skill) | 2026-06-24 |
 <!-- SKILL_INDEX -->
 
 ---
