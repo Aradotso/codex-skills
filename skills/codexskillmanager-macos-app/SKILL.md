@@ -1,4 +1,3 @@
-```markdown
 ---
 name: codexskillmanager-macos-app
 description: Build and use CodexSkillManager, a macOS SwiftUI app for managing local and remote Codex/Claude skills
@@ -518,4 +517,3 @@ MIT License - see repository for full text.
 - **Clawdhub**: https://clawdhub.com
 - **swift-markdown-ui**: https://github.com/gonzalezreal/swift-markdown-ui
 - **Swift Package Manager**: https://swift.org/package-manager
-```
