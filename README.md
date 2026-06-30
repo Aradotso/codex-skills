@@ -78,6 +78,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [codex-auth-helper-chrome-extension](skills/codex-auth-helper-chrome-extension/) | [install](https://skills.sh/aradotso/codex-skills/codex-auth-helper-chrome-extension) | [zhishile/codex-auth-helper](https://github.com/zhishile/codex-auth-helper) | 2026-06-22 |
 | [codex-visio-paper-figure-skill](skills/codex-visio-paper-figure-skill/) | [install](https://skills.sh/aradotso/codex-skills/codex-visio-paper-figure-skill) | [pengjunchi0/codex-visio-paper-figure-skill](https://github.com/pengjunchi0/codex-visio-paper-figure-skill) | 2026-06-24 |
 | [codex-candy-eval-benchmark](skills/codex-candy-eval-benchmark/) | [install](https://skills.sh/aradotso/codex-skills/codex-candy-eval-benchmark) | [haowang02/codex-candy-eval](https://github.com/haowang02/codex-candy-eval) | 2026-06-29 |
+| [codex-keysmith-instruction-installer](skills/codex-keysmith-instruction-installer/) | [install](https://skills.sh/aradotso/codex-skills/codex-keysmith-instruction-installer) | [Jia-Ethan/codex-keysmith](https://github.com/Jia-Ethan/codex-keysmith) | 2026-06-30 |
 <!-- SKILL_INDEX -->
 
 ---
