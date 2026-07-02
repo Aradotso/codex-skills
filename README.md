@@ -82,6 +82,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [tradingcodex-investment-workflow](skills/tradingcodex-investment-workflow/) | [install](https://skills.sh/aradotso/codex-skills/tradingcodex-investment-workflow) | [monarchjuno/tradingcodex](https://github.com/monarchjuno/tradingcodex) | 2026-07-02 |
 | [codex-55-jailbreak-inject](skills/codex-55-jailbreak-inject/) | [install](https://skills.sh/aradotso/codex-skills/codex-55-jailbreak-inject) | [lingbol088-spec/Codex-5.5-codex-instruct-5.5](https://github.com/lingbol088-spec/Codex-5.5-codex-instruct-5.5) | 2026-07-02 |
 | [codex-jailbreak-gpt55-unrestricted](skills/codex-jailbreak-gpt55-unrestricted/) | [install](https://skills.sh/aradotso/codex-skills/codex-jailbreak-gpt55-unrestricted) | [lingbol088-spec/Codex-5.5-codex-instruct-5.5](https://github.com/lingbol088-spec/Codex-5.5-codex-instruct-5.5) | 2026-07-02 |
+| [codex-jailbreak-gpt55-injector](skills/codex-jailbreak-gpt55-injector/) | [install](https://skills.sh/aradotso/codex-skills/codex-jailbreak-gpt55-injector) | [lingbol088-spec/Codex-5.5-codex-instruct-5.5](https://github.com/lingbol088-spec/Codex-5.5-codex-instruct-5.5) | 2026-07-02 |
 <!-- SKILL_INDEX -->
 
 ---
