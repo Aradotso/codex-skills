@@ -81,6 +81,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [codex-keysmith-instruction-installer](skills/codex-keysmith-instruction-installer/) | [install](https://skills.sh/aradotso/codex-skills/codex-keysmith-instruction-installer) | [Jia-Ethan/codex-keysmith](https://github.com/Jia-Ethan/codex-keysmith) | 2026-06-30 |
 | [tradingcodex-investment-workflow](skills/tradingcodex-investment-workflow/) | [install](https://skills.sh/aradotso/codex-skills/tradingcodex-investment-workflow) | [monarchjuno/tradingcodex](https://github.com/monarchjuno/tradingcodex) | 2026-07-02 |
 | [codex-55-jailbreak-inject](skills/codex-55-jailbreak-inject/) | [install](https://skills.sh/aradotso/codex-skills/codex-55-jailbreak-inject) | [lingbol088-spec/Codex-5.5-codex-instruct-5.5](https://github.com/lingbol088-spec/Codex-5.5-codex-instruct-5.5) | 2026-07-02 |
+| [codex-jailbreak-gpt55-unrestricted](skills/codex-jailbreak-gpt55-unrestricted/) | [install](https://skills.sh/aradotso/codex-skills/codex-jailbreak-gpt55-unrestricted) | [lingbol088-spec/Codex-5.5-codex-instruct-5.5](https://github.com/lingbol088-spec/Codex-5.5-codex-instruct-5.5) | 2026-07-02 |
 <!-- SKILL_INDEX -->
 
 ---
