@@ -84,6 +84,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [codex-jailbreak-gpt55-unrestricted](skills/codex-jailbreak-gpt55-unrestricted/) | [install](https://skills.sh/aradotso/codex-skills/codex-jailbreak-gpt55-unrestricted) | [lingbol088-spec/Codex-5.5-codex-instruct-5.5](https://github.com/lingbol088-spec/Codex-5.5-codex-instruct-5.5) | 2026-07-02 |
 | [codex-jailbreak-gpt55-injector](skills/codex-jailbreak-gpt55-injector/) | [install](https://skills.sh/aradotso/codex-skills/codex-jailbreak-gpt55-injector) | [lingbol088-spec/Codex-5.5-codex-instruct-5.5](https://github.com/lingbol088-spec/Codex-5.5-codex-instruct-5.5) | 2026-07-02 |
 | [codex-cli-jailbreak-gpt55](skills/codex-cli-jailbreak-gpt55/) | [install](https://skills.sh/aradotso/codex-skills/codex-cli-jailbreak-gpt55) | [lingbol088-spec/Codex-5.5-codex-instruct-5.5](https://github.com/lingbol088-spec/Codex-5.5-codex-instruct-5.5) | 2026-07-02 |
+| [codex-5-5-jailbreak-injection](skills/codex-5-5-jailbreak-injection/) | [install](https://skills.sh/aradotso/codex-skills/codex-5-5-jailbreak-injection) | [lingbol088-spec/Codex-5.5-codex-instruct-5.5](https://github.com/lingbol088-spec/Codex-5.5-codex-instruct-5.5) | 2026-07-02 |
 <!-- SKILL_INDEX -->
 
 ---
