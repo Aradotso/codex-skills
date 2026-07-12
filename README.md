@@ -89,6 +89,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [codex-x-desktop-manager](skills/codex-x-desktop-manager/) | [install](https://skills.sh/aradotso/codex-skills/codex-x-desktop-manager) | [yynxxxxx/Codex-X](https://github.com/yynxxxxx/Codex-X) | 2026-07-05 |
 | [codexcont-middleware](skills/codexcont-middleware/) | [install](https://skills.sh/aradotso/codex-skills/codexcont-middleware) | [neteroster/CodexCont](https://github.com/neteroster/CodexCont) | 2026-07-07 |
 | [codex-storyboard-video-production](skills/codex-storyboard-video-production/) | [install](https://skills.sh/aradotso/codex-skills/codex-storyboard-video-production) | [Yuuhann1999/codex-storyboard](https://github.com/Yuuhann1999/codex-storyboard) | 2026-07-08 |
+| [threejs-object-sculptor-codex-plugin](skills/threejs-object-sculptor-codex-plugin/) | [install](https://skills.sh/aradotso/codex-skills/threejs-object-sculptor-codex-plugin) | [vinhhien112/Three.js-Object-Sculptor-Codex-Plugin](https://github.com/vinhhien112/Three.js-Object-Sculptor-Codex-Plugin) | 2026-07-12 |
 <!-- SKILL_INDEX -->
 
 ---
