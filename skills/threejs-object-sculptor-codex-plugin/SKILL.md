@@ -1,43 +1,33 @@
+```markdown
 ---
 name: threejs-object-sculptor-codex-plugin
-description: Convert attached object images into code-only, animation-ready procedural Three.js models through guided sculpting workflow
+description: Turn attached object images into code-only, animation-ready procedural Three.js models using Codex-guided sculpting workflow with quality gates.
 triggers:
-  - turn this image into a Three.js model
-  - create a procedural 3D object from this reference
-  - sculpt a Three.js object from this attachment
-  - generate animation-ready Three.js code for this object
-  - build a code-only Three.js model from this image
-  - reconstruct this object as procedural Three.js geometry
-  - make a browser-ready 3D model from this reference
-  - convert this object image to Three.js code
+  - convert this image to a procedural Three.js model
+  - turn this object into a Three.js code model
+  - create an animation-ready Three.js object from this image
+  - build a procedural 3D model from this reference image
+  - generate a Three.js factory for this object
+  - sculpt a Three.js model from this attached image
+  - make a code-only Three.js object from this picture
+  - rebuild this object as procedural Three.js geometry
 ---
 
-# Three.js Object Sculptor Codex Plugin
+# Three.js Object Sculptor
 
 > Skill by [ara.so](https://ara.so) — Codex Skills collection.
 
-Three.js Object Sculptor is a Codex plugin that transforms attached object images into code-only, animation-ready procedural Three.js models. It guides you through a structured sculpting workflow: validate the image, describe the object, decompose into geometry and materials, build from blockout to detail, wire an action-friendly hierarchy, then compare renders against the original reference.
+Three.js Object Sculptor is a Codex plugin that transforms attached object images into quality-gated, animation-ready procedural Three.js models built entirely with code. It guides Codex through a structured sculpting workflow: validate the image, describe the object precisely, decompose it into geometry and material systems, build from blockout to detail, wire an animation-friendly hierarchy, then compare the browser render against the original reference.
 
-## Core Concept
-
-This plugin does **not** do photogrammetry, mesh extraction, or asset downloading. Instead, it guides Codex through a procedural sculpting workflow with quality gates:
-
-1. **Image validation** - Check if the image is suitable for procedural reconstruction
-2. **Pre-spec assessment** - Determine complexity tier and quality targets
-3. **Object sculpt spec** - Define component hierarchy, materials, pivots, animation anchors
-4. **Staged build pipeline** - Blockout → structural → form → materials → surface → lighting → interaction → optimization
-5. **Visual comparison** - Compare rendered output against reference with AI vision scoring
-6. **Self-correction** - Block progress when critical features fail threshold
+**Not photogrammetry.** This plugin does not extract meshes from pixels or download art packs. Instead, it helps Codex infer a procedural model plan and generate TypeScript/Three.js code that approximates the visible object with real pivots, sockets, and transform anchors for animation, physics, and destruction.
 
 ## Installation
 
-### Plugin Installation
-
-Clone into your local Codex plugins directory:
+Clone the plugin into your local Codex plugins directory:
 
 ```bash
 mkdir -p ~/plugins
-git clone <repository-url> ~/plugins/threejs-object-sculptor
+git clone https://github.com/vinhhien112/Three.js-Object-Sculptor-Codex-Plugin ~/plugins/threejs-object-sculptor
 ```
 
 Add to `~/.agents/plugins/marketplace.json`:
@@ -71,65 +61,51 @@ Install the plugin:
 codex plugin add threejs-object-sculptor@local
 ```
 
-Restart Codex to load the plugin skill.
+Restart Codex or start a new thread to load the plugin skill.
 
-### Requirements
+## Core Workflow
 
-- Python 3.10+
-- Codex with local plugin support
-- Three.js project (for implementing generated factories)
+The plugin enforces a staged build pipeline:
 
-## Quick Start
+1. **Image validation** — Check if the image is suitable for procedural reconstruction
+2. **Pre-spec assessment** — Complexity tier, quality targets, and scope
+3. **Object sculpt spec** — Component hierarchy, materials, pivots, sockets, quality gates
+4. **Pass-by-pass generation** — Blockout → structural → form → material → surface → lighting → interaction → optimization
+5. **Visual comparison** — AI vision review comparing render to reference
+6. **Self-correction** — Quality gates block progress if critical features fail
 
-Attach an object image in Codex and ask:
+## Key Scripts & Commands
 
-```
-Use Three.js Object Sculptor to turn the object in this attachment into a procedural Three.js model built entirely with code. Make it animation-ready for real-time browser use.
-```
-
-The plugin will guide through the full sculpting workflow automatically.
-
-## Core Scripts
-
-All scripts are in the `scripts/` directory and should be run from the plugin root.
+All scripts are run from the plugin root directory.
 
 ### 1. Probe Reference Image
 
 Validate whether an image is suitable for procedural 3D reconstruction:
 
 ```bash
-python3 scripts/probe_reference_image.py ./reference/spaceship.png
+python3 scripts/probe_reference_image.py ./reference/tower-ship.png
 ```
 
-Output example:
-
-```json
-{
-  "suitable": true,
-  "object_class": "vehicle_spacecraft",
-  "visibility": "clear",
-  "complexity_hint": "moderate",
-  "warnings": [],
-  "recommended_quality_tier": "production_placeholder"
-}
-```
+**Output:** Suitability report with object class, visibility, complexity estimate, and reconstruction feasibility.
 
 ### 2. Create Pre-Spec Assessment
 
-Define complexity and quality contract before generating the full spec:
+Generate a complexity assessment before code generation:
 
 ```bash
 python3 scripts/new_pre_spec_assessment.py "Tower Ship" \
   --image ./reference/tower-ship.png \
-  --complexity complex \
+  --complexity moderate \
   --out assessment.json
 ```
 
-Complexity tiers: `simple`, `moderate`, `complex`, `very_complex`
+**Complexity tiers:** `simple`, `moderate`, `complex`, `very-complex`
+
+**Output:** JSON assessment with quality targets, expected component count, material systems, and reconstruction scope.
 
 ### 3. Create Object Sculpt Spec
 
-Generate the full `ObjectSculptSpec` JSON:
+Generate the structured specification that guides all code generation:
 
 ```bash
 python3 scripts/new_sculpt_spec.py "Tower Ship" \
@@ -138,193 +114,130 @@ python3 scripts/new_sculpt_spec.py "Tower Ship" \
   --out object-sculpt-spec.json
 ```
 
-Options:
-- `--intended-use` - Animation, destruction, transformation, physics
-- `--material-classes` - metal, wood, glass, fabric, etc.
-- `--target-polycount` - Maximum polygon budget
+**Output:** `ObjectSculptSpec` JSON with:
+- Component hierarchy (pivots, sockets, parent-child relationships)
+- Material definitions (PBR properties, texture references)
+- Lighting setup (key, fill, rim lights)
+- Quality gates (overall threshold, critical features)
+- Animation anchors (transform channels, detachable parts)
+- Destruction anchors (fracture seams, colliders)
 
 ### 4. Validate Sculpt Spec
 
-Check spec validity and quality gate definitions:
+Verify the spec meets structural and quality requirements:
 
 ```bash
 python3 scripts/validate_sculpt_spec.py object-sculpt-spec.json --strict-quality
 ```
 
-Flags:
-- `--strict-quality` - Enforce all quality gates defined
-- `--require-critical-features` - Ensure critical features are specified
+**Flags:**
+- `--strict-quality` — Enforce all quality gate requirements
+- `--allow-warnings` — Pass validation with warnings
+
+**Output:** Validation report with errors, warnings, and spec health score.
 
 ### 5. Check Current Sculpt Pass
 
-See which pass is unlocked and ready for generation:
+Determine which build pass is currently unlocked:
 
 ```bash
 python3 scripts/sculpt_pass_orchestrator.py status object-sculpt-spec.json
 ```
 
-Output shows current pass, completion status, and next actions.
+**Pass sequence:**
+1. `blockout` — Coarse silhouette and proportions
+2. `structural` — Primary component hierarchy
+3. `form` — Shape refinement and secondary forms
+4. `material` — PBR material application
+5. `surface` — Surface detail (normal maps, displacement)
+6. `lighting` — Lighting response and shadow behavior
+7. `interaction` — Animation/physics readiness
+8. `optimization` — Performance and LOD
+
+**Output:** Current pass name, completion status, and blocking issues.
 
 ### 6. Generate Three.js Factory
 
-Generate TypeScript code for the current unlocked pass:
+Create the procedural Three.js model code for the current unlocked pass:
 
 ```bash
 python3 scripts/generate_threejs_factory.py object-sculpt-spec.json \
-  --out src/createTowerShip.ts \
-  --pass blockout
+  --out src/createObjectModel.ts
 ```
 
-Generated factory example structure:
+**Output:** TypeScript factory function that constructs the Three.js object hierarchy.
+
+Example generated code structure:
 
 ```typescript
 import * as THREE from 'three';
 
-export interface TowerShipComponents {
-  hull: THREE.Group;
-  cabin: THREE.Group;
-  sails: THREE.Group[];
-  masts: THREE.Group[];
+export interface ObjectModelOptions {
+  pivotMode?: 'local' | 'world';
+  lodLevel?: number;
+  enablePhysics?: boolean;
 }
 
-export function createTowerShip(): THREE.Group & { components: TowerShipComponents } {
+export function createObjectModel(options: ObjectModelOptions = {}) {
   const root = new THREE.Group();
-  root.name = 'TowerShip';
+  root.name = 'TowerShip_Root';
   
-  // Blockout geometry
-  const hull = new THREE.Group();
-  const hullMesh = new THREE.Mesh(
-    new THREE.BoxGeometry(8, 2, 3),
-    new THREE.MeshStandardMaterial({ color: 0x8B4513 })
-  );
-  hull.add(hullMesh);
-  hull.position.y = 0;
+  // Component hierarchy with pivots
+  const hull = createHull();
+  hull.position.set(0, 0, 0);
   root.add(hull);
   
-  // Cabin
-  const cabin = new THREE.Group();
-  const cabinMesh = new THREE.Mesh(
-    new THREE.BoxGeometry(4, 3, 2.5),
-    new THREE.MeshStandardMaterial({ color: 0xD2691E })
-  );
-  cabin.add(cabinMesh);
+  const cabin = createCabin();
   cabin.position.set(0, 2.5, 0);
-  root.add(cabin);
+  hull.add(cabin);
   
-  // Masts and sails
-  const masts: THREE.Group[] = [];
-  const sails: THREE.Group[] = [];
+  const sails = createSails();
+  sails.position.set(0, 5, 0);
+  cabin.add(sails);
   
-  for (let i = 0; i < 3; i++) {
-    const mast = new THREE.Group();
-    const mastPole = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.2, 0.2, 8),
-      new THREE.MeshStandardMaterial({ color: 0x654321 })
-    );
-    mast.add(mastPole);
-    mast.position.set(i * 2 - 2, 5, 0);
-    root.add(mast);
-    masts.push(mast);
-    
-    const sail = new THREE.Mesh(
-      new THREE.PlaneGeometry(2, 3),
-      new THREE.MeshStandardMaterial({ 
-        color: 0xFFF8DC,
-        side: THREE.DoubleSide 
-      })
-    );
-    sail.position.set(0, 0, 0.5);
-    mast.add(sail);
-    sails.push(mast);
-  }
+  // Material application
+  applyMaterials(root, options);
   
-  const components: TowerShipComponents = {
-    hull,
-    cabin,
-    sails,
-    masts
+  // Animation-ready hierarchy
+  root.userData.animationAnchors = {
+    sails: sails,
+    cabin: cabin,
+    hull: hull
   };
   
-  return Object.assign(root, { components });
+  return root;
 }
+
+function createHull(): THREE.Group {
+  const hull = new THREE.Group();
+  const geometry = new THREE.BoxGeometry(4, 2, 8);
+  const mesh = new THREE.Mesh(geometry);
+  hull.add(mesh);
+  return hull;
+}
+
+// ... additional component factories
 ```
 
-### 7. Visual Comparison Sheet
+### 7. Create Visual Comparison Sheet
 
-Create a side-by-side comparison image for AI vision review:
+Combine reference and render screenshots for AI vision review:
 
 ```bash
 python3 scripts/make_visual_comparison_sheet.py \
   --reference ./reference/tower-ship.png \
   --render ./screenshots/tower-ship-render.png \
-  --out ./screenshots/comparison.png \
+  --out ./screenshots/tower-ship-comparison.png \
   --json
 ```
 
-Outputs both PNG comparison sheet and JSON metadata.
+**Output:** 
+- Side-by-side comparison PNG
+- Optional JSON metadata with image dimensions and alignment
 
-### 8. Record AI Vision Review
+### 8. Extract PBR Evidence
 
-Append a sculpt pass review with vision scores:
-
-```bash
-python3 scripts/append_sculpt_review.py object-sculpt-spec.json \
-  --pass-id blockout \
-  --fidelity 0.85 \
-  --action continue \
-  --summary "Blockout silhouette matches reference. Hull proportions correct." \
-  --render-screenshot ./screenshots/tower-ship-render.png \
-  --comparison-image ./screenshots/comparison.png \
-  --ai-vision-score 0.85 \
-  --feature-reviews-json ./reviews/blockout-features.json \
-  --ai-vision-notes "Mast spacing acceptable. Sail geometry deferred to form pass." \
-  --in-place
-```
-
-Feature reviews JSON format:
-
-```json
-[
-  {
-    "feature_id": "hull_shape",
-    "name": "Hull Shape",
-    "score": 0.9,
-    "threshold": 0.75,
-    "passed": true,
-    "notes": "Silhouette matches reference"
-  },
-  {
-    "feature_id": "mast_positions",
-    "name": "Mast Positions",
-    "score": 0.8,
-    "threshold": 0.7,
-    "passed": true,
-    "notes": "Spacing acceptable"
-  }
-]
-```
-
-### 9. Sync Pass State
-
-Update pass completion and unlock next pass:
-
-```bash
-python3 scripts/sculpt_pass_orchestrator.py sync object-sculpt-spec.json --in-place
-```
-
-Pass progression:
-1. `blockout` - Basic shapes and proportions
-2. `structural` - Core components and hierarchy
-3. `form_refinement` - Detailed geometry
-4. `material_pass` - Material definitions
-5. `surface_pass` - Surface details and textures
-6. `lighting_pass` - Lighting response
-7. `interaction_pass` - Animation anchors and physics
-8. `optimization` - Performance tuning
-
-## PBR Material Extraction
-
-Extract procedural PBR evidence from reference images:
+Generate procedural PBR maps from reference image pixels:
 
 ```bash
 python3 scripts/extract_reference_pbr.py ./reference/oak-bark.png \
@@ -334,497 +247,713 @@ python3 scripts/extract_reference_pbr.py ./reference/oak-bark.png \
   --report ./generated/pbr/oak-bark/report.json
 ```
 
-Generates:
-- `albedo.png` - Base color map
-- `roughness.png` - Roughness estimate
-- `height.png` - Height/displacement map
-- `normal.png` - Normal map (computed from height)
-- `ao.png` - Ambient occlusion estimate
-- `palette.json` - Dominant color palette
-- `report.json` - Confidence scores and metadata
+**Output:**
+- `albedo.png` — Base color map
+- `roughness.png` — Roughness estimate
+- `height.png` — Height/displacement map
+- `normal.png` — Derived normal map
+- `ao.png` — Ambient occlusion estimate
+- `report.json` — Confidence scores and palette data
 
-Options:
-- `--allow-low-confidence` - Accept results below threshold
-- `--patch-spec` - Auto-update sculpt spec with PBR data
+**Flags:**
+- `--target-threshold` — Minimum confidence (0.0-1.0)
+- `--allow-low-confidence` — Override confidence check
+- `--material-id` — Material identifier for spec patching
 
-## Object Sculpt Spec Structure
+### 9. Record AI Vision Review
 
-The `ObjectSculptSpec` is a JSON document that defines the complete procedural model plan:
+Log a visual review with overall and feature-level scores:
+
+```bash
+python3 scripts/append_sculpt_review.py object-sculpt-spec.json \
+  --pass-id blockout \
+  --fidelity 0.82 \
+  --action continue \
+  --summary "Blockout silhouette acceptable, proportions match reference" \
+  --render-screenshot ./screenshots/tower-ship-render.png \
+  --comparison-image ./screenshots/tower-ship-comparison.png \
+  --ai-vision-score 0.82 \
+  --feature-reviews-json ./reviews/blockout-features.json \
+  --ai-vision-notes "Hull shape and cabin placement pass; sail detail deferred to surface pass" \
+  --in-place
+```
+
+**Feature reviews JSON format:**
+
+```json
+[
+  {
+    "feature_id": "hull_shape",
+    "description": "Main hull silhouette and proportions",
+    "score": 0.88,
+    "pass": true,
+    "notes": "Width and length proportions match reference"
+  },
+  {
+    "feature_id": "cabin_blocks",
+    "description": "Cabin structure and placement",
+    "score": 0.75,
+    "pass": true,
+    "notes": "Position correct, detail will improve in form pass"
+  },
+  {
+    "feature_id": "sail_rigging",
+    "description": "Sail mast and rigging structure",
+    "score": 0.45,
+    "pass": false,
+    "critical": true,
+    "notes": "Mast angle incorrect, needs correction before advancing"
+  }
+]
+```
+
+**Actions:** `continue`, `retry`, `revise`, `fail`
+
+**Output:** Updated spec with review appended to pass history.
+
+### 10. Sync Pass State
+
+Update pass completion status based on reviews and quality gates:
+
+```bash
+python3 scripts/sculpt_pass_orchestrator.py sync object-sculpt-spec.json --in-place
+```
+
+**Output:** Updated spec with pass state transitions, next unlocked pass, and blocking issues.
+
+## ObjectSculptSpec Structure
+
+The spec is a JSON document that drives all code generation:
 
 ```json
 {
   "meta": {
-    "name": "Tower Ship",
-    "version": "0.1.0",
-    "reference_image": "./reference/tower-ship.png",
-    "complexity": "complex",
-    "intended_use": ["animation", "real_time_rendering"]
+    "spec_version": "1.0.0",
+    "object_name": "Tower Ship",
+    "object_class": "vehicle",
+    "complexity_tier": "moderate",
+    "created_at": "2026-07-12T10:00:00Z",
+    "reference_image": "./reference/tower-ship.png"
   },
-  "quality": {
-    "target_fidelity": 0.8,
+  "quality_contract": {
+    "overall_threshold": 0.75,
     "critical_features": [
       {
         "id": "hull_shape",
-        "name": "Hull Shape",
-        "threshold": 0.75,
-        "weight": 1.0
+        "description": "Main hull silhouette",
+        "threshold": 0.8,
+        "critical": true
       },
       {
         "id": "sail_rigging",
-        "name": "Sail Rigging",
+        "description": "Sail mast and rigging",
         "threshold": 0.7,
-        "weight": 0.8
-      }
-    ],
-    "overall_threshold": 0.75,
-    "block_on_critical_fail": true
-  },
-  "components": [
-    {
-      "id": "hull",
-      "name": "Hull",
-      "type": "primary",
-      "geometry_type": "custom",
-      "parent_id": null,
-      "pivot": [0, 0, 0],
-      "transform_channels": ["position", "rotation"],
-      "materials": ["wood_planks"],
-      "detail_level": "high"
-    },
-    {
-      "id": "main_mast",
-      "name": "Main Mast",
-      "type": "articulated",
-      "geometry_type": "cylinder",
-      "parent_id": "hull",
-      "pivot": [0, 2, 0],
-      "transform_channels": ["rotation_z"],
-      "materials": ["wood_smooth"],
-      "sockets": ["sail_attachment_top", "sail_attachment_mid"]
-    }
-  ],
-  "materials": [
-    {
-      "id": "wood_planks",
-      "class": "wood",
-      "color": "#8B4513",
-      "roughness": 0.7,
-      "metalness": 0.0,
-      "pbr_evidence": {
-        "albedo_map": "./generated/pbr/wood/albedo.png",
-        "roughness_map": "./generated/pbr/wood/roughness.png",
-        "normal_map": "./generated/pbr/wood/normal.png"
-      }
-    }
-  ],
-  "lighting": {
-    "ambient_color": "#404040",
-    "directional_lights": [
-      {
-        "color": "#FFFFFF",
-        "intensity": 1.0,
-        "direction": [-1, -1, -1]
+        "critical": true
       }
     ]
   },
-  "passes": [
-    {
-      "id": "blockout",
-      "name": "Blockout",
-      "order": 0,
-      "unlocked": true,
-      "completed": true,
-      "quality_gate": 0.7
+  "component_hierarchy": {
+    "root": {
+      "id": "root",
+      "name": "TowerShip_Root",
+      "type": "group",
+      "pivot": [0, 0, 0],
+      "children": ["hull", "cabin", "sails"]
     },
-    {
-      "id": "structural",
-      "name": "Structural",
-      "order": 1,
-      "unlocked": true,
-      "completed": false,
-      "quality_gate": 0.75
-    }
-  ],
-  "reviews": [
-    {
-      "pass_id": "blockout",
-      "timestamp": "2026-07-12T10:30:00Z",
-      "overall_score": 0.85,
-      "action": "continue",
-      "feature_scores": [
-        {"feature_id": "hull_shape", "score": 0.9}
-      ]
-    }
-  ]
-}
-```
-
-## Workflow Patterns
-
-### Pattern 1: Single Image to Complete Model
-
-```bash
-# 1. Probe image
-python3 scripts/probe_reference_image.py ./ref/object.png
-
-# 2. Create assessment
-python3 scripts/new_pre_spec_assessment.py "Object Name" \
-  --image ./ref/object.png \
-  --complexity moderate \
-  --out assessment.json
-
-# 3. Create spec
-python3 scripts/new_sculpt_spec.py "Object Name" \
-  --image ./ref/object.png \
-  --assessment assessment.json \
-  --out spec.json
-
-# 4. Validate
-python3 scripts/validate_sculpt_spec.py spec.json --strict-quality
-
-# 5. Loop through passes
-for pass in blockout structural form_refinement material_pass; do
-  # Generate code
-  python3 scripts/generate_threejs_factory.py spec.json \
-    --out src/createObject.ts --pass $pass
-  
-  # (User implements and renders in browser)
-  
-  # Compare
-  python3 scripts/make_visual_comparison_sheet.py \
-    --reference ./ref/object.png \
-    --render ./screenshots/${pass}.png \
-    --out ./screenshots/compare-${pass}.png
-  
-  # Review
-  python3 scripts/append_sculpt_review.py spec.json \
-    --pass-id $pass \
-    --fidelity 0.8 \
-    --action continue \
-    --render-screenshot ./screenshots/${pass}.png \
-    --comparison-image ./screenshots/compare-${pass}.png \
-    --in-place
-  
-  # Sync
-  python3 scripts/sculpt_pass_orchestrator.py sync spec.json --in-place
-done
-```
-
-### Pattern 2: Material-First Workflow
-
-When the object has distinctive materials, extract PBR evidence first:
-
-```bash
-# Extract materials from close-up reference
-python3 scripts/extract_reference_pbr.py ./ref/bark-closeup.png \
-  --out-dir ./pbr/bark \
-  --material-id trunk_bark \
-  --target-threshold 0.7
-
-python3 scripts/extract_reference_pbr.py ./ref/leaf-closeup.png \
-  --out-dir ./pbr/leaves \
-  --material-id foliage \
-  --target-threshold 0.65
-
-# Create spec with material evidence
-python3 scripts/new_sculpt_spec.py "Ancient Tree" \
-  --image ./ref/tree-full.png \
-  --assessment assessment.json \
-  --out spec.json
-
-# Manually patch spec.json materials section with PBR paths
-# Then proceed with normal workflow
-```
-
-### Pattern 3: Critical Feature Monitoring
-
-Define strict critical features for identity-sensitive objects:
-
-```json
-{
-  "quality": {
-    "critical_features": [
-      {
-        "id": "logo_placement",
-        "name": "Logo Placement",
-        "threshold": 0.9,
-        "weight": 1.0,
-        "block_on_fail": true
+    "components": {
+      "hull": {
+        "id": "hull",
+        "name": "Hull",
+        "type": "mesh_group",
+        "parent": "root",
+        "pivot": [0, 0, 0],
+        "geometry_type": "composite",
+        "transform_channel": "position_y",
+        "children": ["cabin"]
       },
+      "cabin": {
+        "id": "cabin",
+        "name": "Cabin",
+        "type": "mesh_group",
+        "parent": "hull",
+        "pivot": [0, 2.5, 0],
+        "geometry_type": "box",
+        "transform_channel": "rotation_y",
+        "children": ["sails"]
+      },
+      "sails": {
+        "id": "sails",
+        "name": "Sails",
+        "type": "mesh",
+        "parent": "cabin",
+        "pivot": [0, 5, 0],
+        "geometry_type": "custom",
+        "transform_channel": "scale_x"
+      }
+    }
+  },
+  "material_library": {
+    "wood_hull": {
+      "id": "wood_hull",
+      "type": "pbr",
+      "base_color": [0.4, 0.25, 0.15],
+      "roughness": 0.8,
+      "metalness": 0.0,
+      "normal_map": "./generated/pbr/hull/normal.png",
+      "ao_map": "./generated/pbr/hull/ao.png"
+    },
+    "canvas_sail": {
+      "id": "canvas_sail",
+      "type": "pbr",
+      "base_color": [0.95, 0.93, 0.88],
+      "roughness": 0.9,
+      "metalness": 0.0
+    }
+  },
+  "lighting_setup": {
+    "key_light": {
+      "type": "directional",
+      "position": [5, 10, 7],
+      "intensity": 1.0,
+      "color": [1.0, 0.98, 0.95]
+    },
+    "fill_light": {
+      "type": "hemisphere",
+      "sky_color": [0.6, 0.7, 0.9],
+      "ground_color": [0.3, 0.3, 0.4],
+      "intensity": 0.4
+    }
+  },
+  "animation_system": {
+    "sockets": [
       {
-        "id": "wheel_count",
-        "name": "Wheel Count",
-        "threshold": 1.0,
-        "weight": 1.0,
-        "block_on_fail": true
+        "id": "mast_top",
+        "parent_component": "sails",
+        "local_position": [0, 3, 0],
+        "purpose": "flag_attachment"
       }
     ],
-    "block_on_critical_fail": true
+    "transform_channels": [
+      {
+        "component_id": "sails",
+        "channel": "rotation_z",
+        "range": [-0.2, 0.2],
+        "purpose": "wind_sway"
+      }
+    ]
+  },
+  "destruction_system": {
+    "detachable_parts": [
+      {
+        "component_id": "sails",
+        "detach_force_threshold": 50.0,
+        "fracture_seams": []
+      }
+    ],
+    "collider_proxies": [
+      {
+        "component_id": "hull",
+        "shape": "box",
+        "dimensions": [4, 2, 8]
+      }
+    ]
+  },
+  "sculpt_passes": {
+    "blockout": {
+      "id": "blockout",
+      "status": "completed",
+      "unlocked": true,
+      "reviews": [
+        {
+          "timestamp": "2026-07-12T11:00:00Z",
+          "fidelity": 0.82,
+          "action": "continue",
+          "ai_vision_score": 0.82,
+          "feature_scores": {
+            "hull_shape": 0.88,
+            "cabin_blocks": 0.75
+          }
+        }
+      ]
+    },
+    "structural": {
+      "id": "structural",
+      "status": "in_progress",
+      "unlocked": true,
+      "reviews": []
+    }
   }
 }
 ```
 
-Record reviews with feature-specific scores:
+## Common Patterns
 
-```bash
-python3 scripts/append_sculpt_review.py spec.json \
-  --pass-id structural \
-  --fidelity 0.75 \
-  --action retry \
-  --summary "Logo position incorrect - blocks progress" \
-  --feature-reviews-json reviews.json \
-  --in-place
+### Full Reconstruction Workflow
+
+```python
+# 1. Validate reference image
+import subprocess
+result = subprocess.run([
+    'python3', 'scripts/probe_reference_image.py',
+    './reference/ancient-tree.png'
+], capture_output=True, text=True)
+
+# 2. Create pre-spec assessment
+subprocess.run([
+    'python3', 'scripts/new_pre_spec_assessment.py',
+    'Ancient Autumn Tree',
+    '--image', './reference/ancient-tree.png',
+    '--complexity', 'complex',
+    '--out', './specs/tree-assessment.json'
+])
+
+# 3. Create sculpt spec
+subprocess.run([
+    'python3', 'scripts/new_sculpt_spec.py',
+    'Ancient Autumn Tree',
+    '--image', './reference/ancient-tree.png',
+    '--assessment', './specs/tree-assessment.json',
+    '--out', './specs/tree-sculpt-spec.json'
+])
+
+# 4. Validate spec
+subprocess.run([
+    'python3', 'scripts/validate_sculpt_spec.py',
+    './specs/tree-sculpt-spec.json',
+    '--strict-quality'
+])
+
+# 5. Generate blockout pass
+subprocess.run([
+    'python3', 'scripts/generate_threejs_factory.py',
+    './specs/tree-sculpt-spec.json',
+    '--out', './src/createAncientTree.ts'
+])
 ```
 
-## Implementing Generated Factories
+### Iterative Pass Refinement
 
-### Basic Scene Setup
+```python
+import subprocess
+import json
 
-```typescript
-import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { createTowerShip } from './createTowerShip';
+spec_path = './specs/tower-ship-spec.json'
 
-// Scene setup
-const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x87CEEB);
+while True:
+    # Check current pass
+    result = subprocess.run([
+        'python3', 'scripts/sculpt_pass_orchestrator.py',
+        'status', spec_path
+    ], capture_output=True, text=True)
+    
+    status = json.loads(result.stdout)
+    current_pass = status['current_pass']
+    
+    if current_pass is None:
+        print("All passes complete!")
+        break
+    
+    print(f"Working on: {current_pass}")
+    
+    # Generate code for current pass
+    subprocess.run([
+        'python3', 'scripts/generate_threejs_factory.py',
+        spec_path,
+        '--out', f'./src/createModel_{current_pass}.ts'
+    ])
+    
+    # (Render in browser, capture screenshot, run AI vision review)
+    # ...
+    
+    # Record review (example: auto-continue if score > 0.75)
+    ai_score = 0.82  # From AI vision
+    action = 'continue' if ai_score >= 0.75 else 'retry'
+    
+    subprocess.run([
+        'python3', 'scripts/append_sculpt_review.py',
+        spec_path,
+        '--pass-id', current_pass,
+        '--fidelity', str(ai_score),
+        '--action', action,
+        '--summary', f'Pass {current_pass} score: {ai_score}',
+        '--ai-vision-score', str(ai_score),
+        '--in-place'
+    ])
+    
+    # Sync pass state
+    subprocess.run([
+        'python3', 'scripts/sculpt_pass_orchestrator.py',
+        'sync', spec_path,
+        '--in-place'
+    ])
+    
+    if action == 'retry':
+        print(f"Pass {current_pass} failed quality gate, retrying...")
+        continue
+```
 
-const camera = new THREE.PerspectiveCamera(
-  75,
-  window.innerWidth / window.innerHeight,
-  0.1,
-  1000
-);
-camera.position.set(15, 10, 15);
+### PBR Material Extraction
 
-const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+```python
+import subprocess
 
-const controls = new OrbitControls(camera, renderer.domElement);
+# Extract PBR maps from bark reference
+subprocess.run([
+    'python3', 'scripts/extract_reference_pbr.py',
+    './reference/oak-bark-closeup.png',
+    '--out-dir', './generated/pbr/oak-bark',
+    '--material-id', 'bark_ancient',
+    '--target-threshold', '0.7',
+    '--report', './generated/pbr/oak-bark/report.json'
+])
 
-// Lighting (match spec lighting section)
-const ambientLight = new THREE.AmbientLight(0x404040);
-scene.add(ambientLight);
+# Patch spec with extracted material data
+with open('./generated/pbr/oak-bark/report.json') as f:
+    pbr_report = json.load(f)
 
-const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 1.0);
-directionalLight.position.set(-1, -1, -1).normalize();
-scene.add(directionalLight);
+with open('./specs/tree-sculpt-spec.json') as f:
+    spec = json.load(f)
 
-// Create object
-const ship = createTowerShip();
-scene.add(ship);
+# Update material library
+spec['material_library']['bark_ancient']['normal_map'] = './generated/pbr/oak-bark/normal.png'
+spec['material_library']['bark_ancient']['ao_map'] = './generated/pbr/oak-bark/ao.png'
+spec['material_library']['bark_ancient']['roughness'] = pbr_report['roughness_estimate']
 
-// Animation loop
-function animate() {
-  requestAnimationFrame(animate);
-  controls.update();
-  renderer.render(scene, camera);
-}
-animate();
+with open('./specs/tree-sculpt-spec.json', 'w') as f:
+    json.dump(spec, f, indent=2)
+```
 
-// Screenshot for review
-function captureScreenshot() {
-  renderer.render(scene, camera);
-  return renderer.domElement.toDataURL('image/png');
+## Quality Gates & Critical Features
+
+Quality gates prevent passes from advancing when visual fidelity is insufficient.
+
+**Two-level acceptance:**
+
+1. **Overall match** (silhouette, proportions, material read, lighting)
+2. **Critical feature match** (identity-defining features with individual thresholds)
+
+**Example: Tower Ship critical features**
+
+```json
+{
+  "quality_contract": {
+    "overall_threshold": 0.75,
+    "critical_features": [
+      {
+        "id": "hull_shape",
+        "description": "Hull silhouette and proportions",
+        "threshold": 0.80,
+        "critical": true
+      },
+      {
+        "id": "cabin_blocks",
+        "description": "Cabin structure placement",
+        "threshold": 0.70,
+        "critical": true
+      },
+      {
+        "id": "sail_rigging",
+        "description": "Mast and sail geometry",
+        "threshold": 0.75,
+        "critical": true
+      },
+      {
+        "id": "rails",
+        "description": "Deck rails and trim",
+        "threshold": 0.60,
+        "critical": false
+      }
+    ]
+  }
 }
 ```
 
-### Animation-Ready Usage
+**Blocking logic:**
+- If any **critical** feature fails its threshold, the pass fails
+- Overall score must pass its threshold
+- Non-critical features log warnings but don't block
+
+## Animation-Ready Hierarchy
+
+The plugin designs objects with animation in mind from the start.
+
+**Key elements:**
+
+1. **Pivots** — Local transform centers for rotation/scale
+2. **Sockets** — Attachment points for child objects or effects
+3. **Transform channels** — Pre-identified animation properties
+4. **Parent-child hierarchy** — Logical component relationships
+5. **Detachable parts** — Components that can break off or transform independently
+
+**Example: Ancient Tree animation setup**
+
+```json
+{
+  "animation_system": {
+    "sockets": [
+      {
+        "id": "branch_01_tip",
+        "parent_component": "branch_01",
+        "local_position": [2.5, 0, 0],
+        "purpose": "leaf_cluster_attachment"
+      },
+      {
+        "id": "trunk_fork",
+        "parent_component": "trunk_main",
+        "local_position": [0, 5, 0],
+        "purpose": "branch_spawn_point"
+      }
+    ],
+    "transform_channels": [
+      {
+        "component_id": "branch_01",
+        "channel": "rotation_z",
+        "range": [-0.1, 0.1],
+        "purpose": "wind_sway"
+      },
+      {
+        "component_id": "canopy",
+        "channel": "scale",
+        "range": [0.95, 1.05],
+        "purpose": "breathing_idle"
+      }
+    ],
+    "detachable_parts": [
+      {
+        "component_id": "branch_02",
+        "detach_force_threshold": 30.0,
+        "fracture_seams": ["trunk_fork"]
+      }
+    ]
+  }
+}
+```
+
+**Generated TypeScript integration:**
 
 ```typescript
-const ship = createTowerShip();
-
-// Access components for animation
-ship.components.sails.forEach((sail, index) => {
-  // Animate sail rotation
-  gsap.to(sail.rotation, {
-    z: Math.sin(Date.now() * 0.001 + index) * 0.2,
-    duration: 2,
-    repeat: -1,
-    yoyo: true
-  });
-});
-
-// Animate mast sway
-ship.components.masts.forEach(mast => {
-  gsap.to(mast.rotation, {
-    x: Math.sin(Date.now() * 0.0005) * 0.05,
-    duration: 3,
-    repeat: -1,
-    yoyo: true
-  });
-});
-
-// Hull bob animation
-gsap.to(ship.components.hull.position, {
-  y: '+=0.5',
-  duration: 2,
-  repeat: -1,
-  yoyo: true,
-  ease: 'sine.inOut'
-});
+export function createAncientTree() {
+  const root = new THREE.Group();
+  
+  const trunk = createTrunk();
+  trunk.position.set(0, 0, 0);
+  root.add(trunk);
+  
+  const branch01 = createBranch();
+  branch01.position.set(0, 5, 0); // trunk_fork socket
+  branch01.rotation.set(0, 0, Math.PI / 6);
+  trunk.add(branch01);
+  
+  // Animation anchors
+  root.userData.animationAnchors = {
+    trunk,
+    branch01,
+    sockets: {
+      branch_01_tip: new THREE.Vector3(2.5, 0, 0),
+      trunk_fork: new THREE.Vector3(0, 5, 0)
+    }
+  };
+  
+  // Transform channels for animation
+  root.userData.transformChannels = {
+    branch01_sway: {
+      target: branch01,
+      property: 'rotation.z',
+      range: [-0.1, 0.1]
+    }
+  };
+  
+  return root;
+}
 ```
 
 ## Troubleshooting
 
-### "Image not suitable for procedural reconstruction"
+### Image validation fails
 
-**Cause**: Image is too blurry, ambiguous, or lacks clear object boundaries.
+**Problem:** `probe_reference_image.py` reports image is unsuitable.
 
-**Solution**: Use a clearer reference image with:
-- Single dominant object
-- Clear silhouette
-- Good contrast
-- Minimal occlusion
-- Neutral or simple background
+**Solutions:**
+- Ensure object is clearly visible and not occluded
+- Use images with clean background or high object-to-background contrast
+- Avoid extreme camera angles or heavy perspective distortion
+- Provide higher resolution image (minimum 512x512 recommended)
 
-### "Critical feature failed threshold"
+### Spec validation errors
 
-**Cause**: A identity-defining feature scored below its threshold.
+**Problem:** `validate_sculpt_spec.py` reports structural errors.
 
-**Solution**: 
-1. Review feature-specific scores in the review JSON
-2. Identify which component is incorrect
-3. Adjust geometry generation in that pass
-4. Re-render and re-review
-5. Lower threshold only if feature is truly less critical than initially assessed
+**Common issues:**
+- Missing required component hierarchy fields (`id`, `name`, `type`, `pivot`)
+- Orphaned components (parent not in hierarchy)
+- Circular parent-child relationships
+- Invalid material references
+- Quality contract missing critical feature thresholds
 
-### "Pass locked - previous pass incomplete"
+**Solution:** Review spec structure against schema, ensure all components have valid parents (except root).
 
-**Cause**: Previous pass didn't complete successfully or sync didn't run.
+### Pass won't unlock
 
-**Solution**:
+**Problem:** `sculpt_pass_orchestrator.py status` shows pass is blocked.
+
+**Causes:**
+- Previous pass has not passed quality gates
+- Critical feature failed in last review
+- Review action was `fail` or `revise` instead of `continue`
+
+**Solution:**
 ```bash
-# Check status
-python3 scripts/sculpt_pass_orchestrator.py status spec.json
+# Check last review for the blocking pass
+python3 scripts/sculpt_pass_orchestrator.py status object-sculpt-spec.json
 
-# Force unlock next pass (use carefully)
-python3 scripts/sculpt_pass_orchestrator.py unlock spec.json \
-  --pass structural --in-place
-```
+# If critical feature failed, regenerate code and re-review
+python3 scripts/generate_threejs_factory.py object-sculpt-spec.json --out src/model.ts
 
-### "Low PBR extraction confidence"
-
-**Cause**: Reference image doesn't provide clear material evidence.
-
-**Solution**:
-```bash
-# Allow low confidence (will note in spec)
-python3 scripts/extract_reference_pbr.py image.png \
-  --material-id mat \
-  --allow-low-confidence \
-  --out-dir ./pbr/mat
-
-# Or use procedural materials instead of image-derived
-```
-
-### Generated code doesn't compile
-
-**Cause**: Three.js version mismatch or missing imports.
-
-**Solution**: Ensure Three.js version compatibility:
-```bash
-npm install three@^0.150.0
-```
-
-Add missing imports:
-```typescript
-import * as THREE from 'three';
-import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils';
-```
-
-## Quality Gate Best Practices
-
-1. **Set realistic thresholds** - Simple objects: 0.75+, Complex: 0.65-0.75
-2. **Define 3-5 critical features max** - Too many makes progress impossible
-3. **Weight features appropriately** - Identity features: 1.0, Details: 0.5-0.8
-4. **Use block_on_critical_fail** - Only for must-have features
-5. **Review with consistent camera angle** - Match reference viewpoint
-6. **Capture clean screenshots** - No UI, grid, or debug overlays
-
-## Advanced Patterns
-
-### Multi-View Reference
-
-For complex objects, use multiple reference views:
-
-```bash
-# Create base spec from primary view
-python3 scripts/new_sculpt_spec.py "Vehicle" \
-  --image ./ref/front.png \
-  --out spec.json
-
-# Add additional views to reviews
-python3 scripts/append_sculpt_review.py spec.json \
-  --pass-id structural \
-  --fidelity 0.8 \
-  --comparison-image ./screenshots/compare-front.png \
-  --ai-vision-notes "Front view matches. Side view next." \
+# After fixing and re-rendering, record new review with passing scores
+python3 scripts/append_sculpt_review.py object-sculpt-spec.json \
+  --pass-id blockout \
+  --fidelity 0.85 \
+  --action continue \
+  --ai-vision-score 0.85 \
   --in-place
 
-# Review side view separately
-python3 scripts/make_visual_comparison_sheet.py \
-  --reference ./ref/side.png \
-  --render ./screenshots/side-render.png \
-  --out ./screenshots/compare-side.png
+# Sync state
+python3 scripts/sculpt_pass_orchestrator.py sync object-sculpt-spec.json --in-place
 ```
 
-### Procedural Variations
+### PBR extraction low confidence
 
-Generate spec once, create variations programmatically:
+**Problem:** `extract_reference_pbr.py` refuses to patch spec due to low confidence.
 
+**Solutions:**
+- Use close-up reference image with clear surface detail
+- Ensure adequate lighting without blown highlights or deep shadows
+- Increase image resolution
+- Lower `--target-threshold` if procedural approximation is acceptable
+- Use `--allow-low-confidence` flag to force extraction (not recommended for critical materials)
+
+### Generated code doesn't match reference
+
+**Problem:** Visual comparison shows poor match even after multiple passes.
+
+**Diagnosis:**
+- Check which critical features are failing
+- Review AI vision notes for specific geometry or material issues
+- Verify spec component hierarchy matches object structure
+
+**Solutions:**
+- Revise spec component decomposition (more/fewer components)
+- Adjust quality thresholds if targets are unrealistic for one-image reconstruction
+- Add reference views from other angles if hidden sides are critical
+- Use PBR extraction for better material approximation
+- Consider lowering complexity tier if object is over-scoped
+
+### Three.js factory runtime errors
+
+**Problem:** Generated TypeScript code throws errors when imported.
+
+**Common issues:**
+- Missing Three.js imports
+- Invalid geometry parameters
+- Material texture paths don't exist
+- Component hierarchy depth too deep
+
+**Solution:**
 ```typescript
-export function createTowerShip(config: {
-  sailCount?: number;
-  hullScale?: number;
-  sailColor?: THREE.ColorRepresentation;
-} = {}) {
-  const { sailCount = 3, hullScale = 1.0, sailColor = 0xFFF8DC } = config;
-  
-  // Use config to vary generated geometry
-  // Maintains same component structure
-}
+// Ensure Three.js is installed
+// npm install three @types/three
 
-// Generate fleet
-const flagship = createTowerShip({ hullScale: 1.5, sailCount: 4 });
-const escort1 = createTowerShip({ hullScale: 0.8, sailColor: 0xFFE4B5 });
-const escort2 = createTowerShip({ hullScale: 0.8, sailColor: 0xFFE4B5 });
-```
+import * as THREE from 'three';
 
-### Export to GLB
+// Verify texture paths are correct
+const textureLoader = new THREE.TextureLoader();
+const normalMap = textureLoader.load('./generated/pbr/hull/normal.png', 
+  undefined, 
+  undefined, 
+  (err) => console.error('Failed to load texture:', err)
+);
 
-Add export capability to generated factory:
-
-```typescript
-import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter';
-
-export async function exportTowerShipGLB(): Promise<ArrayBuffer> {
-  const ship = createTowerShip();
-  const exporter = new GLTFExporter();
-  
-  return new Promise((resolve, reject) => {
-    exporter.parse(
-      ship,
-      (gltf) => resolve(gltf as ArrayBuffer),
-      { binary: true },
-      (error) => reject(error)
-    );
-  });
+// Add null checks for complex hierarchy
+if (root.userData.animationAnchors?.branch01) {
+  // Safe to use
 }
 ```
+
+## Best Practices
+
+1. **Start with complexity assessment** — Don't skip the pre-spec step; it sets realistic quality targets.
+
+2. **Use quality gates strictly** — Critical features prevent "looks okay" objects that lose identity-defining details.
+
+3. **Extract PBR from close-ups** — General object image for geometry, close-up surface shots for materials.
+
+4. **Design for animation early** — Even static objects benefit from proper pivots and hierarchy for later camera work or interaction.
+
+5. **Review every pass** — Don't let Codex auto-advance; each pass review catches compounding errors early.
+
+6. **Provide multiple reference angles** — Single-image reconstruction makes assumptions; additional views improve accuracy.
+
+7. **Use feature-level scoring** — Overall match can hide failed critical features; always score identity-defining elements separately.
+
+8. **Keep specs under version control** — Commit the JSON spec after each successful pass for rollback capability.
 
 ## Environment Variables
 
-No API keys required. Optional environment variables for tooling:
+No API keys or secrets are required. All processing is local.
 
-- `THREEJS_SCULPTOR_TEMP_DIR` - Temporary file storage (default: `/tmp`)
-- `THREEJS_SCULPTOR_LOG_LEVEL` - `DEBUG`, `INFO`, `WARN`, `ERROR` (default: `INFO`)
+Optional environment variables:
 
-## Resources
+```bash
+# Override default plugin directory
+export CODEX_PLUGIN_DIR=~/custom-plugins
 
-- **Live Demos**: 
-  - Tower Ship: https://3dship.harrysoftware.com
-  - Ancient Tree: https://tree.harrysoftware.com
-- **Three.js Documentation**: https://threejs.org/docs/
-- **Plugin Repository**: Check README for latest examples and updates
+# Default Three.js project output path
+export THREEJS_OUTPUT_DIR=./src/models
+
+# PBR extraction quality
+export PBR_EXTRACTION_QUALITY=high  # low|medium|high
+```
+
+## Integration with Three.js Projects
+
+Example integration into a Vite + Three.js project:
+
+```typescript
+// src/main.ts
+import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { createTowerShip } from './models/createTowerShip';
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+camera.position.set(10, 10, 10);
+
+// Add generated model
+const towerShip = createTowerShip({
+  pivotMode: 'local',
+  lodLevel: 1,
+  enablePhysics: false
+});
+
+scene.add(towerShip);
+
+// Lighting (matches spec lighting_setup)
+const keyLight = new THREE.DirectionalLight(0xFFF9F2, 1.0);
+keyLight.position.set(5, 10, 7);
+scene.add(keyLight);
+
+const hemiLight = new THREE.HemisphereLight(0x99B3E6, 0x4D4D66, 0.4);
+scene.add(hemiLight);
+
+// Animation using generated anchors
+function animate() {
+  requestAnimationFrame(animate);
+  
+  // Use transform channels from spec
+  if (towerShip.userData.transformChannels?.sail_
