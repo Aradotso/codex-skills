@@ -90,6 +90,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [codexcont-middleware](skills/codexcont-middleware/) | [install](https://skills.sh/aradotso/codex-skills/codexcont-middleware) | [neteroster/CodexCont](https://github.com/neteroster/CodexCont) | 2026-07-07 |
 | [codex-storyboard-video-production](skills/codex-storyboard-video-production/) | [install](https://skills.sh/aradotso/codex-skills/codex-storyboard-video-production) | [Yuuhann1999/codex-storyboard](https://github.com/Yuuhann1999/codex-storyboard) | 2026-07-08 |
 | [threejs-object-sculptor-codex-plugin](skills/threejs-object-sculptor-codex-plugin/) | [install](https://skills.sh/aradotso/codex-skills/threejs-object-sculptor-codex-plugin) | [vinhhien112/Three.js-Object-Sculptor-Codex-Plugin](https://github.com/vinhhien112/Three.js-Object-Sculptor-Codex-Plugin) | 2026-07-12 |
+| [codex-first-customer-finder-skill](skills/codex-first-customer-finder-skill/) | [install](https://skills.sh/aradotso/codex-skills/codex-first-customer-finder-skill) | [Kappaemme-git/codex-first-customer-finder-skill](https://github.com/Kappaemme-git/codex-first-customer-finder-skill) | 2026-07-13 |
 <!-- SKILL_INDEX -->
 
 ---
