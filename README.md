@@ -94,6 +94,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [chatgpt-plus-subscription-guide](skills/chatgpt-plus-subscription-guide/) | [install](https://skills.sh/aradotso/codex-skills/chatgpt-plus-subscription-guide) | [leon7482/chatgpt-plus-codex](https://github.com/leon7482/chatgpt-plus-codex) | 2026-07-14 |
 | [codex-hygiene-skill](skills/codex-hygiene-skill/) | [install](https://skills.sh/aradotso/codex-skills/codex-hygiene-skill) | [sunflower-of-parchman/codex-hygiene](https://github.com/sunflower-of-parchman/codex-hygiene) | 2026-07-14 |
 | [chatgpt-subscription-guide](skills/chatgpt-subscription-guide/) | [install](https://skills.sh/aradotso/codex-skills/chatgpt-subscription-guide) | [leon7482/chatgpt-plus-codex](https://github.com/leon7482/chatgpt-plus-codex) | 2026-07-14 |
+| [codexu-macos-usage-tracker](skills/codexu-macos-usage-tracker/) | [install](https://skills.sh/aradotso/codex-skills/codexu-macos-usage-tracker) | [shanggqm/codexU](https://github.com/shanggqm/codexU) | 2026-07-14 |
 <!-- SKILL_INDEX -->
 
 ---
