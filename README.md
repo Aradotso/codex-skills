@@ -91,6 +91,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [codex-storyboard-video-production](skills/codex-storyboard-video-production/) | [install](https://skills.sh/aradotso/codex-skills/codex-storyboard-video-production) | [Yuuhann1999/codex-storyboard](https://github.com/Yuuhann1999/codex-storyboard) | 2026-07-08 |
 | [threejs-object-sculptor-codex-plugin](skills/threejs-object-sculptor-codex-plugin/) | [install](https://skills.sh/aradotso/codex-skills/threejs-object-sculptor-codex-plugin) | [vinhhien112/Three.js-Object-Sculptor-Codex-Plugin](https://github.com/vinhhien112/Three.js-Object-Sculptor-Codex-Plugin) | 2026-07-12 |
 | [codex-first-customer-finder-skill](skills/codex-first-customer-finder-skill/) | [install](https://skills.sh/aradotso/codex-skills/codex-first-customer-finder-skill) | [Kappaemme-git/codex-first-customer-finder-skill](https://github.com/Kappaemme-git/codex-first-customer-finder-skill) | 2026-07-13 |
+| [chatgpt-plus-subscription-guide](skills/chatgpt-plus-subscription-guide/) | [install](https://skills.sh/aradotso/codex-skills/chatgpt-plus-subscription-guide) | [leon7482/chatgpt-plus-codex](https://github.com/leon7482/chatgpt-plus-codex) | 2026-07-14 |
 <!-- SKILL_INDEX -->
 
 ---
