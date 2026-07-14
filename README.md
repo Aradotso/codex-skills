@@ -93,6 +93,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [codex-first-customer-finder-skill](skills/codex-first-customer-finder-skill/) | [install](https://skills.sh/aradotso/codex-skills/codex-first-customer-finder-skill) | [Kappaemme-git/codex-first-customer-finder-skill](https://github.com/Kappaemme-git/codex-first-customer-finder-skill) | 2026-07-13 |
 | [chatgpt-plus-subscription-guide](skills/chatgpt-plus-subscription-guide/) | [install](https://skills.sh/aradotso/codex-skills/chatgpt-plus-subscription-guide) | [leon7482/chatgpt-plus-codex](https://github.com/leon7482/chatgpt-plus-codex) | 2026-07-14 |
 | [codex-hygiene-skill](skills/codex-hygiene-skill/) | [install](https://skills.sh/aradotso/codex-skills/codex-hygiene-skill) | [sunflower-of-parchman/codex-hygiene](https://github.com/sunflower-of-parchman/codex-hygiene) | 2026-07-14 |
+| [chatgpt-subscription-guide](skills/chatgpt-subscription-guide/) | [install](https://skills.sh/aradotso/codex-skills/chatgpt-subscription-guide) | [leon7482/chatgpt-plus-codex](https://github.com/leon7482/chatgpt-plus-codex) | 2026-07-14 |
 <!-- SKILL_INDEX -->
 
 ---
