@@ -1,559 +1,481 @@
 ---
 name: chatgpt-plus-subscription-guide
-description: Guide for purchasing and managing ChatGPT Plus/Pro and Codex subscriptions from China using various payment methods
+description: Guide for Chinese users to subscribe to ChatGPT Plus/Pro and Codex services, covering payment methods, account safety, and troubleshooting
 triggers:
   - how do I subscribe to ChatGPT Plus from China
-  - what are the payment options for ChatGPT Pro
-  - how to buy ChatGPT Plus without a foreign credit card
-  - chatgpt subscription payment methods for chinese users
-  - how to use virtual credit cards for openai
-  - chatgpt plus代充怎么操作
-  - 国内如何购买chatgpt会员
-  - openai stripe payment issues china
+  - what are the payment options for ChatGPT Plus in mainland China
+  - how to get ChatGPT Plus without a foreign credit card
+  - ChatGPT Plus subscription blocked in China
+  - safe way to upgrade to ChatGPT Plus from China
+  - ChatGPT Plus payment methods for Chinese users
+  - how to avoid ChatGPT Plus payment failures
+  - troubleshoot ChatGPT Plus Stripe errors
 ---
 
-# ChatGPT Plus/Pro Subscription Guide
+# ChatGPT Plus/Pro Subscription Guide for Chinese Users
 
 > Skill by [ara.so](https://ara.so) — Codex Skills collection.
 
-This skill provides guidance on subscribing to ChatGPT Plus/Pro and Codex services from regions with payment restrictions, particularly mainland China. It covers payment methods, common issues, and practical solutions for accessing OpenAI services.
+This skill provides comprehensive guidance for developers and users in mainland China who need to subscribe to ChatGPT Plus/Pro, Codex, or other OpenAI services. It covers payment gateway restrictions, safe subscription methods, account security, and common troubleshooting scenarios.
 
 ## Overview
 
-This project documents strategies for Chinese users to subscribe to ChatGPT Plus/Pro when faced with:
-- Stripe payment gateway geo-restrictions
-- Domestic credit card rejections
-- IP-based fraud detection
-- 3D Secure verification failures
+This project is a comprehensive guide (not a software library) that addresses the specific challenges Chinese users face when subscribing to ChatGPT Plus/Pro:
 
-## Key Payment Methods
+- **Payment gateway restrictions**: Stripe blocks mainland China-issued credit cards
+- **Network access requirements**: Clean residential IP addresses vs. datacenter IPs
+- **Fraud prevention**: Avoiding account bans and payment failures
+- **Multiple subscription methods**: Virtual cards, third-party platforms, App Store, etc.
 
-### 1. Virtual Credit Cards (Technical Route)
+## Key Concepts
 
-**Use Case**: Users comfortable with cryptocurrency and international payment platforms
+### Why Subscriptions Fail from China
 
-**Providers**: Platforms supporting KYC verification from China
-- Requires: Identity verification, crypto funding (USDT)
-- Card prefixes: 5405/5561 (US/HK region cards)
+1. **Stripe Geographic Blocks**: All Chinese bank cards (Visa/Mastercard) are rejected
+2. **IP Fraud Detection**: Public VPN/proxy IPs trigger fraud prevention
+3. **3D Secure Failures**: SMS verification timeouts for virtual cards
 
-**Implementation Pattern**:
+### Subscription Methods Comparison
+
+| Method | Difficulty | Safety | Best For |
+|--------|-----------|--------|----------|
+| Overseas Virtual Card | Very High (★★★★★) | High (★★★★☆) | Tech-savvy users familiar with crypto |
+| Third-party Platform (PayPrm) | Very Low (★☆☆☆☆) | Very High (★★★★★) | Most users seeking convenience |
+| App Store Gift Cards | Medium (★★★☆☆) | High (★★★★☆) | iOS users with US Apple ID |
+| Shared Accounts | Very Low (★☆☆☆☆) | Very Low (☆☆☆☆☆) | Not recommended (privacy risk) |
+
+## Recommended Subscription Methods
+
+### Method 1: Third-Party Platform (Recommended)
+
+**Best for**: 99% of users who want a quick, safe solution
+
+**Process**:
+1. Use platforms like [PayPrm.com](https://www.payprm.com/)
+2. Pay with Alipay/WeChat in CNY
+3. Platform uses legitimate overseas corporate cards
+4. Automatic upgrade within seconds
+5. **Never requires your ChatGPT password**
+
+**Safety checklist**:
+- ✅ Platform must use official Stripe payment links
+- ✅ Must be fully automated (no password required)
+- ✅ Long-term operation history
+- ✅ After-sales support
+- ❌ Avoid individuals on Taobao/Xianyu/Xiaohongshu
+- ❌ Never share your account password
+
+**Environment requirements**:
 ```bash
-# Step 1: Register on virtual card platform
-# Step 2: Complete KYC verification
-# Step 3: Fund card via cryptocurrency
-# Example: Convert CNY → USDT → Card Balance
-
-# Step 4: Obtain card details
-CARD_NUMBER="5405XXXXXXXX1234"
-CVC="123"
-BILLING_ZIP="10001"  # US billing address required
-
-# Step 5: Use residential IP (not datacenter) for binding
-# Ensure IP reputation score is clean
+# You still need clean network access to use ChatGPT after subscription
+# Ensure your proxy/VPN is:
+# - Residential IP (not datacenter)
+# - Low fraud score
+# - Stable US/EU location
 ```
 
-**Network Requirements**:
-```python
-# Check if your proxy is residential vs datacenter
-import requests
+### Method 2: Overseas Virtual Credit Card
 
-def check_ip_type(proxy_url):
-    """
-    Verify IP is residential to avoid Stripe blocks
-    """
-    headers = {'User-Agent': 'Mozilla/5.0'}
-    
-    # Use IP quality check service
-    response = requests.get(
-        'https://ipqualityscore.com/api/json/ip',
-        params={'ip': 'YOUR_IP'},
-        headers=headers,
-        proxies={'https': proxy_url}
-    )
-    
-    data = response.json()
-    return data.get('proxy') == False and data.get('vpn') == False
-```
+**Best for**: Advanced users who need multi-platform subscriptions (Midjourney, Claude, etc.)
 
-**Common Issues**:
-- 403 Forbidden: IP flagged as datacenter/VPN
-- Card declined: Billing address mismatch
-- Verification timeout: 3D Secure SMS delay
+**Process**:
+1. Register on virtual card platform (e.g., supporting 5405/5561 card BINs)
+2. Complete KYC verification
+3. Fund card with USDT or other methods
+4. Get card number, CVV, and US billing address
+5. Use **clean residential IP** to bind card on OpenAI
 
-### 2. Third-Party Recharge Services (Recommended)
-
-**Use Case**: Users prioritizing convenience and speed
-
-**Service Requirements**:
-```yaml
-# Trusted platform checklist
-features:
-  - password_free: true  # Never shares your OpenAI password
-  - payment_methods: ["Alipay", "WeChat Pay"]
-  - automation: "instant"
-  - customer_support: "available"
-  
-security:
-  - official_stripe_integration: true
-  - no_account_sharing: true
-  - refund_policy: "clear"
-```
-
-**Integration Example**:
-```javascript
-// Typical third-party service flow (client-side perspective)
-const subscription = {
-  service: 'ChatGPT Plus',
-  email: process.env.OPENAI_EMAIL,  // Your OpenAI account email
-  plan: 'monthly',  // or 'annual'
-  payment_method: 'alipay'
-};
-
-// Platform handles:
-// 1. Enterprise card payment to OpenAI
-// 2. Clean residential IP routing
-// 3. Automatic subscription activation
-
-// Result: Your account upgraded without password sharing
-```
-
-**Verification Script**:
-```python
-import os
-from datetime import datetime
-
-def verify_subscription_active(api_key):
-    """
-    Check if ChatGPT Plus subscription is active
-    """
-    import openai
-    
-    openai.api_key = os.getenv('OPENAI_API_KEY')
-    
-    try:
-        # Use GPT-4 to verify Plus status
-        response = openai.ChatCompletion.create(
-            model="gpt-4",
-            messages=[{"role": "user", "content": "test"}],
-            max_tokens=5
-        )
-        return True, "ChatGPT Plus active"
-    except openai.error.RateLimitError as e:
-        if "quota" in str(e):
-            return False, "Free tier quota exceeded - Plus not active"
-        raise
-    except Exception as e:
-        return False, f"Error: {str(e)}"
-```
-
-### 3. Apple App Store (iOS Users)
-
-**Requirements**:
-- Non-China region Apple ID (US/HK recommended)
-- App Store gift card balance
-- Clean network environment
-
-**Setup Process**:
+**Key requirements**:
 ```bash
-# 1. Create/switch to US Apple ID
-# Settings → Apple ID → Media & Purchases → View Account → Country/Region
+# IP Environment Check
+# Must use residential proxy, not:
+# ❌ Datacenter IPs
+# ❌ Shared VPN servers
+# ❌ High fraud score IPs
 
-# 2. Purchase US App Store gift card
-# - Official: apple.com/shop/buy-giftcard
-# - Redeem code in App Store
-
-# 3. Install ChatGPT iOS app
-# 4. Subscribe via in-app purchase (uses Apple ID balance)
+# Card Requirements
+# ✅ US-issued virtual card (Visa/Mastercard)
+# ✅ Valid US billing address (ZIP code must match)
+# ✅ Sufficient balance (Plus: $20/month, Pro: $200/month)
 ```
 
-**Configuration Check**:
-```swift
-// Swift code to verify region and payment method (iOS app context)
-import StoreKit
+**Common virtual card platforms** (research required):
+- Support mainland China KYC
+- Accept USDT or Alipay top-up
+- Provide US card BINs
+- Low rejection rate on Stripe
 
-func checkAppStoreEligibility() {
-    let locale = SKPaymentQueue.default().storefront?.countryCode
-    
-    guard locale != "CN" else {
-        print("Error: Chinese App Store doesn't support ChatGPT subscriptions")
-        return
-    }
-    
-    // Verify gift card balance available
-    // Proceed with IAP subscription
-}
-```
+### Method 3: App Store Gift Cards (iOS Only)
 
-**Important Notes**:
-- Don't use discounted/third-party gift cards (high fraud risk)
-- Avoid frequent VPN switching (triggers Apple account locks)
-- Subscription managed through Apple, not OpenAI directly
+**Best for**: Apple ecosystem users with US Apple ID
 
-### 4. Shared Accounts (Not Recommended)
-
-**High Risk Pattern**:
-```python
-# WARNING: Educational purposes only - NOT RECOMMENDED
-class SharedAccount:
-    """
-    Shared/rental accounts have severe limitations
-    """
-    risks = {
-        'privacy': 'All conversations visible to others',
-        'security': 'Account can be locked/banned anytime',
-        'data_loss': 'No guarantee of conversation history',
-        'ip_conflicts': 'Multiple simultaneous logins = instant ban'
-    }
-    
-    def __init__(self):
-        raise Exception("Use dedicated account instead")
-```
-
-## Common Stripe Payment Errors
-
-### Error: "Your card was declined"
-
+**Process**:
 ```bash
-# Diagnosis checklist:
-# 1. Card issuer location
-echo "Issuer: $(check_card_bin $CARD_NUMBER)"
-# China-issued cards: 100% blocked by Stripe for OpenAI
+# Prerequisites
+# 1. US Apple ID (not mainland China region)
+# 2. Clean US IP when logging in
+# 3. Official US App Store gift card
 
-# 2. IP reputation
-curl -s https://ipinfo.io | jq '.org, .country'
-# Must show residential ISP, not "Hosting/VPN/Proxy"
+# Steps
+1. Purchase US App Store gift card
+   - Official: https://www.apple.com/shop/gift-cards
+   - Use international credit card or trusted reseller
 
-# 3. Billing address
-# Must match card's registered country
-BILLING_COUNTRY="US"  # If using US virtual card
-BILLING_ZIP="90210"   # Valid ZIP for billing state
+2. Redeem to US Apple ID balance
+
+3. Download ChatGPT iOS app
+
+4. In-app purchase Plus subscription
+   - Payment via Apple ID balance
+   - Bypasses Stripe entirely
 ```
 
-### Error: "Authentication required" (3D Secure)
-
-```python
-def handle_3ds_verification(card_platform):
-    """
-    Handle 3D Secure SMS/app verification
-    """
-    import time
-    
-    # Many virtual card platforms require app verification
-    verification_timeout = 180  # 3 minutes
-    
-    print(f"Check {card_platform} app for verification code")
-    
-    # Common issues:
-    # - SMS delay to China: 30-120 seconds
-    # - App notification delay: 10-60 seconds
-    # - Session timeout: 180 seconds
-    
-    time.sleep(verification_timeout)
-    return "Verification completed or timeout"
-```
-
-### Error: "403 Forbidden" on OpenAI
-
-```javascript
-// Network diagnosis
-const checkNetworkCompliance = async () => {
-  // Requirements for OpenAI access:
-  const requirements = {
-    ip_type: 'residential',  // Not datacenter
-    ip_reputation: 'clean',  // Not flagged for fraud
-    browser_fingerprint: 'consistent',  // Don't randomize too much
-    tls_fingerprint: 'standard'  // Use standard HTTPS client
-  };
-  
-  // Tools to verify:
-  // - https://whoer.net (check IP quality)
-  // - https://browserleaks.com (check fingerprint)
-  
-  return requirements;
-};
-```
+**Safety warnings**:
+- ❌ Never buy cheap gift cards from unofficial sources (likely stolen)
+- ⚠️ Apple locks accounts for suspicious gift card usage
+- ⚠️ Don't frequently switch VPN nodes when logged into Apple ID
 
 ## Configuration & Best Practices
 
-### Environment Setup
+### Network Environment Setup
 
 ```bash
-# .env file for subscription management
-OPENAI_EMAIL="your.email@example.com"
-OPENAI_API_KEY="sk-..."  # After subscription active
+# Recommended Proxy Configuration
+# Use residential proxy or quality VPN with:
 
-# If using virtual card:
-VIRTUAL_CARD_PLATFORM_KEY=""  # Card provider API key
-CARD_LAST_4="1234"
+# Location: US/EU (avoid Hong Kong for initial binding)
+# Type: Residential IP
+# Clean: Not flagged by fraud databases
+# Stable: Same IP for subscription process
 
-# Network configuration:
-PROXY_URL="socks5://residential-proxy:1080"  # Residential IP required
-PROXY_COUNTRY="US"
-
-# Subscription tracking:
-SUBSCRIPTION_START_DATE="2026-01-15"
-SUBSCRIPTION_RENEWAL_DATE="2026-02-15"
-SUBSCRIPTION_TYPE="ChatGPT Plus"  # or "ChatGPT Pro"
+# Testing your IP quality:
+# Visit: https://scamalytics.com/ or https://ipqualityscore.com/
+# Fraud Score should be < 50
 ```
 
-### Monitoring Script
+### Account Safety Checklist
+
+```markdown
+✅ **Do's**
+- Use unique strong password
+- Enable 2FA on OpenAI account
+- Keep consistent IP region after subscription
+- Use official ChatGPT apps/website only
+- Monitor subscription status in billing settings
+
+❌ **Don'ts**  
+- Share account credentials with third parties
+- Use "daily rental" or shared accounts for work
+- Switch between many different proxy locations
+- Save sensitive data in ChatGPT conversations
+- Use stolen/carded payment methods
+```
+
+### Environment Variables for Integration
+
+If you're building tools that interact with ChatGPT API:
+
+```bash
+# .env file example
+OPENAI_API_KEY=sk-proj-xxxxxxxxxxxxx
+OPENAI_ORG_ID=org-xxxxxxxxxxxxx
+
+# Proxy configuration (if needed)
+HTTP_PROXY=http://your-residential-proxy:port
+HTTPS_PROXY=http://your-residential-proxy:port
+
+# For subscription monitoring
+CHATGPT_EMAIL=your-email@example.com
+STRIPE_CUSTOMER_ID=cus_xxxxxxxxxxxxx
+```
+
+## Common Issues & Troubleshooting
+
+### Payment Failures
+
+**Error**: "Your card was declined"
+
+```bash
+# Diagnosis
+1. Check if using mainland China card → Switch to virtual card or third-party
+2. Verify IP is residential, not datacenter
+3. Check card has sufficient balance
+4. Ensure billing address ZIP matches card issuer region
+5. Try different browser (clear cookies/cache)
+```
+
+**Error**: "We are unable to authenticate your payment method"
+
+```bash
+# 3D Secure failure
+1. Virtual card: Check SMS/app for verification code
+2. Ensure mobile service works internationally
+3. Try card with no 3D Secure requirement
+4. Use third-party platform to bypass entirely
+```
+
+### Account Suspension
+
+**Issue**: "Your account has been flagged"
+
+```bash
+# Prevention & Recovery
+1. Never use chargeback cards (stolen/carded)
+2. Maintain consistent IP region
+3. Don't share account with multiple users
+4. Contact OpenAI support with:
+   - Account email
+   - Subscription receipt
+   - Explanation of payment method
+```
+
+### Access Issues After Subscription
+
+**Issue**: Can't access ChatGPT Plus features
+
+```bash
+# Verification Steps
+1. Check subscription status:
+   Settings → Billing → View plan
+   
+2. Verify payment went through:
+   Check email for OpenAI receipt
+   
+3. Clear browser cache/cookies
+   
+4. Try different browser or app
+   
+5. Check if IP region is still clean:
+   If blocked, change to residential proxy
+```
+
+### Stripe Error Codes
+
+```bash
+# Common Stripe errors from China:
+
+card_declined
+→ Card issuer rejected (likely CN card or fraud flag)
+→ Solution: Use US virtual card with residential IP
+
+authentication_required  
+→ 3D Secure verification needed
+→ Solution: Check SMS/app or use platform without 3DS
+
+processing_error
+→ Temporary Stripe issue
+→ Solution: Wait 24h and retry with clean IP
+
+geographic_decline
+→ Card/IP location mismatch
+→ Solution: Ensure IP and card both show US region
+```
+
+## Code Examples for Monitoring
+
+### Check Subscription Status (Python)
 
 ```python
 import os
 import requests
-from datetime import datetime, timedelta
 
-class SubscriptionMonitor:
-    def __init__(self):
-        self.api_key = os.getenv('OPENAI_API_KEY')
-        self.email = os.getenv('OPENAI_EMAIL')
+def check_chatgpt_subscription():
+    """
+    Check if ChatGPT Plus subscription is active
+    Requires valid session or API access
+    """
+    # Note: This is conceptual - OpenAI doesn't expose subscription API
+    # Use web scraping or official billing page manually
     
-    def check_subscription_status(self):
-        """
-        Verify active subscription by testing model access
-        """
-        headers = {
-            'Authorization': f'Bearer {self.api_key}',
-            'Content-Type': 'application/json'
-        }
-        
-        # Test GPT-4 access (Plus/Pro only)
-        payload = {
-            'model': 'gpt-4',
-            'messages': [{'role': 'user', 'content': 'hi'}],
-            'max_tokens': 5
-        }
-        
-        response = requests.post(
-            'https://api.openai.com/v1/chat/completions',
-            headers=headers,
-            json=payload
-        )
-        
-        if response.status_code == 200:
-            return {
-                'status': 'active',
-                'model': 'gpt-4',
-                'timestamp': datetime.now().isoformat()
-            }
-        else:
-            return {
-                'status': 'inactive',
-                'error': response.json(),
-                'timestamp': datetime.now().isoformat()
-            }
+    headers = {
+        "Authorization": f"Bearer {os.getenv('OPENAI_API_KEY')}"
+    }
     
-    def estimate_renewal_date(self):
-        """
-        Calculate next renewal based on start date
-        """
-        start = datetime.fromisoformat(
-            os.getenv('SUBSCRIPTION_START_DATE')
-        )
-        return start + timedelta(days=30)
+    # Check if API key has Plus features access
+    response = requests.get(
+        "https://api.openai.com/v1/models",
+        headers=headers
+    )
+    
+    models = response.json().get('data', [])
+    has_gpt4 = any('gpt-4' in model['id'] for model in models)
+    
+    return has_gpt4
 
 # Usage
-monitor = SubscriptionMonitor()
-status = monitor.check_subscription_status()
-print(f"Subscription status: {status['status']}")
+if check_chatgpt_subscription():
+    print("✅ Plus/Pro subscription active")
+else:
+    print("❌ Free tier or subscription expired")
 ```
 
-## Troubleshooting
+### Proxy Rotation for Subscription (Node.js)
 
-### Issue: Payment Keeps Failing
+```javascript
+// proxy-manager.js
+require('dotenv').config();
+const axios = require('axios');
 
-```yaml
-diagnosis_steps:
-  1_verify_card:
-    - "Check card has sufficient balance"
-    - "Verify card is internationally enabled"
-    - "Confirm card issuer country matches billing address"
-  
-  2_check_network:
-    - "Use residential IP, not datacenter"
-    - "Clear browser cookies/cache"
-    - "Try different clean browser profile"
-  
-  3_billing_info:
-    - "Use real US address (not random/fake)"
-    - "ZIP code must match billing state"
-    - "Name matches card registration"
+class SubscriptionProxyManager {
+  constructor() {
+    this.residentialProxies = [
+      process.env.PROXY_US_RESIDENTIAL_1,
+      process.env.PROXY_US_RESIDENTIAL_2,
+    ];
+    this.currentProxyIndex = 0;
+  }
 
-  4_timing:
-    - "Avoid peak hours (reduces queue timeout)"
-    - "Complete payment in <5 minutes"
-    - "Don't refresh page during 3DS verification"
-```
-
-### Issue: Account Suspended After Upgrade
-
-```python
-def diagnose_suspension():
-    """
-    Common causes of post-upgrade suspension
-    """
-    causes = {
-        'chargeback_card': 'Card used was later disputed/refunded',
-        'shared_ip': 'Multiple accounts from same IP',
-        'stolen_card': 'Virtual card from fraud source',
-        'tos_violation': 'Account shared/resold',
-        'abnormal_usage': 'API abuse or scraping detected'
+  async testProxyQuality(proxy) {
+    try {
+      const response = await axios.get('https://ipqualityscore.com/api/json/ip', {
+        proxy: {
+          host: proxy.split(':')[0],
+          port: proxy.split(':')[1]
+        }
+      });
+      
+      const fraudScore = response.data.fraud_score;
+      console.log(`Proxy fraud score: ${fraudScore}`);
+      
+      return fraudScore < 50; // Safe for Stripe
+    } catch (error) {
+      console.error('Proxy test failed:', error.message);
+      return false;
     }
+  }
+
+  async getCleanProxy() {
+    for (let proxy of this.residentialProxies) {
+      if (await this.testProxyQuality(proxy)) {
+        return proxy;
+      }
+    }
+    throw new Error('No clean proxy available');
+  }
+
+  async subscribeToPlus(email, paymentMethod) {
+    const cleanProxy = await this.getCleanProxy();
     
-    resolution = {
-        'legitimate_payment': 'Contact OpenAI support with payment proof',
-        'policy_violation': 'Create new account, follow ToS strictly',
-        'technical_error': 'Appeal via help.openai.com'
-    }
+    // Use third-party platform API or manual subscription
+    console.log(`✅ Using clean proxy: ${cleanProxy}`);
+    console.log(`📧 Subscribing email: ${email}`);
+    console.log(`💳 Payment: ${paymentMethod}`);
     
-    return {
-        'causes': causes,
-        'resolution': resolution,
-        'support_url': 'https://help.openai.com'
-    }
+    // Implementation depends on chosen method
+    // For PayPrm-style platforms, call their API
+  }
+}
+
+// Usage
+const manager = new SubscriptionProxyManager();
+manager.subscribeToPlus(
+  process.env.CHATGPT_EMAIL,
+  'payprm-platform'
+);
 ```
 
-### Issue: Subscription Not Showing in Account
+### Subscription Status Monitor (Shell)
 
 ```bash
-# Verification steps:
-# 1. Check payment confirmation email
-grep -i "openai\|chatgpt" ~/Mail/Inbox
+#!/bin/bash
+# check-subscription.sh
 
-# 2. Verify payment processed
-# Login to card platform, check transaction history
+# Environment variables
+EMAIL="${CHATGPT_EMAIL}"
+WEBHOOK_URL="${DISCORD_WEBHOOK_URL}"
 
-# 3. Wait 5-10 minutes for system sync
-# OpenAI backend may take time to activate
+# Check if Plus features are accessible
+check_gpt4_access() {
+    # This requires authenticated session
+    # Use browser automation or manual check
+    echo "Checking GPT-4 access..."
+    
+    # Example: Check via API model list
+    response=$(curl -s https://api.openai.com/v1/models \
+        -H "Authorization: Bearer ${OPENAI_API_KEY}")
+    
+    if echo "$response" | grep -q "gpt-4"; then
+        echo "✅ GPT-4 access confirmed"
+        return 0
+    else
+        echo "❌ No GPT-4 access - subscription may be expired"
+        return 1
+    fi
+}
 
-# 4. Test model access directly
-curl https://api.openai.com/v1/models \
-  -H "Authorization: Bearer $OPENAI_API_KEY" | \
-  jq '.data[] | select(.id | contains("gpt-4"))'
+# Send alert if subscription fails
+send_alert() {
+    curl -X POST "$WEBHOOK_URL" \
+        -H "Content-Type: application/json" \
+        -d "{\"content\": \"⚠️ ChatGPT Plus subscription issue for $EMAIL\"}"
+}
 
-# If GPT-4 models visible, subscription is active
+# Main check
+if ! check_gpt4_access; then
+    send_alert
+    exit 1
+fi
 ```
 
 ## Security Best Practices
 
-```python
-# Never share these:
-SENSITIVE_DATA = {
-    'openai_password': 'NEVER share with any service',
-    'openai_api_key': 'Only use in your own code',
-    'payment_card_cvv': 'Only enter on official Stripe/OpenAI pages',
-    'virtual_card_login': 'Keep credentials private'
-}
+### For Individual Users
 
-# Safe to share with reputable recharge services:
-SAFE_TO_SHARE = {
-    'openai_email': 'Email address only (not password)',
-    'subscription_type': 'Plus or Pro preference',
-    'payment_method': 'Alipay/WeChat for local payment'
-}
+```markdown
+1. **Payment Security**
+   - Never use stolen/carded payment methods
+   - Keep payment receipts from OpenAI
+   - Monitor credit card statements for chargebacks
 
-# Validation before using any service:
-def validate_recharge_service(service_url):
-    """
-    Check if service is legitimate
-    """
-    red_flags = [
-        'requests password',
-        'requests API key', 
-        'requires account sharing',
-        'no customer support',
-        'suspiciously low prices (<$15 for monthly Plus)'
-    ]
-    
-    return all([flag not in service_url for flag in red_flags])
+2. **Account Security**  
+   - Use unique password (not reused)
+   - Enable 2FA immediately
+   - Don't share credentials with "代充" services requiring passwords
+
+3. **Network Security**
+   - Use residential proxy only for subscription
+   - Avoid free public proxies (compromised)
+   - Keep same IP region for consistency
 ```
 
-## Regional Considerations
+### For Teams/Organizations
 
-```javascript
-// Network access requirements by region
-const regionalConfig = {
-  china: {
-    requires_vpn: true,
-    recommended_locations: ['Hong Kong', 'Japan', 'Singapore', 'US West'],
-    payment_methods: ['virtual_card', 'third_party', 'app_store'],
-    blocked_methods: ['china_issued_cards'],
-    notes: 'Use residential IP proxies only'
-  },
-  
-  hong_kong: {
-    requires_vpn: false,
-    payment_methods: ['local_card', 'virtual_card', 'app_store'],
-    notes: 'Direct access available'
-  },
-  
-  taiwan: {
-    requires_vpn: false,
-    payment_methods: ['local_card', 'virtual_card'],
-    notes: 'Most international cards work'
-  }
-};
+```markdown
+1. **Centralized Management**
+   - Use OpenAI Teams/Enterprise if budget allows
+   - Avoid individual shared accounts
+   - Track subscription costs per user
 
-// Check your configuration
-function getRecommendedMethod(region) {
-  const config = regionalConfig[region];
-  return config.payment_methods[0]; // Returns best option
-}
-```
+2. **Compliance**
+   - Ensure payment method is compliant with Chinese regulations
+   - Keep records of all transactions
+   - Use platforms with proper business licenses
 
-## Cost Comparison
-
-```python
-# Monthly cost analysis (2026, CNY equivalent)
-SUBSCRIPTION_COSTS = {
-    'chatgpt_plus': {
-        'official_usd': 20.00,
-        'virtual_card_total': 20.00 + 2.00,  # Card fees
-        'third_party_service': 160.00,  # CNY, ~$22-23
-        'app_store_us': 19.99,  # Slightly cheaper via Apple
-        'shared_account_daily': 3.00 * 30  # High risk, not recommended
-    },
-    
-    'chatgpt_pro': {
-        'official_usd': 200.00,
-        'third_party_service': 1450.00  # CNY
-    }
-}
-
-def calculate_annual_cost(method='third_party_service'):
-    """
-    Calculate total annual cost including all fees
-    """
-    monthly = SUBSCRIPTION_COSTS['chatgpt_plus'][method]
-    
-    if method == 'virtual_card_total':
-        opening_fee = 10.00  # One-time card opening
-        monthly_maintenance = 1.00
-        return (monthly * 12) + opening_fee + (monthly_maintenance * 12)
-    
-    return monthly * 12
+3. **Data Privacy**
+   - Never put sensitive code/data in ChatGPT
+   - Use ChatGPT Enterprise for data retention control
+   - Train team on AI usage policies
 ```
 
 ## Additional Resources
 
-```yaml
-official_links:
-  openai_help: "https://help.openai.com"
-  stripe_supported_cards: "https://stripe.com/docs/payments/cards/supported-card-brands"
-  
-community_resources:
-  reddit_chatgpt: "r/ChatGPT"
-  troubleshooting_wiki: "Check project repository issues"
-  
-payment_verification:
-  stripe_test_cards: "Never use test cards on production"
-  ip_checker: "https://whoer.net"
-  
-compliance:
-  openai_tos: "https://openai.com/policies/terms-of-use"
-  payment_policy: "Review before subscribing"
-```
+- OpenAI Billing Help: https://help.openai.com/en/collections/3943089-billing
+- Stripe Card Testing: Use sandbox cards for development (not production)
+- IP Quality Check: https://scamalytics.com/ or https://ipqualityscore.com/
 
----
+## Summary
 
-**Final Recommendation**: For most users in restricted regions, using an established third-party recharge service with Alipay/WeChat Pay support provides the best balance of convenience, security, and reliability. Ensure the service never requests your OpenAI password and uses official Stripe payment channels.
+For Chinese users subscribing to ChatGPT Plus/Pro:
+
+1. **Best Option (99% users)**: Use reputable third-party platform like PayPrm (fully automated, no password required)
+2. **Advanced Option**: Overseas virtual card + residential IP (for multi-platform needs)
+3. **iOS Option**: US Apple ID + gift cards (Apple users only)
+4. **Never Use**: Shared accounts or password-required services
+
+**Critical Requirements**:
+- Clean residential IP for subscription and usage
+- Legitimate payment source (no stolen cards)
+- Account security (unique password, 2FA)
+- Consistent IP region after subscription
+
+This guide reflects 2026 payment gateway restrictions and provides practical, safe methods for accessing ChatGPT Plus/Pro services from mainland China.
