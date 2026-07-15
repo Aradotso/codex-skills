@@ -96,6 +96,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [chatgpt-subscription-guide](skills/chatgpt-subscription-guide/) | [install](https://skills.sh/aradotso/codex-skills/chatgpt-subscription-guide) | [leon7482/chatgpt-plus-codex](https://github.com/leon7482/chatgpt-plus-codex) | 2026-07-14 |
 | [codexu-macos-usage-tracker](skills/codexu-macos-usage-tracker/) | [install](https://skills.sh/aradotso/codex-skills/codexu-macos-usage-tracker) | [shanggqm/codexU](https://github.com/shanggqm/codexU) | 2026-07-14 |
 | [paper-collage-ad-production](skills/paper-collage-ad-production/) | [install](https://skills.sh/aradotso/codex-skills/paper-collage-ad-production) | [Jane-xiaoer/paper-collage-ad-codex](https://github.com/Jane-xiaoer/paper-collage-ad-codex) | 2026-07-15 |
+| [codex-orchestration-multi-model](skills/codex-orchestration-multi-model/) | [install](https://skills.sh/aradotso/codex-skills/codex-orchestration-multi-model) | [Cjbuilds/Codex-Orchestration](https://github.com/Cjbuilds/Codex-Orchestration) | 2026-07-15 |
 <!-- SKILL_INDEX -->
 
 ---
