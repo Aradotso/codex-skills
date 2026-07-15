@@ -1,45 +1,33 @@
 ---
 name: paper-collage-ad-production
-description: Complete paper-cut collage ad production workflow with local IndexTTS-2 voice cloning, animation pipeline, audio mixing and MP4 quality control
+description: Complete paper-cut collage ad production pipeline with local IndexTTS-2 voice cloning, animation, audio mixing, and MP4 quality control for Codex
 triggers:
-  - "create a paper collage ad with voice cloning"
-  - "make a paper-cut style advertisement with IndexTTS-2"
-  - "generate an animated collage ad with custom voice narration"
-  - "produce a stop-motion paper ad with local TTS"
-  - "build a collage-style video ad with voice cloning and music"
-  - "create animated paper-cut advertisement with narration"
-  - "make a 45-second paper collage ad with custom voice"
-  - "produce collage ad with IndexTTS-2 voice and animation"
+  - "create a paper collage ad for this product"
+  - "make a 45 second cutout animation commercial"
+  - "generate a paper-cut style advertisement with voice"
+  - "produce a collage ad with local voice cloning"
+  - "build an animated paper craft ad with IndexTTS"
+  - "set up paper collage ad production workflow"
+  - "render a stop-motion style ad with narration"
+  - "make a papercraft commercial with audio"
 ---
 
-# Paper Collage Ad Production Skill
+# Paper Collage Ad Production
 
 > Skill by [ara.so](https://ara.so) — Codex Skills collection.
 
-Production workflow for creating paper-cut collage style advertisements with local voice cloning (IndexTTS-2 MLX), animation pipelines (Seedance, HyperFrames, FFmpeg), audio mixing, and MP4 output with quality validation.
-
-## What This Skill Does
-
-- Extract visual metaphors from product materials for cohesive storytelling
-- Generate storyboards with script, dialogue and timecode breakdowns
-- Create style-locked paper-cut keyframes using brand assets
-- Animate using Seedance, HyperFrames, layered PNGs, or FFmpeg
-- Clone voices locally using IndexTTS-2 MLX (Apple Silicon) or use standard TTS
-- Add music, paper foley sounds, and action sound effects
-- Output H.264/AAC MP4 with stream-level validation
+A complete production pipeline for paper-cut/collage style advertisements. Handles creative ideation, scripting, storyboarding, keyframe generation, animation (via Seedance/HyperFrames/layered PNG/FFmpeg), local voice cloning with IndexTTS-2 MLX, music/SFX integration, and final H.264/AAC MP4 with quality validation.
 
 ## Installation
 
-### Install the Skill
-
-Global installation (available to all Codex projects):
+**Global install** (available to all Codex projects):
 
 ```bash
 git clone https://github.com/Jane-xiaoer/paper-collage-ad-codex.git \
   ~/.codex/skills/paper-collage-ad
 ```
 
-Project-local installation:
+**Project-local install**:
 
 ```bash
 mkdir -p .codex/skills
@@ -47,116 +35,196 @@ git clone https://github.com/Jane-xiaoer/paper-collage-ad-codex.git \
   .codex/skills/paper-collage-ad
 ```
 
-After restart, invoke with:
-```
-Use paper-collage-ad to create a fun 45-second paper-cut ad for this product.
+Restart Codex or start a new task, then say:
+
+```text
+Use paper-collage-ad to create a 45-second paper-cut ad for this product.
 ```
 
-### System Dependencies
+Codex will read `SKILL.md` and call `references/`, `examples/`, and `scripts/` as needed.
 
-macOS:
+## System Dependencies
+
+**macOS**:
 
 ```bash
 brew install ffmpeg node
 bash scripts/check-deps.sh
 ```
 
-For static keyframes and layered animation only, no API keys required. Optional services (Seedance, 即梦, MiniMax, ElevenLabs) need user-supplied credentials via environment variables.
-
-### IndexTTS-2 MLX Voice Cloning Setup
-
-Install runtime and models (Apple Silicon Mac):
+**Environment variables** (optional services):
 
 ```bash
-bash scripts/setup-indextts2-mlx.sh
+export SEEDANCE_API_KEY="your-key"
+export JIMENG_API_KEY="your-key"
+export MINIMAX_API_KEY="your-key"
+export ELEVENLABS_API_KEY="your-key"
 ```
 
-This downloads models to:
-```
-~/.local/share/paper-collage-ad/mlx-indextts/
-  models/mlx-indextts2-standard-fp16/
-```
+For static keyframes and layered animation, **no API keys required**.
 
-## Project Structure
+## Core Workflow
 
-```
+### 1. Project Structure
+
+```text
 <project>/
   assets/
-    brand/              # Product images, logos
-    voice-reference/    # reference.wav (6-12s clean single speaker)
-    voice-model/        # speaker-v2.npz (generated, never commit)
-    voice-final/        # 01.wav, 02.wav... (generated narration)
-    keyframes/          # scene_01.png, scene_02.png...
-    animated/           # scene_01.mp4, scene_02.mp4...
-    music/              # background.mp3
-    sfx/                # paper_rustle.wav, swoosh.wav...
+    brand/                 # logos, product images, brand colors
+    keyframes/             # generated paper-cut style frames
+    voice-reference/       # reference.wav (6-12s, authorized)
+    voice-model/           # speaker-v2.npz (local, not in Git)
+    voice-final/           # 01.wav, 02.wav... (generated narration)
+    music/                 # background music
+    sfx/                   # sound effects
   manifests/
-    storyboard.json
-    voice.indextts2.json
-    animation.json
-    audio-mix.json
+    storyboard.json        # scene timing, script, visual descriptions
+    voice.indextts2.json   # narration manifest for IndexTTS-2
   output/
-    final.mp4
+    final.mp4              # rendered ad
 ```
 
-Privacy template:
+**Privacy template**:
 
 ```bash
 cp examples/project.gitignore "<project>/.gitignore"
 ```
 
-## Voice Cloning Workflow
+### 2. Storyboard & Script
 
-### 1. Prepare Voice Reference
-
-Only clone your own voice or voices you have explicit written permission to use.
-
-Place authorized reference audio:
-```
-<project>/assets/voice-reference/reference.wav
-```
-
-Requirements:
-- 6-12 seconds
-- 48 kHz recommended
-- Clean, single speaker
-- Clear speech, no background noise
-
-### 2. Generate Speaker Embedding
+Create or modify storyboard:
 
 ```bash
-bash scripts/prepare-indextts2-voice.sh \
-  "<project>/assets/voice-reference/reference.wav" \
-  "<project>/assets/voice-model/speaker-v2.npz" \
-  --i-have-permission
+cp examples/storyboard.json "<project>/manifests/storyboard.json"
 ```
 
-The `--i-have-permission` flag is mandatory and confirms authorization.
-
-### 3. Create Voice Manifest
-
-```bash
-cp examples/voice-manifest.indextts2.json \
-  "<project>/manifests/voice.indextts2.json"
-```
-
-Edit `voice.indextts2.json`:
+**Example storyboard.json**:
 
 ```json
 {
-  "speakerPath": "assets/voice-model/speaker-v2.npz",
-  "outputDir": "assets/voice-final",
-  "sampleRate": 48000,
-  "segments": [
+  "title": "Product Launch Ad",
+  "duration": 45,
+  "scenes": [
     {
       "id": "01",
-      "text": "Imagine a world where every cup of coffee tells a story.",
-      "emotion": "calm",
+      "duration": 5,
+      "timecode": "00:00-00:05",
+      "visual": "Paper-cut sun rising over layered hills",
+      "narration": "Every morning starts with possibility.",
+      "emotion": "warm"
+    },
+    {
+      "id": "02",
+      "duration": 8,
+      "timecode": "00:05-00:13",
+      "visual": "Hand places product center stage, paper petals unfold",
+      "narration": "Introducing the new SmartWidget.",
+      "emotion": "excited"
+    }
+  ]
+}
+```
+
+### 3. Keyframe Generation
+
+Generate paper-cut style keyframes from brand assets and scene descriptions:
+
+```javascript
+// scripts/generate-keyframes.mjs
+import fs from 'fs';
+import path from 'path';
+
+const storyboard = JSON.parse(fs.readFileSync('manifests/storyboard.json', 'utf-8'));
+const brandColors = ['#FF6B6B', '#4ECDC4', '#FFE66D'];
+
+for (const scene of storyboard.scenes) {
+  console.log(`Scene ${scene.id}: ${scene.visual}`);
+  // Generate layered PNG with paper texture, shadows, brand colors
+  // Output: assets/keyframes/scene-${scene.id}.png
+}
+```
+
+Run:
+
+```bash
+node scripts/generate-keyframes.mjs --storyboard manifests/storyboard.json
+```
+
+### 4. Animation
+
+**Option A: Static layered animation** (no external API):
+
+```bash
+node scripts/animate-layers.mjs \
+  --keyframes assets/keyframes/ \
+  --storyboard manifests/storyboard.json \
+  --output output/video-silent.mp4
+```
+
+**Option B: Seedance API**:
+
+```javascript
+// scripts/animate-seedance.mjs
+import axios from 'axios';
+
+const apiKey = process.env.SEEDANCE_API_KEY;
+
+async function animateScene(sceneId, keyframePath, motion) {
+  const formData = new FormData();
+  formData.append('image', fs.createReadStream(keyframePath));
+  formData.append('motion', motion); // 'pan-right', 'zoom-in', 'rotate-ccw'
+  formData.append('duration', 5);
+
+  const response = await axios.post('https://api.seedance.ai/v1/animate', formData, {
+    headers: { 'Authorization': `Bearer ${apiKey}` }
+  });
+
+  return response.data.video_url;
+}
+```
+
+### 5. Voice Cloning with IndexTTS-2 MLX
+
+**Setup IndexTTS-2** (Apple Silicon Mac):
+
+```bash
+bash scripts/setup-indextts2-mlx.sh
+```
+
+Installs to `~/.local/share/paper-collage-ad/mlx-indextts/models/mlx-indextts2-standard-fp16/`
+
+**Prepare voice model** (use only authorized voice samples):
+
+```bash
+bash scripts/prepare-indextts2-voice.sh \
+  "assets/voice-reference/reference.wav" \
+  "assets/voice-model/speaker-v2.npz" \
+  --i-have-permission
+```
+
+**Create voice manifest**:
+
+```bash
+cp examples/voice-manifest.indextts2.json manifests/voice.indextts2.json
+```
+
+**Example voice manifest**:
+
+```json
+{
+  "speaker_model": "assets/voice-model/speaker-v2.npz",
+  "output_dir": "assets/voice-final",
+  "sample_rate": 48000,
+  "lines": [
+    {
+      "id": "01",
+      "text": "Every morning starts with possibility.",
+      "emotion": "warm",
       "speed": 1.0
     },
     {
       "id": "02",
-      "text": "Our beans travel from mountain to cup in just 72 hours.",
+      "text": "Introducing the new SmartWidget.",
       "emotion": "excited",
       "speed": 1.05
     }
@@ -164,457 +232,286 @@ Edit `voice.indextts2.json`:
 }
 ```
 
-Supported emotions: `neutral`, `happy`, `sad`, `angry`, `surprised`, `fearful`, `calm`, `excited`
-
-### 4. Generate Narration
+**Generate narration**:
 
 ```bash
 node scripts/narrate-indextts2.mjs \
-  --manifest "<project>/manifests/voice.indextts2.json"
+  --manifest manifests/voice.indextts2.json
 ```
 
-Output: `assets/voice-final/01.wav`, `02.wav`, etc.
+Output: `assets/voice-final/01.wav`, `02.wav`, etc. (48 kHz WAV)
 
-## Storyboard & Keyframe Generation
+**IndexTTS-2 emotion tags**: `neutral`, `happy`, `sad`, `angry`, `surprised`, `fearful`, `warm`, `excited`
 
-### Storyboard Structure
+### 6. Audio Mixing
 
-Create `manifests/storyboard.json`:
-
-```json
-{
-  "title": "Mountain Coffee - Origin Story",
-  "duration": 45,
-  "visualMetaphor": "Coffee cherries transform into paper birds flying to customers",
-  "scenes": [
-    {
-      "id": "scene_01",
-      "timecode": "00:00-00:05",
-      "narration": "Imagine a world where every cup tells a story.",
-      "visual": "Paper-cut mountains with coffee plants, sunrise gradient background",
-      "motion": "Camera slow push into mountain range",
-      "sfx": ["birds_chirping", "wind_light"]
-    },
-    {
-      "id": "scene_02",
-      "timecode": "00:05-00:12",
-      "narration": "Our beans travel from mountain to cup in 72 hours.",
-      "visual": "Coffee cherries peel away to reveal origami birds",
-      "motion": "Birds unfold and take flight, trailing coffee bean textures",
-      "sfx": ["paper_rustle", "whoosh"]
-    }
-  ]
-}
-```
-
-### Generate Keyframes
-
-With image generation API (Seedance, 即梦, MiniMax):
-
-```javascript
-// scripts/generate-keyframes.mjs
-import fs from 'fs';
-import { seedanceGenerate } from './lib/seedance.mjs';
-
-const storyboard = JSON.parse(fs.readFileSync('manifests/storyboard.json', 'utf-8'));
-const apiKey = process.env.SEEDANCE_API_KEY;
-
-for (const scene of storyboard.scenes) {
-  const prompt = `paper-cut collage art style: ${scene.visual}. Layered textured paper, cast shadows, craft aesthetic, ${storyboard.visualMetaphor} theme`;
-  
-  const imageUrl = await seedanceGenerate(prompt, {
-    apiKey,
-    width: 1920,
-    height: 1080,
-    style: 'paper-collage'
-  });
-  
-  // Download to assets/keyframes/
-  await downloadImage(imageUrl, `assets/keyframes/${scene.id}.png`);
-}
-```
-
-Or manually place/create keyframes in `assets/keyframes/`.
-
-## Animation Pipeline
-
-### Option 1: Video Generation API (Seedance, HyperFrames)
-
-Create `manifests/animation.json`:
-
-```json
-{
-  "scenes": [
-    {
-      "id": "scene_01",
-      "keyframe": "assets/keyframes/scene_01.png",
-      "motion": "Camera slow push into mountain range",
-      "duration": 5,
-      "output": "assets/animated/scene_01.mp4",
-      "provider": "seedance"
-    }
-  ]
-}
-```
-
-Generate:
-
-```bash
-node scripts/animate-scenes.mjs \
-  --manifest manifests/animation.json \
-  --api-key $SEEDANCE_API_KEY
-```
-
-### Option 2: Layered PNG Animation (FFmpeg)
-
-For parallax or simple motion:
-
-```javascript
-// scripts/animate-layers.mjs
-import { execSync } from 'child_process';
-
-// Separate keyframe into layers: background, midground, foreground
-// Use FFmpeg zoompan or overlay filters
-
-const duration = 5;
-const fps = 24;
-
-execSync(`ffmpeg -loop 1 -i assets/keyframes/scene_01_bg.png \
-  -vf "zoompan=z='min(zoom+0.0015,1.05)':d=${duration * fps}:s=1920x1080:fps=${fps}" \
-  -t ${duration} -pix_fmt yuv420p assets/animated/scene_01.mp4`);
-```
-
-### Option 3: Frame-by-Frame Stop-Motion
-
-Generate intermediate frames using image APIs with iterative prompts, then stitch:
-
-```bash
-ffmpeg -framerate 24 -pattern_type glob -i 'assets/frames/scene_01_*.png' \
-  -c:v libx264 -pix_fmt yuv420p assets/animated/scene_01.mp4
-```
-
-## Audio Mixing
-
-Create `manifests/audio-mix.json`:
-
-```json
-{
-  "timeline": [
-    {
-      "type": "music",
-      "file": "assets/music/background.mp3",
-      "volume": 0.3,
-      "fadeIn": 1.0,
-      "fadeOut": 2.0
-    },
-    {
-      "type": "narration",
-      "file": "assets/voice-final/01.wav",
-      "start": 0.5,
-      "volume": 1.0
-    },
-    {
-      "type": "sfx",
-      "file": "assets/sfx/paper_rustle.wav",
-      "start": 5.2,
-      "volume": 0.6
-    },
-    {
-      "type": "narration",
-      "file": "assets/voice-final/02.wav",
-      "start": 5.8,
-      "volume": 1.0
-    }
-  ],
-  "output": "output/audio-mix.wav",
-  "sampleRate": 48000
-}
-```
-
-Mix:
+Combine video, narration, music, and SFX:
 
 ```bash
 node scripts/mix-audio.mjs \
-  --manifest manifests/audio-mix.json
-```
-
-Internal implementation uses FFmpeg `-filter_complex`:
-
-```javascript
-// Simplified example
-const filters = [];
-filters.push(`[0:a]volume=${musicVolume},afade=t=in:st=0:d=${fadeIn},afade=t=out:st=${duration - fadeOut}:d=${fadeOut}[music]`);
-filters.push(`[1:a]volume=${narrationVolume},adelay=${narrationStart * 1000}|${narrationStart * 1000}[narration]`);
-filters.push(`[music][narration]amix=inputs=2:duration=longest[out]`);
-
-execSync(`ffmpeg -i music.mp3 -i narration.wav \
-  -filter_complex "${filters.join(';')}" \
-  -map "[out]" output.wav`);
-```
-
-## Final Composition
-
-Concatenate video scenes and add audio:
-
-```bash
-node scripts/compose-final.mjs \
-  --video-list manifests/video-order.txt \
-  --audio output/audio-mix.wav \
+  --video output/video-silent.mp4 \
+  --narration assets/voice-final/ \
+  --music assets/music/background.mp3 \
+  --sfx assets/sfx/ \
+  --storyboard manifests/storyboard.json \
   --output output/final.mp4
 ```
 
-`manifests/video-order.txt`:
-
-```
-file 'assets/animated/scene_01.mp4'
-file 'assets/animated/scene_02.mp4'
-file 'assets/animated/scene_03.mp4'
-```
-
-Compose script:
+**Example mix script**:
 
 ```javascript
-// scripts/compose-final.mjs
+// scripts/mix-audio.mjs
 import { execSync } from 'child_process';
+import fs from 'fs';
 
-// Concatenate video
-execSync(`ffmpeg -f concat -safe 0 -i manifests/video-order.txt \
-  -c copy output/video-concat.mp4`);
+const storyboard = JSON.parse(fs.readFileSync(args.storyboard, 'utf-8'));
 
-// Add audio
-execSync(`ffmpeg -i output/video-concat.mp4 -i output/audio-mix.wav \
-  -c:v copy -c:a aac -b:a 192k -shortest output/final.mp4`);
+// Build FFmpeg filter complex
+let filterComplex = '[1:a]volume=0.3[music];'; // Background music at 30%
+
+storyboard.scenes.forEach((scene, i) => {
+  const narrationPath = `assets/voice-final/${scene.id}.wav`;
+  const delay = scene.timecode.split('-')[0]; // e.g., "00:05"
+  filterComplex += `[${i+2}:a]adelay=${timeToMs(delay)}|${timeToMs(delay)}[n${i}];`;
+});
+
+filterComplex += `[music]${storyboard.scenes.map((_, i) => `[n${i}]`).join('')}amix=inputs=${storyboard.scenes.length+1}:duration=longest[audio]`;
+
+const cmd = `ffmpeg -i ${args.video} -i ${args.music} ${storyboard.scenes.map(s => `-i assets/voice-final/${s.id}.wav`).join(' ')} -filter_complex "${filterComplex}" -map 0:v -map "[audio]" -c:v copy -c:a aac -b:a 192k ${args.output}`;
+
+execSync(cmd);
 ```
 
-## Quality Control
+### 7. Quality Control
 
-Validate output:
+Validate final MP4:
 
 ```bash
-bash scripts/qc-video.sh output/final.mp4
+bash scripts/qc-mp4.sh output/final.mp4
 ```
 
 Checks:
-- Video codec: H.264
-- Audio codec: AAC
-- Resolution: 1920×1080 (or project target)
+- H.264 codec
+- AAC audio
+- Resolution ≥ 1080p
 - Frame rate consistency
-- No silent segments
-- Audio levels within broadcast safe range (-23 LUFS target)
+- Audio sync
+- File size
 
-Example QC script:
+**Example QC script**:
 
 ```bash
 #!/bin/bash
-VIDEO=$1
+# scripts/qc-mp4.sh
 
-# Check codecs
-ffprobe -v error -select_streams v:0 -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "$VIDEO"
-# Expected: h264
+FILE=$1
 
-ffprobe -v error -select_streams a:0 -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "$VIDEO"
-# Expected: aac
+# Check video codec
+VCODEC=$(ffprobe -v error -select_streams v:0 -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "$FILE")
+if [ "$VCODEC" != "h264" ]; then
+  echo "❌ Video codec must be H.264, found: $VCODEC"
+  exit 1
+fi
+
+# Check audio codec
+ACODEC=$(ffprobe -v error -select_streams a:0 -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "$FILE")
+if [ "$ACODEC" != "aac" ]; then
+  echo "❌ Audio codec must be AAC, found: $ACODEC"
+  exit 1
+fi
 
 # Check resolution
-ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 "$VIDEO"
-# Expected: 1920x1080
+HEIGHT=$(ffprobe -v error -select_streams v:0 -show_entries stream=height -of default=noprint_wrappers=1:nokey=1 "$FILE")
+if [ "$HEIGHT" -lt 1080 ]; then
+  echo "❌ Resolution too low: ${HEIGHT}p (minimum 1080p)"
+  exit 1
+fi
 
-# Check LUFS
-ffmpeg -i "$VIDEO" -af loudnorm=print_format=json -f null - 2>&1 | grep input_i
-# Target: -23.0 LUFS ±2
-```
-
-## Environment Variables
-
-Optional service integrations read from environment:
-
-```bash
-# .env (never commit)
-SEEDANCE_API_KEY=sk-...
-MINIMAX_API_KEY=...
-ELEVENLABS_API_KEY=...
-JIMENG_API_KEY=...
-```
-
-Load in scripts:
-
-```javascript
-import 'dotenv/config';
-
-const apiKey = process.env.SEEDANCE_API_KEY;
-if (!apiKey) {
-  console.error('SEEDANCE_API_KEY not set');
-  process.exit(1);
-}
+echo "✅ QC passed: $FILE"
 ```
 
 ## Common Patterns
 
-### Full Production Pipeline
+### Full Pipeline (One Command)
 
 ```bash
-# 1. Setup voice
-bash scripts/prepare-indextts2-voice.sh \
-  assets/voice-reference/reference.wav \
-  assets/voice-model/speaker-v2.npz \
-  --i-have-permission
-
-# 2. Generate narration
-node scripts/narrate-indextts2.mjs \
-  --manifest manifests/voice.indextts2.json
-
-# 3. Generate keyframes (manual or API)
-node scripts/generate-keyframes.mjs
-
-# 4. Animate scenes
-node scripts/animate-scenes.mjs \
-  --manifest manifests/animation.json
-
-# 5. Mix audio
-node scripts/mix-audio.mjs \
-  --manifest manifests/audio-mix.json
-
-# 6. Compose final video
-node scripts/compose-final.mjs \
-  --video-list manifests/video-order.txt \
-  --audio output/audio-mix.wav \
-  --output output/final.mp4
-
-# 7. QC
-bash scripts/qc-video.sh output/final.mp4
-```
-
-### Voice-Only Update
-
-Already have video, just update narration:
-
-```bash
-# Edit voice manifest
-vim manifests/voice.indextts2.json
-
-# Regenerate voice
-node scripts/narrate-indextts2.mjs \
-  --manifest manifests/voice.indextts2.json
-
-# Re-mix audio
-node scripts/mix-audio.mjs \
-  --manifest manifests/audio-mix.json
-
-# Re-compose
-node scripts/compose-final.mjs \
-  --video-list manifests/video-order.txt \
-  --audio output/audio-mix.wav \
+node scripts/full-pipeline.mjs \
+  --product "SmartWidget Pro" \
+  --duration 45 \
+  --voice-ref assets/voice-reference/reference.wav \
+  --brand-assets assets/brand/ \
   --output output/final.mp4
 ```
 
-### Quick Storyboard Iteration
+### Custom Animation Script
 
 ```javascript
-// scripts/quick-iterate.mjs
-// Re-generate keyframes and preview without full animation
+// Animate scene with paper texture and parallax
+import { createCanvas, loadImage } from 'canvas';
 
-import { generateKeyframe } from './lib/image-gen.mjs';
-import { createPreviewGrid } from './lib/preview.mjs';
-
-const storyboard = JSON.parse(fs.readFileSync('manifests/storyboard.json', 'utf-8'));
-
-for (const scene of storyboard.scenes) {
-  await generateKeyframe(scene, `assets/keyframes/${scene.id}.png`);
-}
-
-// Create HTML preview grid
-await createPreviewGrid('assets/keyframes', 'output/preview.html');
-```
-
-## Troubleshooting
-
-### IndexTTS-2 MLX Issues
-
-**Error: Model not found**
-
-```bash
-# Re-run setup
-bash scripts/setup-indextts2-mlx.sh
-
-# Verify installation
-ls -la ~/.local/share/paper-collage-ad/mlx-indextts/models/
-```
-
-**Poor voice quality**
-
-- Use cleaner reference audio (6-12s, no background noise)
-- Ensure 48 kHz sample rate
-- Try `emotion: "neutral"` first, then adjust
-- Keep `speed` between 0.9-1.1
-
-**Out of memory on Apple Silicon**
-
-- Close other apps
-- Reduce concurrent segment generation
-- Use standard TTS fallback for longer scripts
-
-### FFmpeg Encoding Issues
-
-**Audio out of sync**
-
-```bash
-# Force constant frame rate
-ffmpeg -i input.mp4 -vsync cfr -r 24 -c:v libx264 -crf 18 output.mp4
-```
-
-**File too large**
-
-```bash
-# Adjust CRF (18=high quality, 23=default, 28=smaller)
-ffmpeg -i input.mp4 -c:v libx264 -crf 23 -c:a aac -b:a 128k output.mp4
-```
-
-**Pixelation in gradients**
-
-```bash
-# Use higher bitrate or lower CRF
-ffmpeg -i input.mp4 -c:v libx264 -crf 18 -preset slow output.mp4
-```
-
-### API Rate Limits
-
-```javascript
-// Add delay between requests
-async function generateWithRetry(prompt, options) {
-  for (let i = 0; i < 3; i++) {
-    try {
-      return await seedanceGenerate(prompt, options);
-    } catch (err) {
-      if (err.status === 429) {
-        await new Promise(resolve => setTimeout(resolve, 5000 * (i + 1)));
-        continue;
-      }
-      throw err;
-    }
+async function animateScene(keyframePath, duration, fps = 30) {
+  const frames = duration * fps;
+  const img = await loadImage(keyframePath);
+  
+  for (let i = 0; i < frames; i++) {
+    const canvas = createCanvas(1920, 1080);
+    const ctx = canvas.getContext('2d');
+    
+    // Parallax: move layers at different speeds
+    const offset = (i / frames) * 100;
+    ctx.drawImage(img, -offset * 0.5, 0); // Background layer
+    ctx.drawImage(img, -offset * 1.0, 0); // Foreground layer
+    
+    // Add paper texture overlay
+    ctx.globalAlpha = 0.1;
+    ctx.fillStyle = '#FFF8E7';
+    ctx.fillRect(0, 0, 1920, 1080);
+    
+    fs.writeFileSync(`frames/frame-${i.toString().padStart(4, '0')}.png`, canvas.toBuffer());
   }
 }
 ```
 
-## Privacy & Security
+### Voice Model Reuse
 
-- **Never commit** `voice-reference/`, `voice-model/`, or personal narration
-- **Never commit** API keys or `.env` files
-- Use project `.gitignore` template: `cp examples/project.gitignore .gitignore`
-- Run privacy check before publishing: `bash scripts/privacy-check.sh`
-- Always disclose AI-generated voice in deliverables
-- Only clone voices with explicit written authorization
+Once you have `speaker-v2.npz`, reuse across projects:
+
+```bash
+# Copy voice model to new project
+cp ~/my-voice/speaker-v2.npz new-project/assets/voice-model/
+
+# Update manifest
+node scripts/narrate-indextts2.mjs \
+  --manifest new-project/manifests/voice.indextts2.json
+```
+
+### Batch Scene Rendering
+
+```javascript
+// scripts/batch-render.mjs
+import { promisify } from 'util';
+import { exec } from 'child_process';
+
+const execAsync = promisify(exec);
+
+const scenes = ['01', '02', '03', '04'];
+
+await Promise.all(scenes.map(async (sceneId) => {
+  await execAsync(`node scripts/render-scene.mjs --id ${sceneId}`);
+  console.log(`✅ Scene ${sceneId} rendered`);
+}));
+```
+
+## Troubleshooting
+
+### IndexTTS-2 Installation Fails
+
+**Problem**: `mlx` package not found
+
+**Solution**: Ensure Python 3.10+ and Apple Silicon Mac:
+
+```bash
+python3 --version  # Must be 3.10+
+uname -m           # Must be arm64
+pip3 install mlx mlx-lm
+```
+
+### Voice Cloning Sounds Robotic
+
+**Problem**: Poor reference audio quality
+
+**Solution**:
+- Use 6-12 seconds of clean, single-speaker audio
+- Remove background noise with Audacity
+- Ensure 48 kHz sample rate: `ffmpeg -i input.wav -ar 48000 output.wav`
+- Avoid accents, music, or multiple speakers
+
+### FFmpeg Audio Sync Issues
+
+**Problem**: Narration out of sync with video
+
+**Solution**: Check timecodes in storyboard:
+
+```javascript
+// Convert timecode to milliseconds
+function timeToMs(timecode) {
+  const [min, sec] = timecode.split(':').map(Number);
+  return (min * 60 + sec) * 1000;
+}
+
+// Verify scene durations sum to total
+const totalDuration = storyboard.scenes.reduce((sum, s) => sum + s.duration, 0);
+console.log(`Total: ${totalDuration}s, Expected: ${storyboard.duration}s`);
+```
+
+### Keyframe Generation Slow
+
+**Problem**: Large brand assets slow down rendering
+
+**Solution**: Pre-resize assets:
+
+```bash
+for img in assets/brand/*.png; do
+  ffmpeg -i "$img" -vf "scale=1920:-1" "assets/brand/resized/$(basename $img)"
+done
+```
+
+### Missing Paper Texture
+
+**Problem**: Collage looks too digital
+
+**Solution**: Apply grain and texture overlay:
+
+```javascript
+// Add to render pipeline
+ctx.globalAlpha = 0.15;
+ctx.fillStyle = ctx.createPattern(await loadImage('assets/textures/paper.png'), 'repeat');
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+```
+
+## Key Scripts Reference
+
+| Script | Purpose |
+|--------|---------|
+| `check-deps.sh` | Verify system dependencies |
+| `setup-indextts2-mlx.sh` | Install IndexTTS-2 runtime |
+| `prepare-indextts2-voice.sh` | Generate speaker model from reference |
+| `narrate-indextts2.mjs` | Synthesize narration from manifest |
+| `generate-keyframes.mjs` | Create paper-cut style frames |
+| `animate-layers.mjs` | Static layered animation |
+| `animate-seedance.mjs` | Seedance API animation |
+| `mix-audio.mjs` | Combine video, narration, music, SFX |
+| `qc-mp4.sh` | Validate final MP4 |
+| `privacy-check.sh` | Scan for secrets before commit |
 
 ## References
 
-See `references/` directory for detailed specs:
+- `references/storyboard.md` – Scene structure, timing, pacing
+- `references/visual-style.md` – Paper-cut aesthetics, brand integration
+- `references/animation.md` – Motion techniques, parallax, transitions
+- `references/voice.md` – IndexTTS-2 usage, emotion control
+- `references/music.md` – Background music, SFX timing
+- `references/qc.md` – MP4 validation checklist
 
-- `storyboard.md` - Scene structure and timing
-- `visual-style.md` - Paper-cut collage aesthetics
-- `animation.md` - Motion techniques and providers
-- `voice.md` - IndexTTS-2 emotion control and fallback options
-- `audio-mix.md` - Music, SFX and normalization
-- `qc.md` - Final validation checklist
+## Privacy & Security
+
+- **Never commit**:
+  - Voice reference files (`voice-reference/`)
+  - Speaker models (`voice-model/`)
+  - Generated narration (`voice-final/`)
+  - API keys (use environment variables)
+  
+- **Before publishing**:
+
+```bash
+bash scripts/privacy-check.sh
+```
+
+- **Voice cloning ethics**:
+  - Only clone your own voice or with explicit written permission
+  - Disclose AI-generated narration in deliverables
+  - Respect voice actor rights and local regulations
 
 ## License
 
-MIT License. Third-party models, runtimes, fonts, music, assets and APIs are subject to their own licenses. IndexTTS-2 model weights are not included in this repository.
+MIT License. Third-party models (IndexTTS-2), APIs, fonts, music, and assets follow their own licenses. No model weights or voice samples included in this repository.
