@@ -101,6 +101,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [openai-codex-security](skills/openai-codex-security/) | [install](https://skills.sh/aradotso/codex-skills/openai-codex-security) | [openai/codex-security](https://github.com/openai/codex-security) | 2026-07-30 |
 | [codex-slides-ai-presentation](skills/codex-slides-ai-presentation/) | [install](https://skills.sh/aradotso/codex-skills/codex-slides-ai-presentation) | [nexu-io/codex-slides](https://github.com/nexu-io/codex-slides) | 2026-07-30 |
 | [heige-codex-skin-studio](skills/heige-codex-skin-studio/) | [install](https://skills.sh/aradotso/codex-skills/heige-codex-skin-studio) | [HeiGeAi/heige-codex-skin-studio](https://github.com/HeiGeAi/heige-codex-skin-studio) | 2026-07-30 |
+| [nanocodex-rust-agent-framework](skills/nanocodex-rust-agent-framework/) | [install](https://skills.sh/aradotso/codex-skills/nanocodex-rust-agent-framework) | [gakonst/nanocodex](https://github.com/gakonst/nanocodex) | 2026-07-30 |
 <!-- SKILL_INDEX -->
 
 ---
