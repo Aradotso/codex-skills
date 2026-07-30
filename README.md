@@ -99,6 +99,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [codex-orchestration-multi-model](skills/codex-orchestration-multi-model/) | [install](https://skills.sh/aradotso/codex-skills/codex-orchestration-multi-model) | [Cjbuilds/Codex-Orchestration](https://github.com/Cjbuilds/Codex-Orchestration) | 2026-07-15 |
 | [codex-dream-skin-theme-injector](skills/codex-dream-skin-theme-injector/) | [install](https://skills.sh/aradotso/codex-skills/codex-dream-skin-theme-injector) | [Fei-Away/Codex-Dream-Skin](https://github.com/Fei-Away/Codex-Dream-Skin) | 2026-07-16 |
 | [openai-codex-security](skills/openai-codex-security/) | [install](https://skills.sh/aradotso/codex-skills/openai-codex-security) | [openai/codex-security](https://github.com/openai/codex-security) | 2026-07-30 |
+| [codex-slides-ai-presentation](skills/codex-slides-ai-presentation/) | [install](https://skills.sh/aradotso/codex-skills/codex-slides-ai-presentation) | [nexu-io/codex-slides](https://github.com/nexu-io/codex-slides) | 2026-07-30 |
 <!-- SKILL_INDEX -->
 
 ---
