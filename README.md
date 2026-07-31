@@ -104,6 +104,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [nanocodex-rust-agent-framework](skills/nanocodex-rust-agent-framework/) | [install](https://skills.sh/aradotso/codex-skills/nanocodex-rust-agent-framework) | [gakonst/nanocodex](https://github.com/gakonst/nanocodex) | 2026-07-30 |
 | [nerv-break-gpt-5-6-jailbreak](skills/nerv-break-gpt-5-6-jailbreak/) | [install](https://skills.sh/aradotso/codex-skills/nerv-break-gpt-5-6-jailbreak) | [lingbol088-spec/5.6-JAILBREAK-NERV-codex-instruct-5.6](https://github.com/lingbol088-spec/5.6-JAILBREAK-NERV-codex-instruct-5.6) | 2026-07-31 |
 | [nerv-break-gpt56-jailbreak](skills/nerv-break-gpt56-jailbreak/) | [install](https://skills.sh/aradotso/codex-skills/nerv-break-gpt56-jailbreak) | [lingbol088-spec/5.6-JAILBREAK-NERV-codex-instruct-5.6](https://github.com/lingbol088-spec/5.6-JAILBREAK-NERV-codex-instruct-5.6) | 2026-07-31 |
+| [nerv-break-gpt-jailbreak](skills/nerv-break-gpt-jailbreak/) | [install](https://skills.sh/aradotso/codex-skills/nerv-break-gpt-jailbreak) | [lingbol088-spec/5.6-JAILBREAK-NERV-codex-instruct-5.6](https://github.com/lingbol088-spec/5.6-JAILBREAK-NERV-codex-instruct-5.6) | 2026-07-31 |
 <!-- SKILL_INDEX -->
 
 ---
