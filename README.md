@@ -105,6 +105,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [nerv-break-gpt-5-6-jailbreak](skills/nerv-break-gpt-5-6-jailbreak/) | [install](https://skills.sh/aradotso/codex-skills/nerv-break-gpt-5-6-jailbreak) | [lingbol088-spec/5.6-JAILBREAK-NERV-codex-instruct-5.6](https://github.com/lingbol088-spec/5.6-JAILBREAK-NERV-codex-instruct-5.6) | 2026-07-31 |
 | [nerv-break-gpt56-jailbreak](skills/nerv-break-gpt56-jailbreak/) | [install](https://skills.sh/aradotso/codex-skills/nerv-break-gpt56-jailbreak) | [lingbol088-spec/5.6-JAILBREAK-NERV-codex-instruct-5.6](https://github.com/lingbol088-spec/5.6-JAILBREAK-NERV-codex-instruct-5.6) | 2026-07-31 |
 | [nerv-break-gpt-jailbreak](skills/nerv-break-gpt-jailbreak/) | [install](https://skills.sh/aradotso/codex-skills/nerv-break-gpt-jailbreak) | [lingbol088-spec/5.6-JAILBREAK-NERV-codex-instruct-5.6](https://github.com/lingbol088-spec/5.6-JAILBREAK-NERV-codex-instruct-5.6) | 2026-07-31 |
+| [codex-router-external-models](skills/codex-router-external-models/) | [install](https://skills.sh/aradotso/codex-skills/codex-router-external-models) | [duolahypercho/codex-router](https://github.com/duolahypercho/codex-router) | 2026-07-31 |
 <!-- SKILL_INDEX -->
 
 ---
