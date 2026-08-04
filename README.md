@@ -109,6 +109,7 @@ npx skills add Aradotso/codex-skills --skill <skill-name>
 | [nerv-break-jailbreak-framework](skills/nerv-break-jailbreak-framework/) | [install](https://skills.sh/aradotso/codex-skills/nerv-break-jailbreak-framework) | [lingbol088-spec/5.6-JAILBREAK-NERV-codex-instruct-5.6](https://github.com/lingbol088-spec/5.6-JAILBREAK-NERV-codex-instruct-5.6) | 2026-08-01 |
 | [nerv-break-5-6-jailbreak-framework](skills/nerv-break-5-6-jailbreak-framework/) | [install](https://skills.sh/aradotso/codex-skills/nerv-break-5-6-jailbreak-framework) | [lingbol088-spec/5.6-JAILBREAK-NERV-codex-instruct-5.6](https://github.com/lingbol088-spec/5.6-JAILBREAK-NERV-codex-instruct-5.6) | 2026-08-01 |
 | [nerv-break-5-6-gpt-jailbreak](skills/nerv-break-5-6-gpt-jailbreak/) | [install](https://skills.sh/aradotso/codex-skills/nerv-break-5-6-gpt-jailbreak) | [lingbol088-spec/5.6-JAILBREAK-NERV-codex-instruct-5.6](https://github.com/lingbol088-spec/5.6-JAILBREAK-NERV-codex-instruct-5.6) | 2026-08-03 |
+| [codex-chatgpt-web-integration](skills/codex-chatgpt-web-integration/) | [install](https://skills.sh/aradotso/codex-skills/codex-chatgpt-web-integration) | [miuuyy/codex-chatgpt-web](https://github.com/miuuyy/codex-chatgpt-web) | 2026-08-04 |
 <!-- SKILL_INDEX -->
 
 ---
