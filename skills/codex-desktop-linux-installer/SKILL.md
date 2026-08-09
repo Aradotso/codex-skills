@@ -1,4 +1,3 @@
-```markdown
 ---
 name: codex-desktop-linux-installer
 description: Unofficial Linux build and installer for OpenAI Codex Desktop with auto-updates, native packaging, and Computer Use support
@@ -559,4 +558,3 @@ tar -tf dist/codex-desktop-*.pkg.tar.zst  # For Arch
 - **Linux Features**: See `linux-features/README.md` for feature contract
 - **Computer Use Author**: [@avifenesh](https://github.com/avifenesh)
 - **Upstream**: [OpenAI Codex Desktop](https://openai.com/codex/)
-```

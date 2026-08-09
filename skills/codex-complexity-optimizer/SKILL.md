@@ -1,4 +1,3 @@
-```markdown
 ---
 name: codex-complexity-optimizer
 description: Analyze codebase complexity, identify performance hotspots, and generate safe optimization reports with risk assessments
@@ -406,4 +405,3 @@ jobs:
 ## License
 
 MIT License - See project repository for details.
-```
